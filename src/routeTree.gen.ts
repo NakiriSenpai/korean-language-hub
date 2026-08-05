@@ -10,7 +10,10 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ShellRouteImport } from './routes/_shell'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ForbiddenRouteImport } from './routes/forbidden'
 import { Route as OfflineRouteImport } from './routes/offline'
+import { Route as UnauthorizedRouteImport } from './routes/unauthorized'
 import { Route as ShellIndexRouteImport } from './routes/_shell.index'
 import { Route as ShellAdminRouteImport } from './routes/_shell.admin'
 import { Route as ShellAnalyticsRouteImport } from './routes/_shell.analytics'
@@ -23,9 +26,24 @@ const ShellRoute = ShellRouteImport.update({
   id: '/_shell',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForbiddenRoute = ForbiddenRouteImport.update({
+  id: '/forbidden',
+  path: '/forbidden',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OfflineRoute = OfflineRouteImport.update({
   id: '/offline',
   path: '/offline',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UnauthorizedRoute = UnauthorizedRouteImport.update({
+  id: '/unauthorized',
+  path: '/unauthorized',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShellIndexRoute = ShellIndexRouteImport.update({
@@ -66,7 +84,10 @@ const ShellSettingsRoute = ShellSettingsRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof ShellIndexRoute
+  '/auth': typeof AuthRoute
+  '/forbidden': typeof ForbiddenRoute
   '/offline': typeof OfflineRoute
+  '/unauthorized': typeof UnauthorizedRoute
   '/admin': typeof ShellAdminRoute
   '/analytics': typeof ShellAnalyticsRoute
   '/design-system': typeof ShellDesignSystemRoute
@@ -75,7 +96,10 @@ export interface FileRoutesByFullPath {
   '/settings': typeof ShellSettingsRoute
 }
 export interface FileRoutesByTo {
+  '/auth': typeof AuthRoute
+  '/forbidden': typeof ForbiddenRoute
   '/offline': typeof OfflineRoute
+  '/unauthorized': typeof UnauthorizedRoute
   '/admin': typeof ShellAdminRoute
   '/analytics': typeof ShellAnalyticsRoute
   '/design-system': typeof ShellDesignSystemRoute
@@ -87,7 +111,10 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_shell': typeof ShellRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/forbidden': typeof ForbiddenRoute
   '/offline': typeof OfflineRoute
+  '/unauthorized': typeof UnauthorizedRoute
   '/_shell/admin': typeof ShellAdminRoute
   '/_shell/analytics': typeof ShellAnalyticsRoute
   '/_shell/design-system': typeof ShellDesignSystemRoute
@@ -100,7 +127,10 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
+    | '/forbidden'
     | '/offline'
+    | '/unauthorized'
     | '/admin'
     | '/analytics'
     | '/design-system'
@@ -109,7 +139,10 @@ export interface FileRouteTypes {
     | '/settings'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/auth'
+    | '/forbidden'
     | '/offline'
+    | '/unauthorized'
     | '/admin'
     | '/analytics'
     | '/design-system'
@@ -120,7 +153,10 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/_shell'
+    | '/auth'
+    | '/forbidden'
     | '/offline'
+    | '/unauthorized'
     | '/_shell/admin'
     | '/_shell/analytics'
     | '/_shell/design-system'
@@ -132,7 +168,10 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   ShellRoute: typeof ShellRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  ForbiddenRoute: typeof ForbiddenRoute
   OfflineRoute: typeof OfflineRoute
+  UnauthorizedRoute: typeof UnauthorizedRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -144,11 +183,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forbidden': {
+      id: '/forbidden'
+      path: '/forbidden'
+      fullPath: '/forbidden'
+      preLoaderRoute: typeof ForbiddenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/offline': {
       id: '/offline'
       path: '/offline'
       fullPath: '/offline'
       preLoaderRoute: typeof OfflineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/unauthorized': {
+      id: '/unauthorized'
+      path: '/unauthorized'
+      fullPath: '/unauthorized'
+      preLoaderRoute: typeof UnauthorizedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_shell/': {
@@ -227,7 +287,10 @@ const ShellRouteWithChildren = ShellRoute._addFileChildren(ShellRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   ShellRoute: ShellRouteWithChildren,
+  AuthRoute: AuthRoute,
+  ForbiddenRoute: ForbiddenRoute,
   OfflineRoute: OfflineRoute,
+  UnauthorizedRoute: UnauthorizedRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

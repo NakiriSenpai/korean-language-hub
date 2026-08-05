@@ -100,11 +100,13 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <PlatformProvider>
-        <PwaRegistrar />
-        <ErrorBoundary>
-          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-          <Outlet />
-        </ErrorBoundary>
+        <IdentityProvider>
+          <PwaRegistrar />
+          <ErrorBoundary>
+            {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+            <Outlet />
+          </ErrorBoundary>
+        </IdentityProvider>
       </PlatformProvider>
     </QueryClientProvider>
   );
