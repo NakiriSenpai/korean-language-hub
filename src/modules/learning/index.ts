@@ -4,7 +4,7 @@
  */
 
 export type {
-  Block​Content,
+  BlockContent,
   BlockType,
   Bookmark,
   CalloutTone,
