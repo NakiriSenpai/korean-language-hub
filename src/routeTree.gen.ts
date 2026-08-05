@@ -47,6 +47,7 @@ import { Route as ShellKnowledgeKindSlugRouteImport } from './routes/_shell.know
 import { Route as ShellLearningCoursesCourseIdRouteImport } from './routes/_shell.learning.courses.$courseId'
 import { Route as ShellLearningLessonsLessonIdRouteImport } from './routes/_shell.learning.lessons.$lessonId'
 import { Route as ShellLearningModulesModuleIdRouteImport } from './routes/_shell.learning.modules.$moduleId'
+import { Route as ShellExamAttemptsAttemptIdIndexRouteImport } from './routes/_shell.exam.attempts.$attemptId.index'
 
 const ShellRoute = ShellRouteImport.update({
   id: '/_shell',
@@ -246,6 +247,12 @@ const ShellLearningModulesModuleIdRoute =
     path: '/modules/$moduleId',
     getParentRoute: () => ShellLearningRoute,
   } as any)
+const ShellExamAttemptsAttemptIdIndexRoute =
+  ShellExamAttemptsAttemptIdIndexRouteImport.update({
+    id: '/attempts/$attemptId/',
+    path: '/attempts/$attemptId/',
+    getParentRoute: () => ShellExamRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof ShellIndexRoute
@@ -285,6 +292,7 @@ export interface FileRoutesByFullPath {
   '/learning/lessons/$lessonId': typeof ShellLearningLessonsLessonIdRoute
   '/learning/modules/$moduleId': typeof ShellLearningModulesModuleIdRoute
   '/assessment/assessments/': typeof ShellAssessmentAssessmentsIndexRoute
+  '/exam/attempts/$attemptId/': typeof ShellExamAttemptsAttemptIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
@@ -319,6 +327,7 @@ export interface FileRoutesByTo {
   '/learning/lessons/$lessonId': typeof ShellLearningLessonsLessonIdRoute
   '/learning/modules/$moduleId': typeof ShellLearningModulesModuleIdRoute
   '/assessment/assessments': typeof ShellAssessmentAssessmentsIndexRoute
+  '/exam/attempts/$attemptId': typeof ShellExamAttemptsAttemptIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -360,6 +369,7 @@ export interface FileRoutesById {
   '/_shell/learning/lessons/$lessonId': typeof ShellLearningLessonsLessonIdRoute
   '/_shell/learning/modules/$moduleId': typeof ShellLearningModulesModuleIdRoute
   '/_shell/assessment/assessments/': typeof ShellAssessmentAssessmentsIndexRoute
+  '/_shell/exam/attempts/$attemptId/': typeof ShellExamAttemptsAttemptIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -401,6 +411,7 @@ export interface FileRouteTypes {
     | '/learning/lessons/$lessonId'
     | '/learning/modules/$moduleId'
     | '/assessment/assessments/'
+    | '/exam/attempts/$attemptId/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/auth'
@@ -435,6 +446,7 @@ export interface FileRouteTypes {
     | '/learning/lessons/$lessonId'
     | '/learning/modules/$moduleId'
     | '/assessment/assessments'
+    | '/exam/attempts/$attemptId'
   id:
     | '__root__'
     | '/_shell'
@@ -475,6 +487,7 @@ export interface FileRouteTypes {
     | '/_shell/learning/lessons/$lessonId'
     | '/_shell/learning/modules/$moduleId'
     | '/_shell/assessment/assessments/'
+    | '/_shell/exam/attempts/$attemptId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -753,6 +766,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellLearningModulesModuleIdRouteImport
       parentRoute: typeof ShellLearningRoute
     }
+    '/_shell/exam/attempts/$attemptId/': {
+      id: '/_shell/exam/attempts/$attemptId/'
+      path: '/attempts/$attemptId'
+      fullPath: '/exam/attempts/$attemptId/'
+      preLoaderRoute: typeof ShellExamAttemptsAttemptIdIndexRouteImport
+      parentRoute: typeof ShellExamRoute
+    }
   }
 }
 
@@ -801,11 +821,13 @@ const ShellAssessmentRouteWithChildren = ShellAssessmentRoute._addFileChildren(
 interface ShellExamRouteChildren {
   ShellExamIndexRoute: typeof ShellExamIndexRoute
   ShellExamAssessmentIdStartRoute: typeof ShellExamAssessmentIdStartRoute
+  ShellExamAttemptsAttemptIdIndexRoute: typeof ShellExamAttemptsAttemptIdIndexRoute
 }
 
 const ShellExamRouteChildren: ShellExamRouteChildren = {
   ShellExamIndexRoute: ShellExamIndexRoute,
   ShellExamAssessmentIdStartRoute: ShellExamAssessmentIdStartRoute,
+  ShellExamAttemptsAttemptIdIndexRoute: ShellExamAttemptsAttemptIdIndexRoute,
 }
 
 const ShellExamRouteWithChildren = ShellExamRoute._addFileChildren(
