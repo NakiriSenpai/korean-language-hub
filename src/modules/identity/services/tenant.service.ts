@@ -16,7 +16,7 @@ export function resolveTenantSlugFromPath(pathname: string): string | null {
 }
 
 export function readStoredTenantId(): string | null {
-  return storage.local.get<string>(ACTIVE_TENANT_KEY) ?? null;
+  return storage.local.get<string | null>(ACTIVE_TENANT_KEY, null);
 }
 
 export function writeStoredTenantId(tenantId: string | null): void {
