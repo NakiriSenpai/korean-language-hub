@@ -87,7 +87,10 @@ jobs:
           fi
           SERVER_DIR=$(dirname "$CONFIG")
           echo "Resolved Worker config: $CONFIG (workingDirectory: $SERVER_DIR)"
-          ls -la "$SERVER_DIR" | head -20
+          # Avoid `ls | head`: head closes stdin early -> SIGPIPE -> pipefail aborts
+          # the step. Write to a file first, then read a limited slice from the file.
+          ls -la "$SERVER_DIR" > /tmp/nitro_server_listing.txt
+          head -20 /tmp/nitro_server_listing.txt
           test -f "$SERVER_DIR/index.mjs" || { echo "::error::Missing $SERVER_DIR/index.mjs"; exit 1; }
           cat "$CONFIG"
           echo "NITRO_SERVER_DIR=$SERVER_DIR" >> "$GITHUB_ENV"
