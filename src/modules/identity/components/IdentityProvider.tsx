@@ -10,7 +10,9 @@ import {
 import { useRouterState } from "@tanstack/react-router";
 import type { Session, User } from "@supabase/supabase-js";
 
-import { handleError, logger } from "@/shared/platform";
+import { useQueryClient } from "@tanstack/react-query";
+
+import { handleError, localStore, logger, sessionStore } from "@/shared/platform";
 import * as authService from "@/modules/identity/services/auth.service";
 import { sessionManager } from "@/modules/identity/services/session.service";
 import { fetchMemberships, fetchProfile } from "@/modules/identity/services/membership.service";
@@ -165,12 +167,26 @@ export function IdentityProvider({ children }: IdentityProviderProps) {
     [loadIdentity],
   );
 
+  /**
+   * Sign-out must leave nothing behind: in-flight protected queries are
+   * cancelled before their 401s land, the cache is dropped so a back-navigation
+   * cannot rehydrate protected data, and the namespaced local storage (active
+   * tenant, UI preferences) is cleared alongside the provider session.
+   */
   const signOut = useCallback(async () => {
-    await authService.signOut();
-    sessionManager.cleanup();
-    setSelectedTenantId(null);
-    setState({ ...INITIAL, status: "unauthenticated" });
-  }, []);
+    await queryClient.cancelQueries();
+    try {
+      await authService.signOut();
+    } finally {
+      sessionManager.cleanup();
+      queryClient.clear();
+      localStore.clearNamespace();
+      sessionStore.clearNamespace();
+      setSelectedTenantId(null);
+      setState({ ...INITIAL, status: "unauthenticated" });
+      logger.info("Session cleared", { scope: "identity.signOut" });
+    }
+  }, [queryClient]);
 
   const refresh = useCallback(async () => {
     const session = await sessionManager.refresh();
