@@ -1,6 +1,7 @@
 import {
   BarChart3,
   BookOpen,
+  CalendarRange,
   GraduationCap,
   LayoutDashboard,
   Settings,
@@ -33,6 +34,15 @@ export const NAV_ITEMS: readonly NavItem[] = [
     description: "Ringkasan aktivitas dan status pembelajaran akan tampil di sini.",
     primary: true,
     exact: true,
+  },
+  {
+    id: "academic",
+    label: "Academic",
+    to: "/academic",
+    icon: CalendarRange,
+    description: "Periode akademik, kelas, peserta, pendaftaran, dan penugasan pengajar.",
+    primary: true,
+    exact: false,
   },
   {
     id: "learning",
