@@ -43,22 +43,32 @@ const ENV_VARIABLE_NAMES: Readonly<Record<EnvKey, string>> = {
 
 export interface EnvValidationResult {
   readonly valid: boolean;
-  /** Human readable names of the missing variables, e.g. `VITE_SUPABASE_URL`. */
+  /** Human readable names of the missing required variables, e.g. `VITE_SUPABASE_URL`. */
   readonly missing: readonly string[];
+  /** Missing optional integration variables — degraded features, not a boot failure. */
+  readonly warnings: readonly string[];
   readonly message: string | null;
+  readonly warningMessage: string | null;
 }
 
 /** Validates the environment without throwing. */
 export function validateEnv(): EnvValidationResult {
   const missing = missingEnvKeys().map((key) => ENV_VARIABLE_NAMES[key]);
+  const warnings = missingOptionalEnvKeys().map((key) => ENV_VARIABLE_NAMES[key]);
   return {
     valid: missing.length === 0,
     missing,
+    warnings,
     message:
       missing.length === 0
         ? null
         : `Missing required environment variables: ${missing.join(", ")}. ` +
           `Copy .env.example to .env and provide the values.`,
+    warningMessage:
+      warnings.length === 0
+        ? null
+        : `Optional integration variables are not configured: ${warnings.join(", ")}. ` +
+          `Media upload and delivery features stay disabled until they are set.`,
   };
 }
 
