@@ -1,8 +1,9 @@
 /**
- * Environment configuration.
+ * Low-level environment reader.
  *
  * Values come exclusively from Vite env variables (`VITE_*`).
- * Nothing is hardcoded and no connection is established in this sprint.
+ * Application code must NOT import this module directly — consume the platform
+ * entry point (`@/shared/platform`) which re-exports `platformEnv`/`validateEnv`.
  */
 
 export interface AppEnv {
@@ -31,7 +32,7 @@ export const env: AppEnv = {
 export type EnvKey = keyof Omit<AppEnv, "mode" | "isProduction">;
 
 /** Keys that must be present before the corresponding integration is used. */
-export const REQUIRED_ENV_KEYS: readonly EnvKey[] = [
+const REQUIRED_ENV_KEYS: readonly EnvKey[] = [
   "supabaseUrl",
   "supabaseAnonKey",
   "cloudinaryCloudName",
@@ -41,5 +42,3 @@ export const REQUIRED_ENV_KEYS: readonly EnvKey[] = [
 /** Returns the configured keys that are still empty. Never throws. */
 export const missingEnvKeys = (): readonly EnvKey[] =>
   REQUIRED_ENV_KEYS.filter((key) => env[key].length === 0);
-
-export const isEnvReady = (): boolean => missingEnvKeys().length === 0;

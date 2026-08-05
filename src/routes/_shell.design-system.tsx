@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { AppCard, AppSection, Grid, Stack } from "@/shared/components/layout";
 import { ThemeToggle } from "@/shared/components/ThemeToggle";
-import { appConfig } from "@/shared/config/app.config";
+import { platformConfig } from "@/shared/platform";
 import { APP_META } from "@/shared/constants";
 import {
   MOTION_TOKENS,
@@ -91,7 +91,7 @@ function DesignSystemPage() {
             </p>
             <h1 className="truncate text-h1 text-text-primary">{APP_META.name}</h1>
             <p className="text-body-sm text-text-secondary">
-              v{appConfig.version} · {appConfig.environment}
+              v{platformConfig.app.version} · {platformConfig.app.environment}
             </p>
           </div>
           <ThemeToggle />
