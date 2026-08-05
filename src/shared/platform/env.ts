@@ -5,7 +5,12 @@
  * Vite env variables (`VITE_*`) — nothing is hardcoded.
  */
 
-import { env as baseEnv, missingEnvKeys, type EnvKey } from "@/shared/config/env";
+import {
+  env as baseEnv,
+  missingEnvKeys,
+  missingOptionalEnvKeys,
+  type EnvKey,
+} from "@/shared/config/env";
 
 export interface PlatformEnv {
   readonly supabaseUrl: string;
