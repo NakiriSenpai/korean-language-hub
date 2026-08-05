@@ -58,6 +58,66 @@ export type Database = {
           },
         ]
       }
+      announcements: {
+        Row: {
+          audience: Database["public"]["Enums"]["announcement_audience"]
+          body: string
+          created_at: string
+          created_by: string | null
+          id: string
+          pinned: boolean
+          published_at: string | null
+          status: Database["public"]["Enums"]["announcement_status"]
+          study_group_id: string | null
+          tenant_id: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          audience?: Database["public"]["Enums"]["announcement_audience"]
+          body: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          pinned?: boolean
+          published_at?: string | null
+          status?: Database["public"]["Enums"]["announcement_status"]
+          study_group_id?: string | null
+          tenant_id: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          audience?: Database["public"]["Enums"]["announcement_audience"]
+          body?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          pinned?: boolean
+          published_at?: string | null
+          status?: Database["public"]["Enums"]["announcement_status"]
+          study_group_id?: string | null
+          tenant_id?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "announcements_study_group_id_fkey"
+            columns: ["study_group_id"]
+            isOneToOne: false
+            referencedRelation: "study_groups"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "announcements_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       assessment_questions: {
         Row: {
           assessment_id: string
@@ -305,6 +365,53 @@ export type Database = {
           },
         ]
       }
+      audit_logs: {
+        Row: {
+          action: string
+          actor_label: string | null
+          actor_user_id: string | null
+          created_at: string
+          entity_id: string | null
+          entity_type: string | null
+          id: string
+          metadata: Json
+          summary: string | null
+          tenant_id: string | null
+        }
+        Insert: {
+          action: string
+          actor_label?: string | null
+          actor_user_id?: string | null
+          created_at?: string
+          entity_id?: string | null
+          entity_type?: string | null
+          id?: string
+          metadata?: Json
+          summary?: string | null
+          tenant_id?: string | null
+        }
+        Update: {
+          action?: string
+          actor_label?: string | null
+          actor_user_id?: string | null
+          created_at?: string
+          entity_id?: string | null
+          entity_type?: string | null
+          id?: string
+          metadata?: Json
+          summary?: string | null
+          tenant_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "audit_logs_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       bookmarks: {
         Row: {
           created_at: string
@@ -359,6 +466,65 @@ export type Database = {
             columns: ["unit_id"]
             isOneToOne: false
             referencedRelation: "lesson_units"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cms_blocks: {
+        Row: {
+          body: string | null
+          created_at: string
+          created_by: string | null
+          id: string
+          image_url: string | null
+          kind: Database["public"]["Enums"]["cms_block_kind"]
+          link_url: string | null
+          payload: Json
+          position: number
+          slug: string
+          status: Database["public"]["Enums"]["content_status"]
+          tenant_id: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          image_url?: string | null
+          kind: Database["public"]["Enums"]["cms_block_kind"]
+          link_url?: string | null
+          payload?: Json
+          position?: number
+          slug: string
+          status?: Database["public"]["Enums"]["content_status"]
+          tenant_id: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          body?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          image_url?: string | null
+          kind?: Database["public"]["Enums"]["cms_block_kind"]
+          link_url?: string | null
+          payload?: Json
+          position?: number
+          slug?: string
+          status?: Database["public"]["Enums"]["content_status"]
+          tenant_id?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cms_blocks_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
             referencedColumns: ["id"]
           },
         ]
@@ -1295,6 +1461,71 @@ export type Database = {
           },
         ]
       }
+      media_assets: {
+        Row: {
+          bytes: number | null
+          created_at: string
+          created_by: string | null
+          duration_seconds: number | null
+          folder: string | null
+          format: string | null
+          height: number | null
+          id: string
+          kind: Database["public"]["Enums"]["media_kind"]
+          public_id: string
+          tags: string[]
+          tenant_id: string
+          title: string
+          updated_at: string
+          url: string
+          width: number | null
+        }
+        Insert: {
+          bytes?: number | null
+          created_at?: string
+          created_by?: string | null
+          duration_seconds?: number | null
+          folder?: string | null
+          format?: string | null
+          height?: number | null
+          id?: string
+          kind: Database["public"]["Enums"]["media_kind"]
+          public_id: string
+          tags?: string[]
+          tenant_id: string
+          title: string
+          updated_at?: string
+          url: string
+          width?: number | null
+        }
+        Update: {
+          bytes?: number | null
+          created_at?: string
+          created_by?: string | null
+          duration_seconds?: number | null
+          folder?: string | null
+          format?: string | null
+          height?: number | null
+          id?: string
+          kind?: Database["public"]["Enums"]["media_kind"]
+          public_id?: string
+          tags?: string[]
+          tenant_id?: string
+          title?: string
+          updated_at?: string
+          url?: string
+          width?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "media_assets_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       memberships: {
         Row: {
           created_at: string
@@ -1682,6 +1913,44 @@ export type Database = {
           },
         ]
       }
+      system_settings: {
+        Row: {
+          category: Database["public"]["Enums"]["setting_category"]
+          created_at: string
+          id: string
+          settings: Json
+          tenant_id: string
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          category: Database["public"]["Enums"]["setting_category"]
+          created_at?: string
+          id?: string
+          settings?: Json
+          tenant_id: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          category?: Database["public"]["Enums"]["setting_category"]
+          created_at?: string
+          id?: string
+          settings?: Json
+          tenant_id?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "system_settings_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       teacher_assignments: {
         Row: {
           assigned_on: string
@@ -1725,6 +1994,59 @@ export type Database = {
             foreignKeyName: "teacher_assignments_tenant_id_fkey"
             columns: ["tenant_id"]
             isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tenant_branding: {
+        Row: {
+          address: string | null
+          contact_email: string | null
+          contact_phone: string | null
+          cover_url: string | null
+          created_at: string
+          id: string
+          logo_url: string | null
+          primary_color: string | null
+          secondary_color: string | null
+          tenant_id: string
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          address?: string | null
+          contact_email?: string | null
+          contact_phone?: string | null
+          cover_url?: string | null
+          created_at?: string
+          id?: string
+          logo_url?: string | null
+          primary_color?: string | null
+          secondary_color?: string | null
+          tenant_id: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          address?: string | null
+          contact_email?: string | null
+          contact_phone?: string | null
+          cover_url?: string | null
+          created_at?: string
+          id?: string
+          logo_url?: string | null
+          primary_color?: string | null
+          secondary_color?: string | null
+          tenant_id?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tenant_branding_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: true
             referencedRelation: "tenants"
             referencedColumns: ["id"]
           },
@@ -1839,6 +2161,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      create_tenant: { Args: { _name: string; _slug: string }; Returns: string }
       has_tenant_role: {
         Args: {
           _roles: Database["public"]["Enums"]["app_role"][]
@@ -1858,6 +2181,8 @@ export type Database = {
     }
     Enums: {
       academic_period_status: "draft" | "active" | "archived"
+      announcement_audience: "platform" | "tenant" | "study_group"
+      announcement_status: "draft" | "published" | "archived"
       app_role: "owner" | "admin" | "instructor" | "staff" | "student"
       assessment_type: "exam" | "quiz" | "practice" | "tryout"
       attempt_status:
@@ -1874,6 +2199,7 @@ export type Database = {
         | "quote"
         | "divider"
         | "callout"
+      cms_block_kind: "banner" | "carousel" | "static_page" | "faq"
       content_status: "draft" | "published" | "archived"
       enrollment_status: "active" | "completed" | "suspended" | "dropped"
       knowledge_difficulty: "beginner" | "intermediate" | "advanced"
@@ -1884,6 +2210,7 @@ export type Database = {
         | "culture_note"
         | "eps_reference"
       learning_target: "lesson" | "unit"
+      media_kind: "image" | "audio" | "video" | "document"
       membership_status: "invited" | "active" | "suspended" | "revoked"
       progress_status: "not_started" | "in_progress" | "completed"
       question_skill: "reading" | "listening"
@@ -1892,9 +2219,16 @@ export type Database = {
         | "multiple_response"
         | "true_false"
         | "short_answer"
+      setting_category:
+        | "general"
+        | "academic"
+        | "assessment"
+        | "learning"
+        | "notification"
+        | "media"
       study_group_status: "draft" | "active" | "archived"
       teacher_assignment_role: "lead" | "assistant"
-      tenant_status: "active" | "suspended"
+      tenant_status: "active" | "suspended" | "archived"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -2023,6 +2357,8 @@ export const Constants = {
   public: {
     Enums: {
       academic_period_status: ["draft", "active", "archived"],
+      announcement_audience: ["platform", "tenant", "study_group"],
+      announcement_status: ["draft", "published", "archived"],
       app_role: ["owner", "admin", "instructor", "staff", "student"],
       assessment_type: ["exam", "quiz", "practice", "tryout"],
       attempt_status: [
@@ -2041,6 +2377,7 @@ export const Constants = {
         "divider",
         "callout",
       ],
+      cms_block_kind: ["banner", "carousel", "static_page", "faq"],
       content_status: ["draft", "published", "archived"],
       enrollment_status: ["active", "completed", "suspended", "dropped"],
       knowledge_difficulty: ["beginner", "intermediate", "advanced"],
@@ -2052,6 +2389,7 @@ export const Constants = {
         "eps_reference",
       ],
       learning_target: ["lesson", "unit"],
+      media_kind: ["image", "audio", "video", "document"],
       membership_status: ["invited", "active", "suspended", "revoked"],
       progress_status: ["not_started", "in_progress", "completed"],
       question_skill: ["reading", "listening"],
@@ -2061,9 +2399,17 @@ export const Constants = {
         "true_false",
         "short_answer",
       ],
+      setting_category: [
+        "general",
+        "academic",
+        "assessment",
+        "learning",
+        "notification",
+        "media",
+      ],
       study_group_status: ["draft", "active", "archived"],
       teacher_assignment_role: ["lead", "assistant"],
-      tenant_status: ["active", "suspended"],
+      tenant_status: ["active", "suspended", "archived"],
     },
   },
 } as const
