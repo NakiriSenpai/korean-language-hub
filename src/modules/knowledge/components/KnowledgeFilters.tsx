@@ -13,12 +13,7 @@ export interface KnowledgeFiltersProps {
 }
 
 /** Keyword, category, difficulty, and tag filters shared by list and search pages. */
-export function KnowledgeFilters({
-  value,
-  onChange,
-  categories,
-  idPrefix,
-}: KnowledgeFiltersProps) {
+export function KnowledgeFilters({ value, onChange, categories, idPrefix }: KnowledgeFiltersProps) {
   return (
     <AppCard>
       <Grid cols={1} smCols={2} lgCols={4} gap="md">

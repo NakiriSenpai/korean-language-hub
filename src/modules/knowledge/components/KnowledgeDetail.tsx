@@ -51,7 +51,8 @@ export function KnowledgeDetail({ entry }: { entry: KnowledgeEntry }) {
             )}
             {entry.publishedAt && (
               <time dateTime={entry.publishedAt} className="text-caption text-text-secondary">
-                Terbit {new Date(entry.publishedAt).toLocaleDateString("id-ID", { dateStyle: "medium" })}
+                Terbit{" "}
+                {new Date(entry.publishedAt).toLocaleDateString("id-ID", { dateStyle: "medium" })}
               </time>
             )}
           </div>

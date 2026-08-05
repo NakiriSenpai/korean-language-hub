@@ -1,11 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, Library } from "lucide-react";
 
-import {
-  KnowledgeDetail,
-  getKnowledgeKindByRoute,
-  useKnowledgeEntry,
-} from "@/modules/knowledge";
+import { KnowledgeDetail, getKnowledgeKindByRoute, useKnowledgeEntry } from "@/modules/knowledge";
 import { Stack } from "@/shared/components/layout";
 import { EmptyState } from "@/shared/components/shell";
 import { ghostButtonClass } from "@/shared/components/form";

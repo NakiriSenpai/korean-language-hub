@@ -11,11 +11,7 @@ export type { ContentStatus };
 export type KnowledgeDifficulty = "beginner" | "intermediate" | "advanced";
 
 export type KnowledgeKind =
-  | "grammar"
-  | "vocabulary"
-  | "conversation"
-  | "culture_note"
-  | "eps_reference";
+  "grammar" | "vocabulary" | "conversation" | "culture_note" | "eps_reference";
 
 /** A single content block stored inside a knowledge entry (Sprint 3 block shape). */
 export interface KnowledgeBlock {

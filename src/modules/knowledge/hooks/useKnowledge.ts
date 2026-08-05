@@ -185,7 +185,8 @@ export function useToggleFavorite() {
   const { tenantId, userId } = useKnowledgeScope();
   const invalidate = useInvalidateKnowledge(tenantId);
   return useMutation({
-    mutationFn: (input: KnowledgeFavoriteInput) => FavoriteService.toggle({ tenantId, userId }, input),
+    mutationFn: (input: KnowledgeFavoriteInput) =>
+      FavoriteService.toggle({ tenantId, userId }, input),
     onSuccess: invalidate,
   });
 }

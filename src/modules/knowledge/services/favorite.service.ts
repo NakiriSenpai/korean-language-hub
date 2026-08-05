@@ -14,11 +14,7 @@ import {
 } from "@/modules/knowledge/services/knowledge-client";
 import { getEntriesByIds } from "@/modules/knowledge/services/entry.repository";
 import { KNOWLEDGE_KINDS } from "@/modules/knowledge/config/kinds";
-import type {
-  KnowledgeEntry,
-  KnowledgeFavorite,
-  KnowledgeKind,
-} from "@/modules/knowledge/types";
+import type { KnowledgeEntry, KnowledgeFavorite, KnowledgeKind } from "@/modules/knowledge/types";
 import {
   knowledgeFavoriteInputSchema,
   type KnowledgeFavoriteInput,

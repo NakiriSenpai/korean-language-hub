@@ -7,13 +7,7 @@ import { useCreateKnowledgeEntry } from "@/modules/knowledge/hooks/useKnowledge"
 import type { KnowledgeDifficulty } from "@/modules/knowledge/types";
 import type { KnowledgeEntryInput } from "@/modules/knowledge/validation/schemas";
 import { AppCard, AppSection, Grid } from "@/shared/components/layout";
-import {
-  Field,
-  SelectInput,
-  TextArea,
-  TextInput,
-  buttonClass,
-} from "@/shared/components/form";
+import { Field, SelectInput, TextArea, TextInput, buttonClass } from "@/shared/components/form";
 import { toUserMessage } from "@/shared/platform";
 
 interface FormState {

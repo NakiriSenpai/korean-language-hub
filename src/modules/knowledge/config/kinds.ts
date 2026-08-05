@@ -9,11 +9,7 @@ import { BookMarked, Globe2, Landmark, MessagesSquare, Type, type LucideIcon } f
 import type { KnowledgeDifficulty, KnowledgeKind } from "@/modules/knowledge/types";
 
 export type KnowledgeTable =
-  | "grammars"
-  | "vocabularies"
-  | "conversations"
-  | "culture_notes"
-  | "eps_references";
+  "grammars" | "vocabularies" | "conversations" | "culture_notes" | "eps_references";
 
 export interface KnowledgeExtraField {
   /** Database column (snake_case). */
