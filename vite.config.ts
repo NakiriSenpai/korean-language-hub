@@ -31,9 +31,22 @@ export default defineConfig({
         workbox: {
           // HTML is never precached: navigations go to the network and fall back to offline.html.
           globPatterns: ["**/*.{js,css,svg,png,ico,woff2}"],
+          // Heavy, rarely used renderers (PDF export, charting, canvas) are not
+          // worth an install-time download — the runtime CacheFirst rule below
+          // still caches them the first time a user actually opens those pages.
+          globIgnores: [
+            "**/jspdf*.js",
+            "**/html2canvas*.js",
+            "**/purify*.js",
+            "**/index.es-*.js",
+            "**/AnalyticsCharts-*.js",
+            "**/write-excel-file*.js",
+          ],
+          maximumFileSizeToCacheInBytes: 2 * 1024 * 1024,
           cleanupOutdatedCaches: true,
           clientsClaim: true,
           skipWaiting: false,
+
           navigateFallback: "/offline.html",
           navigateFallbackDenylist: [/^\/~oauth/, /^\/api\//, /^\/_serverFn\//],
           runtimeCaching: [

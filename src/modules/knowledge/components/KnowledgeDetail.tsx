@@ -4,6 +4,7 @@ import { FavoriteButton } from "@/modules/knowledge/components/FavoriteButton";
 import type { KnowledgeEntry } from "@/modules/knowledge/types";
 import { BlockList, ContentStatusBadge, type LessonBlock } from "@/modules/learning";
 import { AppCard, AppSection, Grid, Stack } from "@/shared/components/layout";
+import { optimizeImageUrl } from "@/shared/platform";
 
 /**
  * Knowledge detail view.
@@ -63,9 +64,10 @@ export function KnowledgeDetail({ entry }: { entry: KnowledgeEntry }) {
 
       {entry.coverUrl && (
         <img
-          src={entry.coverUrl}
+          src={optimizeImageUrl(entry.coverUrl, 1200)}
           alt={`Sampul ${entry.title}`}
           loading="lazy"
+          decoding="async"
           className="w-full rounded-lg border border-border object-cover"
         />
       )}

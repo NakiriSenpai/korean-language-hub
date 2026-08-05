@@ -31,6 +31,7 @@ export {
   cloudinaryConfig,
   buildCloudinaryUrl,
   buildTransformation,
+  optimizeImageUrl,
 } from "@/shared/platform/cloudinary";
 export type {
   CloudinaryConfig,
