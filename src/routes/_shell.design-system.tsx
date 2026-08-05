@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { AppCard, AppPage, AppSection, Grid, Stack } from "@/shared/components/layout";
+import { AppCard, AppSection, Grid, Stack } from "@/shared/components/layout";
 import { ThemeToggle } from "@/shared/components/ThemeToggle";
 import { appConfig } from "@/shared/config/app.config";
 import { APP_META } from "@/shared/constants";
@@ -13,7 +13,7 @@ import {
   typographyClass,
 } from "@/shared/design/tokens";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/_shell/design-system")({
   head: () => ({
     meta: [
       { title: "Hangeul LPK — Design System Foundation" },
@@ -82,7 +82,7 @@ const MOTION_CLASS: Record<string, string> = {
 
 function DesignSystemPage() {
   return (
-    <AppPage width="lg">
+    <Stack gap="2xl">
       <Stack gap="2xl">
         <header className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-md sm:flex sm:items-center sm:justify-between">
           <div className="flex min-w-0 flex-col gap-xs">
@@ -175,6 +175,6 @@ function DesignSystemPage() {
           </Grid>
         </AppSection>
       </Stack>
-    </AppPage>
+    </Stack>
   );
 }
