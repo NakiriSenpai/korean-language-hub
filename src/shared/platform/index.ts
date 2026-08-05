@@ -75,4 +75,7 @@ export {
   usePlatformConfig,
   useOnlineStatus,
 } from "@/shared/platform/PlatformProvider";
-export type { PlatformContextValue, PlatformProviderProps } from "@/shared/platform/PlatformProvider";
+export type {
+  PlatformContextValue,
+  PlatformProviderProps,
+} from "@/shared/platform/PlatformProvider";

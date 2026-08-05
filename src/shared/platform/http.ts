@@ -19,7 +19,8 @@ export async function withTimeout<T>(
   let timer: ReturnType<typeof setTimeout> | undefined;
   const timeout = new Promise<never>((_, reject) => {
     timer = setTimeout(
-      () => reject(new AppError(`The ${label} timed out after ${timeoutMs}ms.`, { kind: "network" })),
+      () =>
+        reject(new AppError(`The ${label} timed out after ${timeoutMs}ms.`, { kind: "network" })),
       timeoutMs,
     );
   });

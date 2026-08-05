@@ -5,10 +5,7 @@ import { logger } from "@/shared/lib/logger";
 import { handleError } from "@/shared/lib/error-handler";
 import { platformConfig, type PlatformConfig } from "@/shared/platform/config";
 import { validateEnv, type EnvValidationResult } from "@/shared/platform/env";
-import {
-  startConnectivityObserver,
-  onConnectivityChange,
-} from "@/shared/platform/connectivity";
+import { startConnectivityObserver, onConnectivityChange } from "@/shared/platform/connectivity";
 import { getNetworkState, startNetworkService } from "@/shared/platform/network";
 
 export interface PlatformContextValue {
@@ -65,7 +62,15 @@ export function PlatformProvider({ children, fallback, strict = false }: Platfor
   return (
     <PlatformContext.Provider value={value}>
       <ThemeProvider>
-        {blocked ? (fallback ? fallback(envResult) : <EnvErrorScreen result={envResult} />) : children}
+        {blocked ? (
+          fallback ? (
+            fallback(envResult)
+          ) : (
+            <EnvErrorScreen result={envResult} />
+          )
+        ) : (
+          children
+        )}
       </ThemeProvider>
     </PlatformContext.Provider>
   );

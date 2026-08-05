@@ -40,7 +40,11 @@ export function startNetworkService(): () => void {
   if (typeof window === "undefined") return () => undefined;
   if (!bound) {
     bound = true;
-    state = { status: readOnline() ? "online" : "offline", online: readOnline(), since: Date.now() };
+    state = {
+      status: readOnline() ? "online" : "offline",
+      online: readOnline(),
+      since: Date.now(),
+    };
     window.addEventListener("online", () => emit("online"));
     window.addEventListener("offline", () => emit("offline"));
   }
