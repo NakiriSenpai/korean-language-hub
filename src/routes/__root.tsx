@@ -11,7 +11,8 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ErrorBoundary } from "@/shared/components/ErrorBoundary";
-import { ThemeProvider, themeInitScript } from "@/shared/theme";
+import { themeInitScript } from "@/shared/theme";
+import { PlatformProvider } from "@/shared/platform";
 import { ErrorPage, NotFoundPage } from "@/shared/components/shell";
 
 function NotFoundComponent() {
@@ -91,12 +92,12 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
+      <PlatformProvider>
         <ErrorBoundary>
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
           <Outlet />
         </ErrorBoundary>
-      </ThemeProvider>
+      </PlatformProvider>
     </QueryClientProvider>
   );
 }
