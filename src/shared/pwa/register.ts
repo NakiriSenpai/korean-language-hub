@@ -40,7 +40,9 @@ async function unregisterExisting(): Promise<void> {
     const registrations = await navigator.serviceWorker.getRegistrations();
     await Promise.allSettled(
       registrations
-        .filter((item) => (item.active ?? item.waiting ?? item.installing)?.scriptURL.endsWith(SW_URL))
+        .filter((item) =>
+          (item.active ?? item.waiting ?? item.installing)?.scriptURL.endsWith(SW_URL),
+        )
         .map((item) => item.unregister()),
     );
   } catch (error) {
