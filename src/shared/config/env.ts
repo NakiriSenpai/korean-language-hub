@@ -8,7 +8,7 @@
 
 export interface AppEnv {
   readonly supabaseUrl: string;
-  readonly supabaseAnonKey: string;
+  readonly supabasePublishableKey: string;
   readonly cloudinaryCloudName: string;
   readonly cloudinaryUploadPreset: string;
   readonly mode: string;
@@ -22,7 +22,9 @@ const read = (key: string): string => {
 
 export const env: AppEnv = {
   supabaseUrl: read("VITE_SUPABASE_URL"),
-  supabaseAnonKey: read("VITE_SUPABASE_ANON_KEY"),
+  // Canonical name is VITE_SUPABASE_PUBLISHABLE_KEY; the legacy VITE_SUPABASE_ANON_KEY
+  // name stays readable as a fallback so existing deployments keep booting.
+  supabasePublishableKey: read("VITE_SUPABASE_PUBLISHABLE_KEY") || read("VITE_SUPABASE_ANON_KEY"),
   cloudinaryCloudName: read("VITE_CLOUDINARY_CLOUD_NAME"),
   cloudinaryUploadPreset: read("VITE_CLOUDINARY_UPLOAD_PRESET"),
   mode: import.meta.env.MODE,
@@ -32,7 +34,7 @@ export const env: AppEnv = {
 export type EnvKey = keyof Omit<AppEnv, "mode" | "isProduction">;
 
 /** Keys the application cannot boot without. */
-const REQUIRED_ENV_KEYS: readonly EnvKey[] = ["supabaseUrl", "supabaseAnonKey"];
+const REQUIRED_ENV_KEYS: readonly EnvKey[] = ["supabaseUrl", "supabasePublishableKey"];
 
 /**
  * Keys that only gate an optional integration (media upload/delivery). Missing

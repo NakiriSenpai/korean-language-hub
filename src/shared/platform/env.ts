@@ -14,7 +14,7 @@ import {
 
 export interface PlatformEnv {
   readonly supabaseUrl: string;
-  readonly supabaseAnonKey: string;
+  readonly supabasePublishableKey: string;
   readonly cloudinaryCloudName: string;
   readonly cloudinaryUploadPreset: string;
   readonly mode: string;
@@ -25,7 +25,7 @@ export interface PlatformEnv {
 
 export const platformEnv: PlatformEnv = {
   supabaseUrl: baseEnv.supabaseUrl,
-  supabaseAnonKey: baseEnv.supabaseAnonKey,
+  supabasePublishableKey: baseEnv.supabasePublishableKey,
   cloudinaryCloudName: baseEnv.cloudinaryCloudName,
   cloudinaryUploadPreset: baseEnv.cloudinaryUploadPreset,
   mode: baseEnv.mode,
@@ -36,7 +36,7 @@ export const platformEnv: PlatformEnv = {
 
 const ENV_VARIABLE_NAMES: Readonly<Record<EnvKey, string>> = {
   supabaseUrl: "VITE_SUPABASE_URL",
-  supabaseAnonKey: "VITE_SUPABASE_ANON_KEY",
+  supabasePublishableKey: "VITE_SUPABASE_PUBLISHABLE_KEY",
   cloudinaryCloudName: "VITE_CLOUDINARY_CLOUD_NAME",
   cloudinaryUploadPreset: "VITE_CLOUDINARY_UPLOAD_PRESET",
 };
