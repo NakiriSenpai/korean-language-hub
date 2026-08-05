@@ -71,6 +71,8 @@ export function IdentityProvider({ children }: IdentityProviderProps) {
   const [state, setState] = useState<IdentityState>(INITIAL);
   const [selectedTenantId, setSelectedTenantId] = useState<string | null>(null);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const queryClient = useQueryClient();
+
 
   const loadIdentity = useCallback(async (session: Session | null): Promise<void> => {
     if (!session?.user) {
