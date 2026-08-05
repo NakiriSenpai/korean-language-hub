@@ -20,6 +20,7 @@ import { Route as ShellAdminRouteImport } from './routes/_shell.admin'
 import { Route as ShellAnalyticsRouteImport } from './routes/_shell.analytics'
 import { Route as ShellDesignSystemRouteImport } from './routes/_shell.design-system'
 import { Route as ShellExamRouteImport } from './routes/_shell.exam'
+import { Route as ShellKnowledgeRouteImport } from './routes/_shell.knowledge'
 import { Route as ShellLearningRouteImport } from './routes/_shell.learning'
 import { Route as ShellSettingsRouteImport } from './routes/_shell.settings'
 import { Route as ShellAcademicIndexRouteImport } from './routes/_shell.academic.index'
@@ -27,6 +28,7 @@ import { Route as ShellAcademicEnrollmentsRouteImport } from './routes/_shell.ac
 import { Route as ShellAcademicGroupsRouteImport } from './routes/_shell.academic.groups'
 import { Route as ShellAcademicStudentsRouteImport } from './routes/_shell.academic.students'
 import { Route as ShellAcademicTeachersRouteImport } from './routes/_shell.academic.teachers'
+import { Route as ShellKnowledgeIndexRouteImport } from './routes/_shell.knowledge.index'
 import { Route as ShellLearningIndexRouteImport } from './routes/_shell.learning.index'
 import { Route as ShellLearningBookmarksRouteImport } from './routes/_shell.learning.bookmarks'
 import { Route as ShellLearningContinueRouteImport } from './routes/_shell.learning.continue'
@@ -88,6 +90,11 @@ const ShellExamRoute = ShellExamRouteImport.update({
   path: '/exam',
   getParentRoute: () => ShellRoute,
 } as any)
+const ShellKnowledgeRoute = ShellKnowledgeRouteImport.update({
+  id: '/knowledge',
+  path: '/knowledge',
+  getParentRoute: () => ShellRoute,
+} as any)
 const ShellLearningRoute = ShellLearningRouteImport.update({
   id: '/learning',
   path: '/learning',
@@ -123,6 +130,11 @@ const ShellAcademicTeachersRoute = ShellAcademicTeachersRouteImport.update({
   id: '/teachers',
   path: '/teachers',
   getParentRoute: () => ShellAcademicRoute,
+} as any)
+const ShellKnowledgeIndexRoute = ShellKnowledgeIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ShellKnowledgeRoute,
 } as any)
 const ShellLearningIndexRoute = ShellLearningIndexRouteImport.update({
   id: '/',
@@ -169,6 +181,7 @@ export interface FileRoutesByFullPath {
   '/analytics': typeof ShellAnalyticsRoute
   '/design-system': typeof ShellDesignSystemRoute
   '/exam': typeof ShellExamRoute
+  '/knowledge': typeof ShellKnowledgeRouteWithChildren
   '/learning': typeof ShellLearningRouteWithChildren
   '/settings': typeof ShellSettingsRoute
   '/academic/enrollments': typeof ShellAcademicEnrollmentsRoute
@@ -178,6 +191,7 @@ export interface FileRoutesByFullPath {
   '/learning/bookmarks': typeof ShellLearningBookmarksRoute
   '/learning/continue': typeof ShellLearningContinueRoute
   '/academic/': typeof ShellAcademicIndexRoute
+  '/knowledge/': typeof ShellKnowledgeIndexRoute
   '/learning/': typeof ShellLearningIndexRoute
   '/learning/courses/$courseId': typeof ShellLearningCoursesCourseIdRoute
   '/learning/lessons/$lessonId': typeof ShellLearningLessonsLessonIdRoute
@@ -201,6 +215,7 @@ export interface FileRoutesByTo {
   '/learning/bookmarks': typeof ShellLearningBookmarksRoute
   '/learning/continue': typeof ShellLearningContinueRoute
   '/academic': typeof ShellAcademicIndexRoute
+  '/knowledge': typeof ShellKnowledgeIndexRoute
   '/learning': typeof ShellLearningIndexRoute
   '/learning/courses/$courseId': typeof ShellLearningCoursesCourseIdRoute
   '/learning/lessons/$lessonId': typeof ShellLearningLessonsLessonIdRoute
@@ -218,6 +233,7 @@ export interface FileRoutesById {
   '/_shell/analytics': typeof ShellAnalyticsRoute
   '/_shell/design-system': typeof ShellDesignSystemRoute
   '/_shell/exam': typeof ShellExamRoute
+  '/_shell/knowledge': typeof ShellKnowledgeRouteWithChildren
   '/_shell/learning': typeof ShellLearningRouteWithChildren
   '/_shell/settings': typeof ShellSettingsRoute
   '/_shell/': typeof ShellIndexRoute
@@ -228,6 +244,7 @@ export interface FileRoutesById {
   '/_shell/learning/bookmarks': typeof ShellLearningBookmarksRoute
   '/_shell/learning/continue': typeof ShellLearningContinueRoute
   '/_shell/academic/': typeof ShellAcademicIndexRoute
+  '/_shell/knowledge/': typeof ShellKnowledgeIndexRoute
   '/_shell/learning/': typeof ShellLearningIndexRoute
   '/_shell/learning/courses/$courseId': typeof ShellLearningCoursesCourseIdRoute
   '/_shell/learning/lessons/$lessonId': typeof ShellLearningLessonsLessonIdRoute
@@ -246,6 +263,7 @@ export interface FileRouteTypes {
     | '/analytics'
     | '/design-system'
     | '/exam'
+    | '/knowledge'
     | '/learning'
     | '/settings'
     | '/academic/enrollments'
@@ -255,6 +273,7 @@ export interface FileRouteTypes {
     | '/learning/bookmarks'
     | '/learning/continue'
     | '/academic/'
+    | '/knowledge/'
     | '/learning/'
     | '/learning/courses/$courseId'
     | '/learning/lessons/$lessonId'
@@ -278,6 +297,7 @@ export interface FileRouteTypes {
     | '/learning/bookmarks'
     | '/learning/continue'
     | '/academic'
+    | '/knowledge'
     | '/learning'
     | '/learning/courses/$courseId'
     | '/learning/lessons/$lessonId'
@@ -294,6 +314,7 @@ export interface FileRouteTypes {
     | '/_shell/analytics'
     | '/_shell/design-system'
     | '/_shell/exam'
+    | '/_shell/knowledge'
     | '/_shell/learning'
     | '/_shell/settings'
     | '/_shell/'
@@ -304,6 +325,7 @@ export interface FileRouteTypes {
     | '/_shell/learning/bookmarks'
     | '/_shell/learning/continue'
     | '/_shell/academic/'
+    | '/_shell/knowledge/'
     | '/_shell/learning/'
     | '/_shell/learning/courses/$courseId'
     | '/_shell/learning/lessons/$lessonId'
@@ -397,6 +419,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellExamRouteImport
       parentRoute: typeof ShellRoute
     }
+    '/_shell/knowledge': {
+      id: '/_shell/knowledge'
+      path: '/knowledge'
+      fullPath: '/knowledge'
+      preLoaderRoute: typeof ShellKnowledgeRouteImport
+      parentRoute: typeof ShellRoute
+    }
     '/_shell/learning': {
       id: '/_shell/learning'
       path: '/learning'
@@ -445,6 +474,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/academic/teachers'
       preLoaderRoute: typeof ShellAcademicTeachersRouteImport
       parentRoute: typeof ShellAcademicRoute
+    }
+    '/_shell/knowledge/': {
+      id: '/_shell/knowledge/'
+      path: '/'
+      fullPath: '/knowledge/'
+      preLoaderRoute: typeof ShellKnowledgeIndexRouteImport
+      parentRoute: typeof ShellKnowledgeRoute
     }
     '/_shell/learning/': {
       id: '/_shell/learning/'
@@ -511,6 +547,18 @@ const ShellAcademicRouteWithChildren = ShellAcademicRoute._addFileChildren(
   ShellAcademicRouteChildren,
 )
 
+interface ShellKnowledgeRouteChildren {
+  ShellKnowledgeIndexRoute: typeof ShellKnowledgeIndexRoute
+}
+
+const ShellKnowledgeRouteChildren: ShellKnowledgeRouteChildren = {
+  ShellKnowledgeIndexRoute: ShellKnowledgeIndexRoute,
+}
+
+const ShellKnowledgeRouteWithChildren = ShellKnowledgeRoute._addFileChildren(
+  ShellKnowledgeRouteChildren,
+)
+
 interface ShellLearningRouteChildren {
   ShellLearningBookmarksRoute: typeof ShellLearningBookmarksRoute
   ShellLearningContinueRoute: typeof ShellLearningContinueRoute
@@ -539,6 +587,7 @@ interface ShellRouteChildren {
   ShellAnalyticsRoute: typeof ShellAnalyticsRoute
   ShellDesignSystemRoute: typeof ShellDesignSystemRoute
   ShellExamRoute: typeof ShellExamRoute
+  ShellKnowledgeRoute: typeof ShellKnowledgeRouteWithChildren
   ShellLearningRoute: typeof ShellLearningRouteWithChildren
   ShellSettingsRoute: typeof ShellSettingsRoute
   ShellIndexRoute: typeof ShellIndexRoute
@@ -550,6 +599,7 @@ const ShellRouteChildren: ShellRouteChildren = {
   ShellAnalyticsRoute: ShellAnalyticsRoute,
   ShellDesignSystemRoute: ShellDesignSystemRoute,
   ShellExamRoute: ShellExamRoute,
+  ShellKnowledgeRoute: ShellKnowledgeRouteWithChildren,
   ShellLearningRoute: ShellLearningRouteWithChildren,
   ShellSettingsRoute: ShellSettingsRoute,
   ShellIndexRoute: ShellIndexRoute,
