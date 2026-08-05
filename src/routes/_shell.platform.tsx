@@ -34,17 +34,17 @@ const linkClass = cn(
 
 const activeProps = { className: "bg-primary/10 text-primary font-medium" };
 
-const TABS = [
+const TABS: readonly { to: string; label: string; exact: boolean }[] = [
   { to: "/platform", label: "Konsol", exact: true },
-  { to: "/platform/tenants", label: "Lembaga" },
-  { to: "/platform/users", label: "Pengguna" },
-  { to: "/platform/branding", label: "Branding" },
-  { to: "/platform/settings", label: "Pengaturan" },
-  { to: "/platform/audit", label: "Audit" },
-  { to: "/platform/announcements", label: "Pengumuman" },
-  { to: "/platform/media", label: "Media" },
-  { to: "/platform/cms", label: "CMS" },
-] as const;
+  { exact: false, to: "/platform/tenants", label: "Lembaga" },
+  { exact: false, to: "/platform/users", label: "Pengguna" },
+  { exact: false, to: "/platform/branding", label: "Branding" },
+  { exact: false, to: "/platform/settings", label: "Pengaturan" },
+  { exact: false, to: "/platform/audit", label: "Audit" },
+  { exact: false, to: "/platform/announcements", label: "Pengumuman" },
+  { exact: false, to: "/platform/media", label: "Media" },
+  { exact: false, to: "/platform/cms", label: "CMS" },
+];
 
 function PlatformLayout() {
   return (
@@ -72,7 +72,7 @@ function PlatformLayout() {
               <li key={tab.to}>
                 <Link
                   to={tab.to}
-                  activeOptions={tab.exact ? { exact: true } : undefined}
+                  activeOptions={{ exact: tab.exact }}
                   className={linkClass}
                   activeProps={activeProps}
                 >

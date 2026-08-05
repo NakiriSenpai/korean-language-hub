@@ -23,6 +23,7 @@ import { Route as ShellDesignSystemRouteImport } from './routes/_shell.design-sy
 import { Route as ShellExamRouteImport } from './routes/_shell.exam'
 import { Route as ShellKnowledgeRouteImport } from './routes/_shell.knowledge'
 import { Route as ShellLearningRouteImport } from './routes/_shell.learning'
+import { Route as ShellPlatformRouteImport } from './routes/_shell.platform'
 import { Route as ShellSettingsRouteImport } from './routes/_shell.settings'
 import { Route as ShellAcademicIndexRouteImport } from './routes/_shell.academic.index'
 import { Route as ShellAcademicEnrollmentsRouteImport } from './routes/_shell.academic.enrollments'
@@ -122,6 +123,11 @@ const ShellKnowledgeRoute = ShellKnowledgeRouteImport.update({
 const ShellLearningRoute = ShellLearningRouteImport.update({
   id: '/learning',
   path: '/learning',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellPlatformRoute = ShellPlatformRouteImport.update({
+  id: '/platform',
+  path: '/platform',
   getParentRoute: () => ShellRoute,
 } as any)
 const ShellSettingsRoute = ShellSettingsRouteImport.update({
@@ -307,6 +313,7 @@ export interface FileRoutesByFullPath {
   '/exam': typeof ShellExamRouteWithChildren
   '/knowledge': typeof ShellKnowledgeRouteWithChildren
   '/learning': typeof ShellLearningRouteWithChildren
+  '/platform': typeof ShellPlatformRoute
   '/settings': typeof ShellSettingsRoute
   '/academic/enrollments': typeof ShellAcademicEnrollmentsRoute
   '/academic/groups': typeof ShellAcademicGroupsRoute
@@ -346,6 +353,7 @@ export interface FileRoutesByTo {
   '/unauthorized': typeof UnauthorizedRoute
   '/admin': typeof ShellAdminRoute
   '/design-system': typeof ShellDesignSystemRoute
+  '/platform': typeof ShellPlatformRoute
   '/settings': typeof ShellSettingsRoute
   '/': typeof ShellIndexRoute
   '/academic/enrollments': typeof ShellAcademicEnrollmentsRoute
@@ -394,6 +402,7 @@ export interface FileRoutesById {
   '/_shell/exam': typeof ShellExamRouteWithChildren
   '/_shell/knowledge': typeof ShellKnowledgeRouteWithChildren
   '/_shell/learning': typeof ShellLearningRouteWithChildren
+  '/_shell/platform': typeof ShellPlatformRoute
   '/_shell/settings': typeof ShellSettingsRoute
   '/_shell/': typeof ShellIndexRoute
   '/_shell/academic/enrollments': typeof ShellAcademicEnrollmentsRoute
@@ -443,6 +452,7 @@ export interface FileRouteTypes {
     | '/exam'
     | '/knowledge'
     | '/learning'
+    | '/platform'
     | '/settings'
     | '/academic/enrollments'
     | '/academic/groups'
@@ -482,6 +492,7 @@ export interface FileRouteTypes {
     | '/unauthorized'
     | '/admin'
     | '/design-system'
+    | '/platform'
     | '/settings'
     | '/'
     | '/academic/enrollments'
@@ -529,6 +540,7 @@ export interface FileRouteTypes {
     | '/_shell/exam'
     | '/_shell/knowledge'
     | '/_shell/learning'
+    | '/_shell/platform'
     | '/_shell/settings'
     | '/_shell/'
     | '/_shell/academic/enrollments'
@@ -669,6 +681,13 @@ declare module '@tanstack/react-router' {
       path: '/learning'
       fullPath: '/learning'
       preLoaderRoute: typeof ShellLearningRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/platform': {
+      id: '/_shell/platform'
+      path: '/platform'
+      fullPath: '/platform'
+      preLoaderRoute: typeof ShellPlatformRouteImport
       parentRoute: typeof ShellRoute
     }
     '/_shell/settings': {
@@ -1031,6 +1050,7 @@ interface ShellRouteChildren {
   ShellExamRoute: typeof ShellExamRouteWithChildren
   ShellKnowledgeRoute: typeof ShellKnowledgeRouteWithChildren
   ShellLearningRoute: typeof ShellLearningRouteWithChildren
+  ShellPlatformRoute: typeof ShellPlatformRoute
   ShellSettingsRoute: typeof ShellSettingsRoute
   ShellIndexRoute: typeof ShellIndexRoute
 }
@@ -1044,6 +1064,7 @@ const ShellRouteChildren: ShellRouteChildren = {
   ShellExamRoute: ShellExamRouteWithChildren,
   ShellKnowledgeRoute: ShellKnowledgeRouteWithChildren,
   ShellLearningRoute: ShellLearningRouteWithChildren,
+  ShellPlatformRoute: ShellPlatformRoute,
   ShellSettingsRoute: ShellSettingsRoute,
   ShellIndexRoute: ShellIndexRoute,
 }
