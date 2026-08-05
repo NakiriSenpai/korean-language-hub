@@ -112,33 +112,56 @@ interface DirectoryRow {
   role: AppRole;
   status: MembershipStatus;
   created_at: string;
-  profile: { full_name: string | null; avatar_url: string | null; phone: string | null } | null;
 }
 
+interface ProfileRow {
+  id: string;
+  full_name: string | null;
+  avatar_url: string | null;
+  phone: string | null;
+}
+
+/**
+ * Memberships and profiles have no direct foreign key (profiles point at
+ * auth.users), so the directory joins them in two tenant-scoped reads.
+ */
 export async function listDirectoryUsers(tenantId: string): Promise<readonly DirectoryUser[]> {
   assertTenant(tenantId, "platform.users.list");
   const rows = unwrapList(
     await supabase
       .from("memberships")
-      .select(
-        "id, user_id, tenant_id, role, status, created_at, profile:profiles(full_name, avatar_url, phone)",
-      )
+      .select("id, user_id, tenant_id, role, status, created_at")
       .eq("tenant_id", tenantId)
       .order("created_at", { ascending: true }),
     "platform.users.list",
   ) as readonly DirectoryRow[];
 
-  return rows.map((row) => ({
-    membershipId: row.id,
-    userId: row.user_id,
-    tenantId: row.tenant_id,
-    fullName: row.profile?.full_name ?? "Tanpa nama",
-    avatarUrl: row.profile?.avatar_url ?? null,
-    phone: row.profile?.phone ?? null,
-    role: row.role,
-    status: row.status,
-    joinedAt: row.created_at,
-  }));
+  const userIds = [...new Set(rows.map((row) => row.user_id))];
+  const profiles = userIds.length
+    ? ((unwrapList(
+        await supabase
+          .from("profiles")
+          .select("id, full_name, avatar_url, phone")
+          .in("id", userIds),
+        "platform.users.profiles",
+      ) as readonly ProfileRow[]) ?? [])
+    : [];
+  const byId = new Map(profiles.map((profile) => [profile.id, profile]));
+
+  return rows.map((row) => {
+    const profile = byId.get(row.user_id);
+    return {
+      membershipId: row.id,
+      userId: row.user_id,
+      tenantId: row.tenant_id,
+      fullName: profile?.full_name ?? "Tanpa nama",
+      avatarUrl: profile?.avatar_url ?? null,
+      phone: profile?.phone ?? null,
+      role: row.role,
+      status: row.status,
+      joinedAt: row.created_at,
+    };
+  });
 }
 
 /** Role change. Audited automatically by the `memberships_audit` trigger. */
