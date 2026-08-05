@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 
-import { ghostButtonClass } from "@/modules/academic/components/Form";
+import { ghostButtonClass } from "@/shared/components/form";
 import type { OutlineLesson } from "@/modules/learning/types";
 import { cn } from "@/lib/utils";
 
