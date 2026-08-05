@@ -136,6 +136,7 @@ export interface MediaAsset {
   readonly width: number | null;
   readonly height: number | null;
   readonly folder: string | null;
+  readonly createdBy: string | null;
   readonly createdAt: string;
 }
 
