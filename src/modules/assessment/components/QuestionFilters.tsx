@@ -1,10 +1,16 @@
 import {
-  ASSESSMENT_TYPES,
-  DIFFICULTY_OPTIONS_LIST,
-} from "@/modules/assessment/config/options";
-import { QUESTION_SKILLS, QUESTION_TYPES } from "@/modules/assessment/config/registry";
-import { LANGUAGE_OPTIONS } from "@/modules/assessment/config/registry";
-import type { QuestionFilters as Filters } from "@/modules/assessment/types";
+  LANGUAGE_OPTIONS,
+  QUESTION_SKILLS,
+  QUESTION_TYPES,
+} from "@/modules/assessment/config/registry";
+import type {
+  ContentStatus,
+  KnowledgeDifficulty,
+  QuestionFilters as Filters,
+  QuestionSkill,
+  QuestionType,
+} from "@/modules/assessment/types";
+import { DIFFICULTY_OPTIONS } from "@/modules/knowledge/config/kinds";
 import { Field, SelectInput, TextInput } from "@/shared/components/form";
 import { AppCard, Grid } from "@/shared/components/layout";
 
@@ -35,7 +41,7 @@ export function QuestionFilters({ value, onChange, categories, idPrefix }: Quest
             id={`${idPrefix}-type`}
             value={value.type ?? ""}
             onChange={(event) =>
-              onChange({ ...value, type: event.target.value as Filters["type"] })
+              onChange({ ...value, type: event.target.value as QuestionType | "" })
             }
           >
             <option value="">Semua tipe</option>
@@ -52,7 +58,7 @@ export function QuestionFilters({ value, onChange, categories, idPrefix }: Quest
             id={`${idPrefix}-skill`}
             value={value.skill ?? ""}
             onChange={(event) =>
-              onChange({ ...value, skill: event.target.value as Filters["skill"] })
+              onChange({ ...value, skill: event.target.value as QuestionSkill | "" })
             }
           >
             <option value="">Semua keterampilan</option>
@@ -69,11 +75,11 @@ export function QuestionFilters({ value, onChange, categories, idPrefix }: Quest
             id={`${idPrefix}-difficulty`}
             value={value.difficulty ?? ""}
             onChange={(event) =>
-              onChange({ ...value, difficulty: event.target.value as Filters["difficulty"] })
+              onChange({ ...value, difficulty: event.target.value as KnowledgeDifficulty | "" })
             }
           >
             <option value="">Semua tingkat</option>
-            {DIFFICULTY_OPTIONS_LIST.map((option) => (
+            {DIFFICULTY_OPTIONS.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>
@@ -125,7 +131,7 @@ export function QuestionFilters({ value, onChange, categories, idPrefix }: Quest
             id={`${idPrefix}-status`}
             value={value.status ?? ""}
             onChange={(event) =>
-              onChange({ ...value, status: event.target.value as Filters["status"] })
+              onChange({ ...value, status: event.target.value as ContentStatus | "" })
             }
           >
             <option value="">Semua status</option>
@@ -138,5 +144,3 @@ export function QuestionFilters({ value, onChange, categories, idPrefix }: Quest
     </AppCard>
   );
 }
-
-export { ASSESSMENT_TYPES };
