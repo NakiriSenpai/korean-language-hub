@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { CheckCircle2, ChevronLeft, ChevronRight, CircleSlash, Info, XCircle } from "lucide-react";
+import {
+  CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
+  CircleSlash,
+  FileQuestion,
+  Info,
+  XCircle,
+} from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import type { SnapshotQuestion } from "@/modules/assessment";
@@ -29,6 +37,7 @@ export function ExamReview({
   if (questions.length === 0) {
     return (
       <EmptyState
+        icon={FileQuestion}
         title="Belum ada soal untuk ditinjau"
         description="Snapshot ujian ini tidak memuat soal."
       />
