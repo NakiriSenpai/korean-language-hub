@@ -8,6 +8,7 @@
  */
 
 import { supabase } from "@/integrations/supabase/client";
+import type { Json } from "@/integrations/supabase/types";
 import {
   assertTenant,
   assertUser,
@@ -149,7 +150,7 @@ export const SnapshotService = {
           tenant_id: scope.tenantId,
           assessment_id: assessmentId,
           version,
-          payload: payload as unknown as Record<string, unknown>,
+          payload: payload as unknown as Json,
           question_count: questions.length,
           total_points: totalPoints,
           created_by: scope.userId,
