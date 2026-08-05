@@ -14,6 +14,7 @@ import { ErrorBoundary } from "@/shared/components/ErrorBoundary";
 import { themeInitScript } from "@/shared/theme";
 import { PlatformProvider } from "@/shared/platform";
 import { ErrorPage, NotFoundPage } from "@/shared/components/shell";
+import { PwaRegistrar } from "@/shared/pwa";
 
 function NotFoundComponent() {
   return <NotFoundPage />;
@@ -99,6 +100,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <PlatformProvider>
+        <PwaRegistrar />
         <ErrorBoundary>
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
           <Outlet />
