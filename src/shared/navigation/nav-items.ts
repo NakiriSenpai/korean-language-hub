@@ -3,6 +3,8 @@ import {
   BookOpen,
   CalendarRange,
   GraduationCap,
+  Library,
+
   LayoutDashboard,
   Settings,
   ShieldCheck,
