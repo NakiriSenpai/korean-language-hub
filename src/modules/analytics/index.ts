@@ -53,4 +53,4 @@ export {
   GradeDistributionChart,
   ScoreDistributionChart,
   TrendChart,
-} from "@/modules/analytics/components/AnalyticsCharts";
+} from "@/modules/analytics/components/LazyCharts";
