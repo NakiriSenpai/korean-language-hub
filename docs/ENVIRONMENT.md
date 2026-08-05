@@ -9,7 +9,7 @@ read `import.meta.env` directly.
 | Variable | Required | Purpose |
 | --- | --- | --- |
 | `VITE_SUPABASE_URL` | **Yes** | Backend project URL (auth, database, realtime) |
-| `VITE_SUPABASE_PUBLISHABLE_KEY` | **Yes** | Publishable key used by the browser client |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | **Yes** | Publishable key used by the browser client (legacy alias `VITE_SUPABASE_ANON_KEY` is still read as a fallback) |
 | `VITE_CLOUDINARY_CLOUD_NAME` | No | Media delivery (images/audio) |
 | `VITE_CLOUDINARY_UPLOAD_PRESET` | No | Unsigned upload preset for the Media Manager |
 
