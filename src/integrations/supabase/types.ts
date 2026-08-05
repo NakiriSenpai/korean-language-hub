@@ -14,6 +14,118 @@ export type Database = {
   }
   public: {
     Tables: {
+      academic_periods: {
+        Row: {
+          code: string
+          created_at: string
+          ends_on: string
+          id: string
+          name: string
+          starts_on: string
+          status: Database["public"]["Enums"]["academic_period_status"]
+          tenant_id: string
+          updated_at: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          ends_on: string
+          id?: string
+          name: string
+          starts_on: string
+          status?: Database["public"]["Enums"]["academic_period_status"]
+          tenant_id: string
+          updated_at?: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          ends_on?: string
+          id?: string
+          name?: string
+          starts_on?: string
+          status?: Database["public"]["Enums"]["academic_period_status"]
+          tenant_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "academic_periods_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      enrollments: {
+        Row: {
+          completed_on: string | null
+          created_at: string
+          enrolled_on: string
+          id: string
+          period_id: string
+          status: Database["public"]["Enums"]["enrollment_status"]
+          student_profile_id: string
+          study_group_id: string
+          tenant_id: string
+          updated_at: string
+        }
+        Insert: {
+          completed_on?: string | null
+          created_at?: string
+          enrolled_on?: string
+          id?: string
+          period_id: string
+          status?: Database["public"]["Enums"]["enrollment_status"]
+          student_profile_id: string
+          study_group_id: string
+          tenant_id: string
+          updated_at?: string
+        }
+        Update: {
+          completed_on?: string | null
+          created_at?: string
+          enrolled_on?: string
+          id?: string
+          period_id?: string
+          status?: Database["public"]["Enums"]["enrollment_status"]
+          student_profile_id?: string
+          study_group_id?: string
+          tenant_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "enrollments_period_id_fkey"
+            columns: ["period_id"]
+            isOneToOne: false
+            referencedRelation: "academic_periods"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "enrollments_student_profile_id_fkey"
+            columns: ["student_profile_id"]
+            isOneToOne: false
+            referencedRelation: "student_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "enrollments_study_group_id_fkey"
+            columns: ["study_group_id"]
+            isOneToOne: false
+            referencedRelation: "study_groups"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "enrollments_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       memberships: {
         Row: {
           created_at: string
@@ -97,6 +209,164 @@ export type Database = {
         }
         Relationships: []
       }
+      student_profiles: {
+        Row: {
+          avatar_url: string | null
+          birth_date: string | null
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+          notes: string | null
+          phone: string | null
+          student_number: string
+          tenant_id: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          birth_date?: string | null
+          created_at?: string
+          email?: string | null
+          full_name: string
+          id?: string
+          notes?: string | null
+          phone?: string | null
+          student_number: string
+          tenant_id: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          birth_date?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          notes?: string | null
+          phone?: string | null
+          student_number?: string
+          tenant_id?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_profiles_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      study_groups: {
+        Row: {
+          capacity: number
+          code: string
+          created_at: string
+          id: string
+          level: string | null
+          name: string
+          period_id: string
+          room: string | null
+          status: Database["public"]["Enums"]["study_group_status"]
+          tenant_id: string
+          updated_at: string
+        }
+        Insert: {
+          capacity?: number
+          code: string
+          created_at?: string
+          id?: string
+          level?: string | null
+          name: string
+          period_id: string
+          room?: string | null
+          status?: Database["public"]["Enums"]["study_group_status"]
+          tenant_id: string
+          updated_at?: string
+        }
+        Update: {
+          capacity?: number
+          code?: string
+          created_at?: string
+          id?: string
+          level?: string | null
+          name?: string
+          period_id?: string
+          room?: string | null
+          status?: Database["public"]["Enums"]["study_group_status"]
+          tenant_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "study_groups_period_id_fkey"
+            columns: ["period_id"]
+            isOneToOne: false
+            referencedRelation: "academic_periods"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "study_groups_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      teacher_assignments: {
+        Row: {
+          assigned_on: string
+          assignment_role: Database["public"]["Enums"]["teacher_assignment_role"]
+          created_at: string
+          id: string
+          study_group_id: string
+          teacher_user_id: string
+          tenant_id: string
+          updated_at: string
+        }
+        Insert: {
+          assigned_on?: string
+          assignment_role?: Database["public"]["Enums"]["teacher_assignment_role"]
+          created_at?: string
+          id?: string
+          study_group_id: string
+          teacher_user_id: string
+          tenant_id: string
+          updated_at?: string
+        }
+        Update: {
+          assigned_on?: string
+          assignment_role?: Database["public"]["Enums"]["teacher_assignment_role"]
+          created_at?: string
+          id?: string
+          study_group_id?: string
+          teacher_user_id?: string
+          tenant_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "teacher_assignments_study_group_id_fkey"
+            columns: ["study_group_id"]
+            isOneToOne: false
+            referencedRelation: "study_groups"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "teacher_assignments_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       tenants: {
         Row: {
           created_at: string
@@ -150,8 +420,12 @@ export type Database = {
       }
     }
     Enums: {
+      academic_period_status: "draft" | "active" | "archived"
       app_role: "owner" | "admin" | "instructor" | "staff" | "student"
+      enrollment_status: "active" | "completed" | "suspended" | "dropped"
       membership_status: "invited" | "active" | "suspended" | "revoked"
+      study_group_status: "draft" | "active" | "archived"
+      teacher_assignment_role: "lead" | "assistant"
       tenant_status: "active" | "suspended"
     }
     CompositeTypes: {
@@ -280,8 +554,12 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      academic_period_status: ["draft", "active", "archived"],
       app_role: ["owner", "admin", "instructor", "staff", "student"],
+      enrollment_status: ["active", "completed", "suspended", "dropped"],
       membership_status: ["invited", "active", "suspended", "revoked"],
+      study_group_status: ["draft", "active", "archived"],
+      teacher_assignment_role: ["lead", "assistant"],
       tenant_status: ["active", "suspended"],
     },
   },
