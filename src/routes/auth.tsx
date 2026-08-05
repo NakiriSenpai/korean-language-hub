@@ -5,6 +5,9 @@ import { SignInForm } from "@/modules/identity/components/SignInForm";
 
 export const Route = createFileRoute("/auth")({
   ssr: false,
+  validateSearch: (search: Record<string, unknown>) => ({
+    redirect: typeof search["redirect"] === "string" ? (search["redirect"] as string) : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Masuk — Hangeul LPK Platform" },
