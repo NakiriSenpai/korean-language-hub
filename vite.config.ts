@@ -29,23 +29,14 @@ export default defineConfig({
         devOptions: { enabled: false },
         includeAssets: ["favicon.png", "apple-touch-icon.png", "offline.html", "icons/*.png"],
         workbox: {
-          globPatterns: ["**/*.{js,css,html,svg,png,ico,woff2}"],
+          // HTML is never precached: navigations go to the network and fall back to offline.html.
+          globPatterns: ["**/*.{js,css,svg,png,ico,woff2}"],
           cleanupOutdatedCaches: true,
           clientsClaim: true,
           skipWaiting: false,
           navigateFallback: "/offline.html",
           navigateFallbackDenylist: [/^\/~oauth/, /^\/api\//, /^\/_serverFn\//],
           runtimeCaching: [
-            {
-              // App shell / HTML navigations: always try the network first.
-              urlPattern: ({ request }) => request.mode === "navigate",
-              handler: "NetworkFirst",
-              options: {
-                cacheName: "html-navigations",
-                networkTimeoutSeconds: 5,
-                expiration: { maxEntries: 20, maxAgeSeconds: 60 * 60 * 24 },
-              },
-            },
             {
               // Same-origin hashed build assets.
               urlPattern: ({ url, request, sameOrigin }) =>
