@@ -1,0 +1,17 @@
+name: CI
+
+on:
+  push:
+    branches: [development]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Typecheck, Lint, Build
+    uses: ./.github/workflows/_verify.yml
+    secrets: inherit
