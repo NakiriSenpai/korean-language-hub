@@ -45,10 +45,18 @@ export const Route = createFileRoute("/_shell/platform/announcements")({
   component: AnnouncementsPage,
 });
 
-const emptyForm = {
+interface AnnouncementForm {
+  title: string;
+  body: string;
+  audience: "platform" | "tenant" | "study_group";
+  studyGroupId: string;
+  pinned: boolean;
+}
+
+const emptyForm: AnnouncementForm = {
   title: "",
   body: "",
-  audience: "tenant" as const,
+  audience: "tenant",
   studyGroupId: "",
   pinned: false,
 };
@@ -61,7 +69,7 @@ function AnnouncementsPage() {
   const setStatus = useSetAnnouncementStatus();
   const removeAnnouncement = useDeleteAnnouncement();
 
-  const [form, setForm] = useState<typeof emptyForm & { audience: string }>(emptyForm);
+  const [form, setForm] = useState<AnnouncementForm>(emptyForm);
   const [error, setError] = useState<string | null>(null);
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -114,7 +122,7 @@ function AnnouncementsPage() {
                     <SelectInput
                       id="audience"
                       value={form.audience}
-                      onChange={(event) => setForm({ ...form, audience: event.target.value })}
+                      onChange={(event) => setForm({ ...form, audience: event.target.value as AnnouncementForm["audience"] })}
                     >
                       <option value="tenant">Lembaga</option>
                       <option value="platform">Seluruh platform</option>
