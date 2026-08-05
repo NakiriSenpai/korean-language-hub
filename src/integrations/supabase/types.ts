@@ -58,6 +58,139 @@ export type Database = {
           },
         ]
       }
+      assessment_questions: {
+        Row: {
+          assessment_id: string
+          created_at: string
+          id: string
+          points: number
+          position: number
+          question_id: string
+          question_version_id: string
+          tenant_id: string
+          updated_at: string
+        }
+        Insert: {
+          assessment_id: string
+          created_at?: string
+          id?: string
+          points?: number
+          position?: number
+          question_id: string
+          question_version_id: string
+          tenant_id: string
+          updated_at?: string
+        }
+        Update: {
+          assessment_id?: string
+          created_at?: string
+          id?: string
+          points?: number
+          position?: number
+          question_id?: string
+          question_version_id?: string
+          tenant_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assessment_questions_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: false
+            referencedRelation: "assessments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "assessment_questions_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "questions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "assessment_questions_question_version_id_fkey"
+            columns: ["question_version_id"]
+            isOneToOne: false
+            referencedRelation: "question_versions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "assessment_questions_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      assessments: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          description: string | null
+          difficulty: Database["public"]["Enums"]["knowledge_difficulty"]
+          duration_minutes: number
+          id: string
+          passing_score: number
+          published_at: string | null
+          published_version: number
+          randomize_choices: boolean
+          randomize_questions: boolean
+          slug: string
+          status: Database["public"]["Enums"]["content_status"]
+          tenant_id: string
+          title: string
+          type: Database["public"]["Enums"]["assessment_type"]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          duration_minutes?: number
+          id?: string
+          passing_score?: number
+          published_at?: string | null
+          published_version?: number
+          randomize_choices?: boolean
+          randomize_questions?: boolean
+          slug: string
+          status?: Database["public"]["Enums"]["content_status"]
+          tenant_id: string
+          title: string
+          type?: Database["public"]["Enums"]["assessment_type"]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          duration_minutes?: number
+          id?: string
+          passing_score?: number
+          published_at?: string | null
+          published_version?: number
+          randomize_choices?: boolean
+          randomize_questions?: boolean
+          slug?: string
+          status?: Database["public"]["Enums"]["content_status"]
+          tenant_id?: string
+          title?: string
+          type?: Database["public"]["Enums"]["assessment_type"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assessments_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       bookmarks: {
         Row: {
           created_at: string
@@ -194,6 +327,74 @@ export type Database = {
           },
         ]
       }
+      conversations: {
+        Row: {
+          audio_url: string | null
+          blocks: Json
+          category: string | null
+          cover_url: string | null
+          created_at: string
+          description: string | null
+          difficulty: Database["public"]["Enums"]["knowledge_difficulty"]
+          id: string
+          published_at: string | null
+          situation: string | null
+          slug: string
+          status: Database["public"]["Enums"]["content_status"]
+          tags: string[]
+          tenant_id: string
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          audio_url?: string | null
+          blocks?: Json
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          id?: string
+          published_at?: string | null
+          situation?: string | null
+          slug: string
+          status?: Database["public"]["Enums"]["content_status"]
+          tags?: string[]
+          tenant_id: string
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          audio_url?: string | null
+          blocks?: Json
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          id?: string
+          published_at?: string | null
+          situation?: string | null
+          slug?: string
+          status?: Database["public"]["Enums"]["content_status"]
+          tags?: string[]
+          tenant_id?: string
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "conversations_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       course_modules: {
         Row: {
           course_id: string
@@ -295,6 +496,71 @@ export type Database = {
           },
         ]
       }
+      culture_notes: {
+        Row: {
+          blocks: Json
+          category: string | null
+          cover_url: string | null
+          created_at: string
+          description: string | null
+          difficulty: Database["public"]["Enums"]["knowledge_difficulty"]
+          id: string
+          published_at: string | null
+          region: string | null
+          slug: string
+          status: Database["public"]["Enums"]["content_status"]
+          tags: string[]
+          tenant_id: string
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          blocks?: Json
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          id?: string
+          published_at?: string | null
+          region?: string | null
+          slug: string
+          status?: Database["public"]["Enums"]["content_status"]
+          tags?: string[]
+          tenant_id: string
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          blocks?: Json
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          id?: string
+          published_at?: string | null
+          region?: string | null
+          slug?: string
+          status?: Database["public"]["Enums"]["content_status"]
+          tags?: string[]
+          tenant_id?: string
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "culture_notes_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       enrollments: {
         Row: {
           completed_on: string | null
@@ -363,6 +629,74 @@ export type Database = {
           },
         ]
       }
+      eps_references: {
+        Row: {
+          blocks: Json
+          category: string | null
+          cover_url: string | null
+          created_at: string
+          description: string | null
+          difficulty: Database["public"]["Enums"]["knowledge_difficulty"]
+          id: string
+          published_at: string | null
+          reference_code: string | null
+          slug: string
+          source_year: number | null
+          status: Database["public"]["Enums"]["content_status"]
+          tags: string[]
+          tenant_id: string
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          blocks?: Json
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          id?: string
+          published_at?: string | null
+          reference_code?: string | null
+          slug: string
+          source_year?: number | null
+          status?: Database["public"]["Enums"]["content_status"]
+          tags?: string[]
+          tenant_id: string
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          blocks?: Json
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          id?: string
+          published_at?: string | null
+          reference_code?: string | null
+          slug?: string
+          source_year?: number | null
+          status?: Database["public"]["Enums"]["content_status"]
+          tags?: string[]
+          tenant_id?: string
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "eps_references_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       grammars: {
         Row: {
           blocks: Json
@@ -424,6 +758,47 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "grammars_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      knowledge_favorites: {
+        Row: {
+          created_at: string
+          id: string
+          item_id: string
+          item_type: Database["public"]["Enums"]["knowledge_kind"]
+          note: string | null
+          tenant_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          item_id: string
+          item_type: Database["public"]["Enums"]["knowledge_kind"]
+          note?: string | null
+          tenant_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          item_id?: string
+          item_type?: Database["public"]["Enums"]["knowledge_kind"]
+          note?: string | null
+          tenant_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "knowledge_favorites_tenant_id_fkey"
             columns: ["tenant_id"]
             isOneToOne: false
             referencedRelation: "tenants"
@@ -709,6 +1084,200 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      question_choices: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          is_correct: boolean
+          label: string | null
+          position: number
+          question_version_id: string
+          tenant_id: string
+          updated_at: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          is_correct?: boolean
+          label?: string | null
+          position?: number
+          question_version_id: string
+          tenant_id: string
+          updated_at?: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          is_correct?: boolean
+          label?: string | null
+          position?: number
+          question_version_id?: string
+          tenant_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "question_choices_question_version_id_fkey"
+            columns: ["question_version_id"]
+            isOneToOne: false
+            referencedRelation: "question_versions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "question_choices_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      question_versions: {
+        Row: {
+          answer_key: string | null
+          audio_url: string | null
+          category: string | null
+          created_at: string
+          created_by: string | null
+          difficulty: Database["public"]["Enums"]["knowledge_difficulty"]
+          explanation: string | null
+          id: string
+          language: string
+          passage: string | null
+          prompt: string
+          question_id: string
+          skill: Database["public"]["Enums"]["question_skill"]
+          source: string | null
+          tags: string[]
+          tenant_id: string
+          type: Database["public"]["Enums"]["question_type"]
+          updated_at: string
+          version: number
+        }
+        Insert: {
+          answer_key?: string | null
+          audio_url?: string | null
+          category?: string | null
+          created_at?: string
+          created_by?: string | null
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          explanation?: string | null
+          id?: string
+          language?: string
+          passage?: string | null
+          prompt: string
+          question_id: string
+          skill?: Database["public"]["Enums"]["question_skill"]
+          source?: string | null
+          tags?: string[]
+          tenant_id: string
+          type: Database["public"]["Enums"]["question_type"]
+          updated_at?: string
+          version: number
+        }
+        Update: {
+          answer_key?: string | null
+          audio_url?: string | null
+          category?: string | null
+          created_at?: string
+          created_by?: string | null
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          explanation?: string | null
+          id?: string
+          language?: string
+          passage?: string | null
+          prompt?: string
+          question_id?: string
+          skill?: Database["public"]["Enums"]["question_skill"]
+          source?: string | null
+          tags?: string[]
+          tenant_id?: string
+          type?: Database["public"]["Enums"]["question_type"]
+          updated_at?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "question_versions_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "questions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "question_versions_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      questions: {
+        Row: {
+          author_id: string | null
+          category: string | null
+          created_at: string
+          current_version: number
+          difficulty: Database["public"]["Enums"]["knowledge_difficulty"]
+          id: string
+          language: string
+          public_id: string
+          skill: Database["public"]["Enums"]["question_skill"]
+          source: string | null
+          status: Database["public"]["Enums"]["content_status"]
+          tags: string[]
+          tenant_id: string
+          type: Database["public"]["Enums"]["question_type"]
+          updated_at: string
+        }
+        Insert: {
+          author_id?: string | null
+          category?: string | null
+          created_at?: string
+          current_version?: number
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          id?: string
+          language?: string
+          public_id: string
+          skill?: Database["public"]["Enums"]["question_skill"]
+          source?: string | null
+          status?: Database["public"]["Enums"]["content_status"]
+          tags?: string[]
+          tenant_id: string
+          type: Database["public"]["Enums"]["question_type"]
+          updated_at?: string
+        }
+        Update: {
+          author_id?: string | null
+          category?: string | null
+          created_at?: string
+          current_version?: number
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          id?: string
+          language?: string
+          public_id?: string
+          skill?: Database["public"]["Enums"]["question_skill"]
+          source?: string | null
+          status?: Database["public"]["Enums"]["content_status"]
+          tags?: string[]
+          tenant_id?: string
+          type?: Database["public"]["Enums"]["question_type"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "questions_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       role_permissions: {
         Row: {
@@ -1015,6 +1584,7 @@ export type Database = {
     Enums: {
       academic_period_status: "draft" | "active" | "archived"
       app_role: "owner" | "admin" | "instructor" | "staff" | "student"
+      assessment_type: "exam" | "quiz" | "practice" | "tryout"
       block_type:
         | "text"
         | "image"
@@ -1035,6 +1605,12 @@ export type Database = {
       learning_target: "lesson" | "unit"
       membership_status: "invited" | "active" | "suspended" | "revoked"
       progress_status: "not_started" | "in_progress" | "completed"
+      question_skill: "reading" | "listening"
+      question_type:
+        | "multiple_choice"
+        | "multiple_response"
+        | "true_false"
+        | "short_answer"
       study_group_status: "draft" | "active" | "archived"
       teacher_assignment_role: "lead" | "assistant"
       tenant_status: "active" | "suspended"
@@ -1167,6 +1743,7 @@ export const Constants = {
     Enums: {
       academic_period_status: ["draft", "active", "archived"],
       app_role: ["owner", "admin", "instructor", "staff", "student"],
+      assessment_type: ["exam", "quiz", "practice", "tryout"],
       block_type: [
         "text",
         "image",
@@ -1189,6 +1766,13 @@ export const Constants = {
       learning_target: ["lesson", "unit"],
       membership_status: ["invited", "active", "suspended", "revoked"],
       progress_status: ["not_started", "in_progress", "completed"],
+      question_skill: ["reading", "listening"],
+      question_type: [
+        "multiple_choice",
+        "multiple_response",
+        "true_false",
+        "short_answer",
+      ],
       study_group_status: ["draft", "active", "archived"],
       teacher_assignment_role: ["lead", "assistant"],
       tenant_status: ["active", "suspended"],
