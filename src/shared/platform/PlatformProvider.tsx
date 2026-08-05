@@ -38,6 +38,9 @@ export function PlatformProvider({ children, fallback, strict = false }: Platfor
         scope: "platform.env",
       });
     }
+    if (envResult.warningMessage) {
+      logger.warn(envResult.warningMessage, { scope: "platform.env" });
+    }
     startNetworkService();
     setOnline(getNetworkState().online);
     const stop = startConnectivityObserver();

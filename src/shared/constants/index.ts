@@ -3,7 +3,7 @@
 export const APP_META = {
   name: "Hangeul LPK Platform",
   shortName: "Hangeul LPK",
-  version: "0.1.0",
+  version: "1.0.0",
   description: "Multi-tenant SaaS platform for Korean language training centers (LPK).",
 } as const;
 

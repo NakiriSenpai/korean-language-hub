@@ -31,14 +31,19 @@ export const env: AppEnv = {
 
 export type EnvKey = keyof Omit<AppEnv, "mode" | "isProduction">;
 
-/** Keys that must be present before the corresponding integration is used. */
-const REQUIRED_ENV_KEYS: readonly EnvKey[] = [
-  "supabaseUrl",
-  "supabaseAnonKey",
-  "cloudinaryCloudName",
-  "cloudinaryUploadPreset",
-];
+/** Keys the application cannot boot without. */
+const REQUIRED_ENV_KEYS: readonly EnvKey[] = ["supabaseUrl", "supabaseAnonKey"];
 
-/** Returns the configured keys that are still empty. Never throws. */
+/**
+ * Keys that only gate an optional integration (media upload/delivery). Missing
+ * values degrade the media features, they must never block the whole app.
+ */
+const OPTIONAL_ENV_KEYS: readonly EnvKey[] = ["cloudinaryCloudName", "cloudinaryUploadPreset"];
+
+/** Returns the required keys that are still empty. Never throws. */
 export const missingEnvKeys = (): readonly EnvKey[] =>
   REQUIRED_ENV_KEYS.filter((key) => env[key].length === 0);
+
+/** Returns the optional keys that are still empty. Never throws. */
+export const missingOptionalEnvKeys = (): readonly EnvKey[] =>
+  OPTIONAL_ENV_KEYS.filter((key) => env[key].length === 0);
