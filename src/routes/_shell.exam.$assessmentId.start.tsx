@@ -65,10 +65,11 @@ function ExamStartPage() {
       <Stack gap="lg">
         <div>
           <h3 className="text-h3 text-text-primary">{pkg.title}</h3>
-          {pkg.description ? (
-            <p className="mt-xs text-body-sm text-text-secondary">{pkg.description}</p>
-          ) : null}
+          <p className="mt-xs text-body-sm text-text-secondary">
+            Versi snapshot {pkg.snapshotVersion} · total {pkg.totalPoints} poin
+          </p>
         </div>
+
 
         <ul className="flex flex-wrap gap-lg text-body-sm text-text-secondary">
           <li className="inline-flex items-center gap-xs">
