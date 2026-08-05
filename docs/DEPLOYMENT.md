@@ -47,7 +47,7 @@ come from one build.
 | Name | Required | Purpose |
 | --- | --- | --- |
 | `VITE_SUPABASE_URL` | yes | Supabase project URL |
-| `VITE_SUPABASE_ANON_KEY` | yes | Supabase publishable key |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | yes | Supabase publishable key |
 | `VITE_CLOUDINARY_CLOUD_NAME` | no | Media delivery (degrades if unset) |
 | `VITE_CLOUDINARY_UPLOAD_PRESET` | no | Unsigned upload preset |
 

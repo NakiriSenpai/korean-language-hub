@@ -18,15 +18,15 @@ let client: PlatformSupabaseClient | null = null;
 
 /** Creates a new (non-cached) Supabase client. */
 export function createSupabaseClient(): PlatformSupabaseClient {
-  const { supabaseUrl, supabaseAnonKey, isServer } = platformEnv;
-  if (!supabaseUrl || !supabaseAnonKey) {
+  const { supabaseUrl, supabasePublishableKey, isServer } = platformEnv;
+  if (!supabaseUrl || !supabasePublishableKey) {
     throw new AppError("Supabase environment is not configured.", {
       kind: "validation",
       context: { missing: validateEnv().missing },
     });
   }
 
-  return createClient<PlatformDatabase>(supabaseUrl, supabaseAnonKey, {
+  return createClient<PlatformDatabase>(supabaseUrl, supabasePublishableKey, {
     auth: {
       persistSession: !isServer,
       autoRefreshToken: !isServer,
@@ -45,7 +45,7 @@ export function getSupabaseClient(): PlatformSupabaseClient {
 
 /** True when the required Supabase environment variables are present. */
 export function isSupabaseConfigured(): boolean {
-  return platformEnv.supabaseUrl.length > 0 && platformEnv.supabaseAnonKey.length > 0;
+  return platformEnv.supabaseUrl.length > 0 && platformEnv.supabasePublishableKey.length > 0;
 }
 
 export interface SupabaseErrorShape {
