@@ -10,32 +10,54 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  verify:
-    name: Typecheck, Lint, Build
-    uses: ./.github/workflows/_verify.yml
-    with:
-      upload-artifact: true
-    secrets: inherit
-
   deploy:
-    name: Deploy to Firebase Hosting
-    needs: verify
+    name: Build & Deploy to Cloudflare Workers
     runs-on: ubuntu-latest
     environment: production
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Download build output
-        uses: actions/download-artifact@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          name: dist
-          path: dist
+          bun-version: latest
 
-      - name: Deploy to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Setup Node.js (LTS)
+        uses: actions/setup-node@v4
         with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-          projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
-          channelId: live
+          node-version: "22"
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock') }}
+          restore-keys: ${{ runner.os }}-bun-
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Typecheck
+        run: bun run typecheck
+
+      - name: Lint
+        run: bun run lint
+
+      # The SSR worker and the client bundle must come from the SAME build:
+      # VITE_* values are inlined at build time, so building twice (or reusing a
+      # CI artifact built with different env) would desync client and server.
+      - name: Build
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          VITE_CLOUDINARY_CLOUD_NAME: ${{ secrets.VITE_CLOUDINARY_CLOUD_NAME }}
+          VITE_CLOUDINARY_UPLOAD_PRESET: ${{ secrets.VITE_CLOUDINARY_UPLOAD_PRESET }}
+        run: bun run build
+
+      - name: Deploy to Cloudflare Workers
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy --config dist/server/wrangler.json
