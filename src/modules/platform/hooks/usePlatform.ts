@@ -89,12 +89,36 @@ export function usePlatformStats() {
   });
 }
 
+/**
+ * Live dependency probes (platform / database / media / storage).
+ * Kept separate from the derived data checks so a slow probe never blocks the
+ * console from painting.
+ */
+export function usePlatformRuntimeHealth() {
+  return useQuery({
+    queryKey: ["platform", "health"],
+    queryFn: () => runHealthChecks(),
+    staleTime: 30_000,
+    refetchInterval: 60_000,
+  });
+}
+
 export function useHealthChecks(lastAuditAt: string | null) {
   const stats = usePlatformStats();
+  const runtime = usePlatformRuntimeHealth();
   const { online } = getNetworkState();
-  if (!stats.data) return [];
-  return ConsoleService.buildHealthChecks(stats.data, online, lastAuditAt);
+  const derived = stats.data
+    ? ConsoleService.buildHealthChecks(stats.data, online, lastAuditAt)
+    : [];
+  const probes: HealthCheck[] = (runtime.data?.probes ?? []).map((probe) => ({
+    id: probe.id,
+    label: probe.label,
+    level: probe.level,
+    detail: probe.detail,
+  }));
+  return [...probes, ...derived];
 }
+
 
 /* ------------------------------------------------------------------ */
 /* Tenant management                                                   */
