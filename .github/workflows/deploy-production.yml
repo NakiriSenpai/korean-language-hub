@@ -55,9 +55,30 @@ jobs:
           VITE_CLOUDINARY_UPLOAD_PRESET: ${{ secrets.VITE_CLOUDINARY_UPLOAD_PRESET }}
         run: bun run build
 
+      # Nitro's cloudflare-module preset writes the merged deploy config next to
+      # the worker entry (dist/server/wrangler.json). Fail loudly here with the
+      # actual tree instead of letting wrangler report a bare ENOENT.
+      - name: Verify Nitro deploy output
+        run: |
+          echo "dist/server contents:"
+          ls -la dist/server | head -20
+          test -f dist/server/index.mjs || { echo "::error::Missing dist/server/index.mjs"; exit 1; }
+          test -d dist/client || { echo "::error::Missing dist/client"; exit 1; }
+          if [ ! -f dist/server/wrangler.json ]; then
+            echo "::error::Nitro did not emit dist/server/wrangler.json"
+            find dist -maxdepth 2 -name 'wrangler*' -print
+            exit 1
+          fi
+          cat dist/server/wrangler.json
+
+      # Deploy from dist/server so `wrangler.json` is picked up as the config in
+      # the current working directory. Relative paths inside it (main, assets)
+      # are resolved against that same directory.
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy --config dist/server/wrangler.json
+          wranglerVersion: "4.118.0"
+          workingDirectory: dist/server
+          command: deploy --config wrangler.json
