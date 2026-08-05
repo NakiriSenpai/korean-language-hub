@@ -80,3 +80,45 @@ export type {
   PlatformContextValue,
   PlatformProviderProps,
 } from "@/shared/platform/PlatformProvider";
+
+/* ------------------------- production hardening -------------------------- */
+
+export {
+  buildSecurityHeaders,
+  buildContentSecurityPolicy,
+  withSecurityHeaders,
+} from "@/shared/platform/security";
+export type { SecurityHeaderOptions } from "@/shared/platform/security";
+
+export {
+  observability,
+  withTelemetry,
+  describeError,
+  getCorrelationId,
+  setCorrelationId,
+  createRequestId,
+  createId,
+  CORRELATION_HEADER,
+  REQUEST_HEADER,
+} from "@/shared/platform/observability";
+export type { TelemetryEnvelope } from "@/shared/platform/observability";
+
+export { runHealthChecks } from "@/shared/platform/health";
+export type {
+  HealthReport,
+  HealthProbeResult,
+  HealthLevel as PlatformHealthLevel,
+} from "@/shared/platform/health";
+
+export {
+  buildBackupMetadata,
+  exportTenantConfig,
+  toBackupFile,
+  RECOVERY_CHECKLIST,
+} from "@/shared/platform/backup";
+export type {
+  BackupMetadata,
+  TenantConfigExport,
+  TenantConfigExportInput,
+  RecoveryStep,
+} from "@/shared/platform/backup";
