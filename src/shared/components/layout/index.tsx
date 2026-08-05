@@ -46,10 +46,10 @@ const SHADOW: Record<ShadowToken, string> = {
 };
 
 const MAX_WIDTH = {
-  sm: "max-w-screen-sm",
-  md: "max-w-screen-md",
-  lg: "max-w-screen-lg",
-  xl: "max-w-screen-xl",
+  sm: "max-w-xl",
+  md: "max-w-3xl",
+  lg: "max-w-5xl",
+  xl: "max-w-7xl",
   full: "max-w-full",
 } as const;
 
