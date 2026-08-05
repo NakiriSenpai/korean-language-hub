@@ -48,7 +48,7 @@ export function assertTenant(tenantId: string, scope: string): string {
 export function assertUser(userId: string | undefined | null, scope: string): string {
   if (!userId) {
     throw new AppError("Sesi berakhir, silakan masuk kembali.", {
-      kind: "auth",
+      kind: "permission",
       context: { scope },
     });
   }
