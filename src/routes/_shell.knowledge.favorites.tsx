@@ -43,8 +43,8 @@ function KnowledgeFavoritesPage() {
           />
         ) : (
           <Grid cols={1} smCols={2} lgCols={3} gap="md">
-            {list.map((entry) => (
-              <KnowledgeCard key={`${entry.kind}-${entry.id}`} entry={entry} showKind />
+            {list.map(({ favorite, entry }) => (
+              <KnowledgeCard key={favorite.id} entry={entry} showKind />
             ))}
           </Grid>
         )}

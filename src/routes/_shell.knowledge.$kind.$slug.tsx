@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Library } from "lucide-react";
 
 import {
   KnowledgeDetail,
@@ -44,6 +44,7 @@ function KnowledgeDetailPage() {
   if (!definition) {
     return (
       <EmptyState
+        icon={Library}
         title="Jenis materi tidak dikenal"
         description="Pilih salah satu kategori knowledge pada navigasi di atas."
       />

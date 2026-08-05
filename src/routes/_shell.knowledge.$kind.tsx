@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { createFileRoute, notFound } from "@tanstack/react-router";
+import { Library } from "lucide-react";
 
 import { PermissionGate } from "@/modules/identity";
 import {
@@ -54,6 +55,7 @@ function KnowledgeKindPage() {
   if (!definition) {
     return (
       <EmptyState
+        icon={Library}
         title="Jenis materi tidak dikenal"
         description="Pilih salah satu kategori knowledge pada navigasi di atas."
       />

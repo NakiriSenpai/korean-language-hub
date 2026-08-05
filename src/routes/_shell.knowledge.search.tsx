@@ -39,7 +39,7 @@ function KnowledgeSearchPage() {
     filters.keyword?.trim() || filters.category || filters.difficulty || filters.tag?.trim(),
   );
   const results = useKnowledgeSearch(filters, hasFilter);
-  const list = results.data ?? [];
+  const list = results.data?.entries ?? [];
 
   return (
     <AppSection
