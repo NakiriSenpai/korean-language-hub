@@ -4,18 +4,15 @@
   // `assets`, `no_bundle` and `rules`; everything below is ours to control.
   //
   // Deploy with:  bun run deploy   (wrangler deploy --config dist/server/wrangler.json)
-  "$schema": "node_modules/wrangler/config-schema.json",
+  //
+  // No `vars` block on purpose: values declared here would overwrite whatever is
+  // configured on the Worker at every deploy. Runtime values (SUPABASE_URL) are
+  // set once with `wrangler secret put` / the Workers dashboard instead.
   "name": "hangeul-lpk",
   "compatibility_date": "2026-08-05",
   "compatibility_flags": ["nodejs_compat"],
   "observability": {
     "enabled": true,
     "head_sampling_rate": 1
-  },
-  "vars": {
-    // Non-secret runtime values only. Secrets go through
-    // `wrangler secret put` / the Workers dashboard, never here.
-    // SUPABASE_URL is read by src/server.ts to build the CSP connect-src.
-    "SUPABASE_URL": ""
   }
 }
