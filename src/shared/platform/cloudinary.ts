@@ -99,3 +99,20 @@ export const cloudinary = {
   transform: buildTransformation,
   isConfigured: (): boolean => cloudinaryConfig.configured,
 } as const;
+
+/**
+ * Rewrites an existing Cloudinary delivery URL so the browser receives an
+ * appropriately sized, modern-format image instead of the original upload.
+ * Non-Cloudinary URLs (and already-transformed ones) are returned untouched,
+ * so callers can pass any stored image URL safely.
+ */
+export function optimizeImageUrl(url: string, width = 960): string {
+  if (!url.includes("res.cloudinary.com")) return url;
+  const marker = "/upload/";
+  const index = url.indexOf(marker);
+  if (index === -1) return url;
+  const tail = url.slice(index + marker.length);
+  // Already carries a transformation segment — leave the author's intent alone.
+  if (/^[a-z]{1,3}_[^/]+\//.test(tail)) return url;
+  return `${url.slice(0, index + marker.length)}f_auto,q_auto,c_limit,w_${width},dpr_auto/${tail}`;
+}
