@@ -27,6 +27,12 @@ import { Route as ShellAcademicEnrollmentsRouteImport } from './routes/_shell.ac
 import { Route as ShellAcademicGroupsRouteImport } from './routes/_shell.academic.groups'
 import { Route as ShellAcademicStudentsRouteImport } from './routes/_shell.academic.students'
 import { Route as ShellAcademicTeachersRouteImport } from './routes/_shell.academic.teachers'
+import { Route as ShellLearningIndexRouteImport } from './routes/_shell.learning.index'
+import { Route as ShellLearningBookmarksRouteImport } from './routes/_shell.learning.bookmarks'
+import { Route as ShellLearningContinueRouteImport } from './routes/_shell.learning.continue'
+import { Route as ShellLearningCoursesCourseIdRouteImport } from './routes/_shell.learning.courses.$courseId'
+import { Route as ShellLearningLessonsLessonIdRouteImport } from './routes/_shell.learning.lessons.$lessonId'
+import { Route as ShellLearningModulesModuleIdRouteImport } from './routes/_shell.learning.modules.$moduleId'
 
 const ShellRoute = ShellRouteImport.update({
   id: '/_shell',
@@ -118,6 +124,39 @@ const ShellAcademicTeachersRoute = ShellAcademicTeachersRouteImport.update({
   path: '/teachers',
   getParentRoute: () => ShellAcademicRoute,
 } as any)
+const ShellLearningIndexRoute = ShellLearningIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ShellLearningRoute,
+} as any)
+const ShellLearningBookmarksRoute = ShellLearningBookmarksRouteImport.update({
+  id: '/bookmarks',
+  path: '/bookmarks',
+  getParentRoute: () => ShellLearningRoute,
+} as any)
+const ShellLearningContinueRoute = ShellLearningContinueRouteImport.update({
+  id: '/continue',
+  path: '/continue',
+  getParentRoute: () => ShellLearningRoute,
+} as any)
+const ShellLearningCoursesCourseIdRoute =
+  ShellLearningCoursesCourseIdRouteImport.update({
+    id: '/courses/$courseId',
+    path: '/courses/$courseId',
+    getParentRoute: () => ShellLearningRoute,
+  } as any)
+const ShellLearningLessonsLessonIdRoute =
+  ShellLearningLessonsLessonIdRouteImport.update({
+    id: '/lessons/$lessonId',
+    path: '/lessons/$lessonId',
+    getParentRoute: () => ShellLearningRoute,
+  } as any)
+const ShellLearningModulesModuleIdRoute =
+  ShellLearningModulesModuleIdRouteImport.update({
+    id: '/modules/$moduleId',
+    path: '/modules/$moduleId',
+    getParentRoute: () => ShellLearningRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof ShellIndexRoute
@@ -130,13 +169,19 @@ export interface FileRoutesByFullPath {
   '/analytics': typeof ShellAnalyticsRoute
   '/design-system': typeof ShellDesignSystemRoute
   '/exam': typeof ShellExamRoute
-  '/learning': typeof ShellLearningRoute
+  '/learning': typeof ShellLearningRouteWithChildren
   '/settings': typeof ShellSettingsRoute
   '/academic/enrollments': typeof ShellAcademicEnrollmentsRoute
   '/academic/groups': typeof ShellAcademicGroupsRoute
   '/academic/students': typeof ShellAcademicStudentsRoute
   '/academic/teachers': typeof ShellAcademicTeachersRoute
+  '/learning/bookmarks': typeof ShellLearningBookmarksRoute
+  '/learning/continue': typeof ShellLearningContinueRoute
   '/academic/': typeof ShellAcademicIndexRoute
+  '/learning/': typeof ShellLearningIndexRoute
+  '/learning/courses/$courseId': typeof ShellLearningCoursesCourseIdRoute
+  '/learning/lessons/$lessonId': typeof ShellLearningLessonsLessonIdRoute
+  '/learning/modules/$moduleId': typeof ShellLearningModulesModuleIdRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
@@ -147,14 +192,19 @@ export interface FileRoutesByTo {
   '/analytics': typeof ShellAnalyticsRoute
   '/design-system': typeof ShellDesignSystemRoute
   '/exam': typeof ShellExamRoute
-  '/learning': typeof ShellLearningRoute
   '/settings': typeof ShellSettingsRoute
   '/': typeof ShellIndexRoute
   '/academic/enrollments': typeof ShellAcademicEnrollmentsRoute
   '/academic/groups': typeof ShellAcademicGroupsRoute
   '/academic/students': typeof ShellAcademicStudentsRoute
   '/academic/teachers': typeof ShellAcademicTeachersRoute
+  '/learning/bookmarks': typeof ShellLearningBookmarksRoute
+  '/learning/continue': typeof ShellLearningContinueRoute
   '/academic': typeof ShellAcademicIndexRoute
+  '/learning': typeof ShellLearningIndexRoute
+  '/learning/courses/$courseId': typeof ShellLearningCoursesCourseIdRoute
+  '/learning/lessons/$lessonId': typeof ShellLearningLessonsLessonIdRoute
+  '/learning/modules/$moduleId': typeof ShellLearningModulesModuleIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -168,14 +218,20 @@ export interface FileRoutesById {
   '/_shell/analytics': typeof ShellAnalyticsRoute
   '/_shell/design-system': typeof ShellDesignSystemRoute
   '/_shell/exam': typeof ShellExamRoute
-  '/_shell/learning': typeof ShellLearningRoute
+  '/_shell/learning': typeof ShellLearningRouteWithChildren
   '/_shell/settings': typeof ShellSettingsRoute
   '/_shell/': typeof ShellIndexRoute
   '/_shell/academic/enrollments': typeof ShellAcademicEnrollmentsRoute
   '/_shell/academic/groups': typeof ShellAcademicGroupsRoute
   '/_shell/academic/students': typeof ShellAcademicStudentsRoute
   '/_shell/academic/teachers': typeof ShellAcademicTeachersRoute
+  '/_shell/learning/bookmarks': typeof ShellLearningBookmarksRoute
+  '/_shell/learning/continue': typeof ShellLearningContinueRoute
   '/_shell/academic/': typeof ShellAcademicIndexRoute
+  '/_shell/learning/': typeof ShellLearningIndexRoute
+  '/_shell/learning/courses/$courseId': typeof ShellLearningCoursesCourseIdRoute
+  '/_shell/learning/lessons/$lessonId': typeof ShellLearningLessonsLessonIdRoute
+  '/_shell/learning/modules/$moduleId': typeof ShellLearningModulesModuleIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -196,7 +252,13 @@ export interface FileRouteTypes {
     | '/academic/groups'
     | '/academic/students'
     | '/academic/teachers'
+    | '/learning/bookmarks'
+    | '/learning/continue'
     | '/academic/'
+    | '/learning/'
+    | '/learning/courses/$courseId'
+    | '/learning/lessons/$lessonId'
+    | '/learning/modules/$moduleId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/auth'
@@ -207,14 +269,19 @@ export interface FileRouteTypes {
     | '/analytics'
     | '/design-system'
     | '/exam'
-    | '/learning'
     | '/settings'
     | '/'
     | '/academic/enrollments'
     | '/academic/groups'
     | '/academic/students'
     | '/academic/teachers'
+    | '/learning/bookmarks'
+    | '/learning/continue'
     | '/academic'
+    | '/learning'
+    | '/learning/courses/$courseId'
+    | '/learning/lessons/$lessonId'
+    | '/learning/modules/$moduleId'
   id:
     | '__root__'
     | '/_shell'
@@ -234,7 +301,13 @@ export interface FileRouteTypes {
     | '/_shell/academic/groups'
     | '/_shell/academic/students'
     | '/_shell/academic/teachers'
+    | '/_shell/learning/bookmarks'
+    | '/_shell/learning/continue'
     | '/_shell/academic/'
+    | '/_shell/learning/'
+    | '/_shell/learning/courses/$courseId'
+    | '/_shell/learning/lessons/$lessonId'
+    | '/_shell/learning/modules/$moduleId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -373,6 +446,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellAcademicTeachersRouteImport
       parentRoute: typeof ShellAcademicRoute
     }
+    '/_shell/learning/': {
+      id: '/_shell/learning/'
+      path: '/'
+      fullPath: '/learning/'
+      preLoaderRoute: typeof ShellLearningIndexRouteImport
+      parentRoute: typeof ShellLearningRoute
+    }
+    '/_shell/learning/bookmarks': {
+      id: '/_shell/learning/bookmarks'
+      path: '/bookmarks'
+      fullPath: '/learning/bookmarks'
+      preLoaderRoute: typeof ShellLearningBookmarksRouteImport
+      parentRoute: typeof ShellLearningRoute
+    }
+    '/_shell/learning/continue': {
+      id: '/_shell/learning/continue'
+      path: '/continue'
+      fullPath: '/learning/continue'
+      preLoaderRoute: typeof ShellLearningContinueRouteImport
+      parentRoute: typeof ShellLearningRoute
+    }
+    '/_shell/learning/courses/$courseId': {
+      id: '/_shell/learning/courses/$courseId'
+      path: '/courses/$courseId'
+      fullPath: '/learning/courses/$courseId'
+      preLoaderRoute: typeof ShellLearningCoursesCourseIdRouteImport
+      parentRoute: typeof ShellLearningRoute
+    }
+    '/_shell/learning/lessons/$lessonId': {
+      id: '/_shell/learning/lessons/$lessonId'
+      path: '/lessons/$lessonId'
+      fullPath: '/learning/lessons/$lessonId'
+      preLoaderRoute: typeof ShellLearningLessonsLessonIdRouteImport
+      parentRoute: typeof ShellLearningRoute
+    }
+    '/_shell/learning/modules/$moduleId': {
+      id: '/_shell/learning/modules/$moduleId'
+      path: '/modules/$moduleId'
+      fullPath: '/learning/modules/$moduleId'
+      preLoaderRoute: typeof ShellLearningModulesModuleIdRouteImport
+      parentRoute: typeof ShellLearningRoute
+    }
   }
 }
 
@@ -396,13 +511,35 @@ const ShellAcademicRouteWithChildren = ShellAcademicRoute._addFileChildren(
   ShellAcademicRouteChildren,
 )
 
+interface ShellLearningRouteChildren {
+  ShellLearningBookmarksRoute: typeof ShellLearningBookmarksRoute
+  ShellLearningContinueRoute: typeof ShellLearningContinueRoute
+  ShellLearningIndexRoute: typeof ShellLearningIndexRoute
+  ShellLearningCoursesCourseIdRoute: typeof ShellLearningCoursesCourseIdRoute
+  ShellLearningLessonsLessonIdRoute: typeof ShellLearningLessonsLessonIdRoute
+  ShellLearningModulesModuleIdRoute: typeof ShellLearningModulesModuleIdRoute
+}
+
+const ShellLearningRouteChildren: ShellLearningRouteChildren = {
+  ShellLearningBookmarksRoute: ShellLearningBookmarksRoute,
+  ShellLearningContinueRoute: ShellLearningContinueRoute,
+  ShellLearningIndexRoute: ShellLearningIndexRoute,
+  ShellLearningCoursesCourseIdRoute: ShellLearningCoursesCourseIdRoute,
+  ShellLearningLessonsLessonIdRoute: ShellLearningLessonsLessonIdRoute,
+  ShellLearningModulesModuleIdRoute: ShellLearningModulesModuleIdRoute,
+}
+
+const ShellLearningRouteWithChildren = ShellLearningRoute._addFileChildren(
+  ShellLearningRouteChildren,
+)
+
 interface ShellRouteChildren {
   ShellAcademicRoute: typeof ShellAcademicRouteWithChildren
   ShellAdminRoute: typeof ShellAdminRoute
   ShellAnalyticsRoute: typeof ShellAnalyticsRoute
   ShellDesignSystemRoute: typeof ShellDesignSystemRoute
   ShellExamRoute: typeof ShellExamRoute
-  ShellLearningRoute: typeof ShellLearningRoute
+  ShellLearningRoute: typeof ShellLearningRouteWithChildren
   ShellSettingsRoute: typeof ShellSettingsRoute
   ShellIndexRoute: typeof ShellIndexRoute
 }
@@ -413,7 +550,7 @@ const ShellRouteChildren: ShellRouteChildren = {
   ShellAnalyticsRoute: ShellAnalyticsRoute,
   ShellDesignSystemRoute: ShellDesignSystemRoute,
   ShellExamRoute: ShellExamRoute,
-  ShellLearningRoute: ShellLearningRoute,
+  ShellLearningRoute: ShellLearningRouteWithChildren,
   ShellSettingsRoute: ShellSettingsRoute,
   ShellIndexRoute: ShellIndexRoute,
 }
