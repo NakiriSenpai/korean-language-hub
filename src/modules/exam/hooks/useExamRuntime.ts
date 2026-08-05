@@ -18,7 +18,9 @@ function formatClock(totalSeconds: number): string {
   const minutes = Math.floor((safe % 3600) / 60);
   const seconds = safe % 60;
   const pad = (value: number) => String(value).padStart(2, "0");
-  return hours > 0 ? `${pad(hours)}:${pad(minutes)}:${pad(seconds)}` : `${pad(minutes)}:${pad(seconds)}`;
+  return hours > 0
+    ? `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`
+    : `${pad(minutes)}:${pad(seconds)}`;
 }
 
 /** Countdown driven by the attempt deadline stored on the server. */
@@ -53,7 +55,9 @@ export function useExamTimer(
       elapsedSeconds: started ? Math.max(0, Math.floor((now - started) / 1000)) : 0,
       expired,
       hasDeadline: deadline !== null,
-      label: deadline ? formatClock(remainingSeconds) : formatClock(started ? Math.floor((now - started) / 1000) : 0),
+      label: deadline
+        ? formatClock(remainingSeconds)
+        : formatClock(started ? Math.floor((now - started) / 1000) : 0),
     }),
     [deadline, expired, now, remainingSeconds, started],
   );
@@ -94,7 +98,8 @@ export function useFullscreen(): { supported: boolean; active: boolean; toggle: 
     return () => document.removeEventListener("fullscreenchange", handler);
   }, []);
 
-  const supported = typeof document !== "undefined" && Boolean(document.documentElement?.requestFullscreen);
+  const supported =
+    typeof document !== "undefined" && Boolean(document.documentElement?.requestFullscreen);
 
   const toggle = useCallback(() => {
     if (!supported) return;

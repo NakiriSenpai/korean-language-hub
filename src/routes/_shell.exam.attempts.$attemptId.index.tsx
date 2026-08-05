@@ -45,9 +45,7 @@ function ExamRuntimePage() {
   }
 
   if (attempt.data.status !== "in_progress" && attempt.data.status !== "draft") {
-    return (
-      <Navigate to="/exam/attempts/$attemptId/result" params={{ attemptId }} replace />
-    );
+    return <Navigate to="/exam/attempts/$attemptId/result" params={{ attemptId }} replace />;
   }
 
   return <ExamRuntime attempt={attempt.data} />;

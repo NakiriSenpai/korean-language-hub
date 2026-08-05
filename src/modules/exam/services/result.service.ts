@@ -115,7 +115,9 @@ export const ResultService = {
 
     const startedAt = attempt.startedAt ? new Date(attempt.startedAt).getTime() : null;
     const submittedAt = attempt.submittedAt ? new Date(attempt.submittedAt).getTime() : Date.now();
-    const timeUsedSeconds = startedAt ? Math.max(0, Math.round((submittedAt - startedAt) / 1000)) : 0;
+    const timeUsedSeconds = startedAt
+      ? Math.max(0, Math.round((submittedAt - startedAt) / 1000))
+      : 0;
 
     const row = unwrap(
       await supabase

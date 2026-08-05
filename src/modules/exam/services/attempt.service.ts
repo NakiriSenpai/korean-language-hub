@@ -63,7 +63,9 @@ interface AnswerRow {
 }
 
 function toStringArray(value: unknown): readonly string[] {
-  return Array.isArray(value) ? value.filter((item): item is string => typeof item === "string") : [];
+  return Array.isArray(value)
+    ? value.filter((item): item is string => typeof item === "string")
+    : [];
 }
 
 function toAttempt(row: AttemptRow): ExamAttempt {

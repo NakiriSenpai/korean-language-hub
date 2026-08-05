@@ -1,11 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
-import {
-  ExamReview,
-  useAttempt,
-  useAttemptAnswers,
-  useAttemptPackage,
-} from "@/modules/exam";
+import { ExamReview, useAttempt, useAttemptAnswers, useAttemptPackage } from "@/modules/exam";
 import { ghostButtonClass } from "@/shared/components/form";
 import { AppCard, Stack } from "@/shared/components/layout";
 import { RouteLoading } from "@/shared/components/shell";

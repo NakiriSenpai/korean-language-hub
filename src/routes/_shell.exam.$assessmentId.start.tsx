@@ -70,7 +70,6 @@ function ExamStartPage() {
           </p>
         </div>
 
-
         <ul className="flex flex-wrap gap-lg text-body-sm text-text-secondary">
           <li className="inline-flex items-center gap-xs">
             <Timer className="size-4" aria-hidden="true" />
@@ -92,7 +91,9 @@ function ExamStartPage() {
             <li>Timer berjalan sejak ujian dimulai dan tidak dapat dijeda.</li>
             <li>Jawaban tersimpan otomatis setiap kali Anda memilih atau mengetik.</li>
             <li>Soal listening memiliki batas pemutaran audio.</li>
-            <li>Jika koneksi terputus, ujian dapat dilanjutkan kembali dari perangkat yang sama.</li>
+            <li>
+              Jika koneksi terputus, ujian dapat dilanjutkan kembali dari perangkat yang sama.
+            </li>
           </ul>
         </div>
 

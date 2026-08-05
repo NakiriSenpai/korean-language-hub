@@ -1,6 +1,14 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { ChevronLeft, ChevronRight, Maximize2, Minimize2, Send, Timer, WifiOff } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Maximize2,
+  Minimize2,
+  Send,
+  Timer,
+  WifiOff,
+} from "lucide-react";
 import { toast } from "sonner";
 
 import { cn } from "@/lib/utils";
@@ -70,7 +78,10 @@ export function ExamRuntime({ attempt }: { readonly attempt: ExamAttempt }) {
           await finish.mutateAsync(attempt.id);
           toast.success("Ujian berhasil dikumpulkan.");
         }
-        await navigate({ to: "/exam/attempts/$attemptId/result", params: { attemptId: attempt.id } });
+        await navigate({
+          to: "/exam/attempts/$attemptId/result",
+          params: { attemptId: attempt.id },
+        });
       } catch (error) {
         submittingRef.current = false;
         toast.error(toUserMessage(error));
@@ -179,7 +190,11 @@ export function ExamRuntime({ attempt }: { readonly attempt: ExamAttempt }) {
           )}
 
           {fullscreen.supported && (
-            <button type="button" onClick={fullscreen.toggle} className={cn(ghostButtonClass, "ml-auto")}>
+            <button
+              type="button"
+              onClick={fullscreen.toggle}
+              className={cn(ghostButtonClass, "ml-auto")}
+            >
               {fullscreen.active ? (
                 <Minimize2 className="size-4" aria-hidden="true" />
               ) : (
@@ -208,7 +223,11 @@ export function ExamRuntime({ attempt }: { readonly attempt: ExamAttempt }) {
               }}
             />
             <div className="flex flex-wrap gap-sm">
-              <button type="button" className={ghostButtonClass} onClick={() => setReviewing(false)}>
+              <button
+                type="button"
+                className={ghostButtonClass}
+                onClick={() => setReviewing(false)}
+              >
                 Kembali ke soal
               </button>
               <button
