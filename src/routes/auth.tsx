@@ -28,6 +28,7 @@ export const Route = createFileRoute("/auth")({
 });
 
 function AuthPage() {
+  const { redirect } = Route.useSearch();
   return (
     <main className="flex min-h-dvh w-full items-center justify-center bg-background px-md py-2xl">
       <div className="flex w-full max-w-[42ch] flex-col gap-lg">
@@ -38,7 +39,7 @@ function AuthPage() {
             Gunakan email keanggotaan lembaga untuk melanjutkan.
           </p>
         </div>
-        <SignInForm />
+        <SignInForm redirectTo={redirect && redirect.startsWith("/") ? redirect : "/"} />
       </div>
     </main>
   );
