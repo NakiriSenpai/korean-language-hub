@@ -36,6 +36,15 @@ export const NAV_ITEMS: readonly NavItem[] = [
     exact: true,
   },
   {
+    id: "academic",
+    label: "Academic",
+    to: "/academic",
+    icon: CalendarRange,
+    description: "Periode akademik, kelas, peserta, pendaftaran, dan penugasan pengajar.",
+    primary: true,
+    exact: false,
+  },
+  {
     id: "learning",
     label: "Learning",
     to: "/learning",
