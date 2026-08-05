@@ -28,6 +28,8 @@ import { Route as ShellAcademicGroupsRouteImport } from './routes/_shell.academi
 import { Route as ShellAcademicStudentsRouteImport } from './routes/_shell.academic.students'
 import { Route as ShellAcademicTeachersRouteImport } from './routes/_shell.academic.teachers'
 import { Route as ShellLearningIndexRouteImport } from './routes/_shell.learning.index'
+import { Route as ShellLearningCoursesCourseIdRouteImport } from './routes/_shell.learning.courses.$courseId'
+import { Route as ShellLearningModulesModuleIdRouteImport } from './routes/_shell.learning.modules.$moduleId'
 
 const ShellRoute = ShellRouteImport.update({
   id: '/_shell',
@@ -124,6 +126,18 @@ const ShellLearningIndexRoute = ShellLearningIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ShellLearningRoute,
 } as any)
+const ShellLearningCoursesCourseIdRoute =
+  ShellLearningCoursesCourseIdRouteImport.update({
+    id: '/courses/$courseId',
+    path: '/courses/$courseId',
+    getParentRoute: () => ShellLearningRoute,
+  } as any)
+const ShellLearningModulesModuleIdRoute =
+  ShellLearningModulesModuleIdRouteImport.update({
+    id: '/modules/$moduleId',
+    path: '/modules/$moduleId',
+    getParentRoute: () => ShellLearningRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof ShellIndexRoute
@@ -144,6 +158,8 @@ export interface FileRoutesByFullPath {
   '/academic/teachers': typeof ShellAcademicTeachersRoute
   '/academic/': typeof ShellAcademicIndexRoute
   '/learning/': typeof ShellLearningIndexRoute
+  '/learning/courses/$courseId': typeof ShellLearningCoursesCourseIdRoute
+  '/learning/modules/$moduleId': typeof ShellLearningModulesModuleIdRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
@@ -162,6 +178,8 @@ export interface FileRoutesByTo {
   '/academic/teachers': typeof ShellAcademicTeachersRoute
   '/academic': typeof ShellAcademicIndexRoute
   '/learning': typeof ShellLearningIndexRoute
+  '/learning/courses/$courseId': typeof ShellLearningCoursesCourseIdRoute
+  '/learning/modules/$moduleId': typeof ShellLearningModulesModuleIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -184,6 +202,8 @@ export interface FileRoutesById {
   '/_shell/academic/teachers': typeof ShellAcademicTeachersRoute
   '/_shell/academic/': typeof ShellAcademicIndexRoute
   '/_shell/learning/': typeof ShellLearningIndexRoute
+  '/_shell/learning/courses/$courseId': typeof ShellLearningCoursesCourseIdRoute
+  '/_shell/learning/modules/$moduleId': typeof ShellLearningModulesModuleIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -206,6 +226,8 @@ export interface FileRouteTypes {
     | '/academic/teachers'
     | '/academic/'
     | '/learning/'
+    | '/learning/courses/$courseId'
+    | '/learning/modules/$moduleId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/auth'
@@ -224,6 +246,8 @@ export interface FileRouteTypes {
     | '/academic/teachers'
     | '/academic'
     | '/learning'
+    | '/learning/courses/$courseId'
+    | '/learning/modules/$moduleId'
   id:
     | '__root__'
     | '/_shell'
@@ -245,6 +269,8 @@ export interface FileRouteTypes {
     | '/_shell/academic/teachers'
     | '/_shell/academic/'
     | '/_shell/learning/'
+    | '/_shell/learning/courses/$courseId'
+    | '/_shell/learning/modules/$moduleId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -390,6 +416,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellLearningIndexRouteImport
       parentRoute: typeof ShellLearningRoute
     }
+    '/_shell/learning/courses/$courseId': {
+      id: '/_shell/learning/courses/$courseId'
+      path: '/courses/$courseId'
+      fullPath: '/learning/courses/$courseId'
+      preLoaderRoute: typeof ShellLearningCoursesCourseIdRouteImport
+      parentRoute: typeof ShellLearningRoute
+    }
+    '/_shell/learning/modules/$moduleId': {
+      id: '/_shell/learning/modules/$moduleId'
+      path: '/modules/$moduleId'
+      fullPath: '/learning/modules/$moduleId'
+      preLoaderRoute: typeof ShellLearningModulesModuleIdRouteImport
+      parentRoute: typeof ShellLearningRoute
+    }
   }
 }
 
@@ -415,10 +455,14 @@ const ShellAcademicRouteWithChildren = ShellAcademicRoute._addFileChildren(
 
 interface ShellLearningRouteChildren {
   ShellLearningIndexRoute: typeof ShellLearningIndexRoute
+  ShellLearningCoursesCourseIdRoute: typeof ShellLearningCoursesCourseIdRoute
+  ShellLearningModulesModuleIdRoute: typeof ShellLearningModulesModuleIdRoute
 }
 
 const ShellLearningRouteChildren: ShellLearningRouteChildren = {
   ShellLearningIndexRoute: ShellLearningIndexRoute,
+  ShellLearningCoursesCourseIdRoute: ShellLearningCoursesCourseIdRoute,
+  ShellLearningModulesModuleIdRoute: ShellLearningModulesModuleIdRoute,
 }
 
 const ShellLearningRouteWithChildren = ShellLearningRoute._addFileChildren(

@@ -64,7 +64,11 @@ function LessonsPage() {
     event.preventDefault();
     setError(null);
     try {
-      await createLesson.mutateAsync({ ...form, moduleId });
+      await createLesson.mutateAsync({
+        ...form,
+        moduleId,
+        estimatedMinutes: Number(form.estimatedMinutes) || 10,
+      });
       setForm({ title: "", summary: "", estimatedMinutes: "10", status: "draft" });
       toast.success("Lesson dibuat.");
     } catch (cause) {
