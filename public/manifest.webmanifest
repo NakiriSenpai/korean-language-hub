@@ -1,0 +1,35 @@
+{
+  "name": "Hangeul LPK Platform",
+  "short_name": "Hangeul LPK",
+  "description": "Platform SaaS multi-tenant untuk lembaga pelatihan bahasa Korea (LPK).",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "lang": "id",
+  "dir": "ltr",
+  "theme_color": "#1e1b4b",
+  "background_color": "#ffffff",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

@@ -14,6 +14,7 @@ import { ErrorBoundary } from "@/shared/components/ErrorBoundary";
 import { themeInitScript } from "@/shared/theme";
 import { PlatformProvider } from "@/shared/platform";
 import { ErrorPage, NotFoundPage } from "@/shared/components/shell";
+import { PwaRegistrar } from "@/shared/pwa";
 
 function NotFoundComponent() {
   return <NotFoundPage />;
@@ -56,13 +57,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "theme-color", content: "#1e1b4b" },
+      { name: "apple-mobile-web-app-capable", content: "yes" },
+      { name: "apple-mobile-web-app-title", content: "Hangeul LPK" },
+      { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "manifest", href: "/manifest.webmanifest" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png", sizes: "180x180" },
     ],
   }),
   shellComponent: RootShell,
@@ -93,6 +100,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <PlatformProvider>
+        <PwaRegistrar />
         <ErrorBoundary>
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
           <Outlet />
