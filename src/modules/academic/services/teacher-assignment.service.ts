@@ -91,19 +91,19 @@ export async function listAssignableTeachers(
 ): Promise<readonly AssignableTeacher[]> {
   const { data, error } = await supabase
     .from("memberships")
-    .select("user_id, role, profiles(full_name)")
+    .select("user_id, role")
     .eq("tenant_id", tenantId)
     .eq("status", "active")
     .in("role", ["owner", "admin", "instructor"]);
 
   if (error) throw toAcademicError(error, "academic.teacherAssignment.candidates");
 
-  return (data ?? []).map((row) => {
-    const profile = row.profiles as { full_name: string | null } | null;
-    return {
-      userId: row.user_id,
-      name: profile?.full_name ?? row.user_id.slice(0, 8),
-      role: row.role,
-    };
-  });
+  const rows = data ?? [];
+  const names = await resolveTeacherNames(rows.map((row) => row.user_id));
+
+  return rows.map((row) => ({
+    userId: row.user_id,
+    name: names.get(row.user_id) ?? row.user_id.slice(0, 8),
+    role: row.role,
+  }));
 }
