@@ -6,6 +6,28 @@
 import { AppError } from "@/shared/lib/error-handler";
 import { logger } from "@/shared/lib/logger";
 import { platformConfig } from "@/shared/platform/config";
+import {
+  CORRELATION_HEADER,
+  REQUEST_HEADER,
+  createRequestId,
+  getCorrelationId,
+} from "@/shared/platform/observability";
+
+/**
+ * Only methods without side effects may be replayed automatically. Retrying a
+ * POST/PATCH/DELETE can duplicate a write, so those are attempted once unless
+ * the caller opts in explicitly.
+ */
+const IDEMPOTENT_METHODS = new Set(["GET", "HEAD", "OPTIONS", "PUT", "DELETE"]);
+
+/** Retry only transient failures: network errors, timeouts, 429 and 5xx. */
+export function isRetryableError(error: unknown): boolean {
+  if (!(error instanceof AppError)) return false;
+  if (error.kind !== "network") return false;
+  const status = error.context?.["status"];
+  if (typeof status !== "number") return true;
+  return status === 408 || status === 429 || status >= 500;
+}
 
 export const sleep = (ms: number): Promise<void> =>
   new Promise((resolve) => setTimeout(resolve, ms));
@@ -84,6 +106,11 @@ export async function httpRequest<T = unknown>(
   const run = async (): Promise<HttpResponse<T>> => {
     const controller = new AbortController();
     const requestHeaders = new Headers(headers);
+    const requestId = createRequestId();
+    if (!requestHeaders.has(REQUEST_HEADER)) requestHeaders.set(REQUEST_HEADER, requestId);
+    if (!requestHeaders.has(CORRELATION_HEADER)) {
+      requestHeaders.set(CORRELATION_HEADER, getCorrelationId());
+    }
     let payload: BodyInit | null = null;
 
     if (body !== undefined) {
@@ -111,7 +138,7 @@ export async function httpRequest<T = unknown>(
     if (!response.ok) {
       throw new AppError(`Request failed with status ${response.status}.`, {
         kind: response.status === 404 ? "notFound" : "network",
-        context: { url, status: response.status },
+        context: { url, status: response.status, requestId },
       });
     }
 
@@ -123,7 +150,10 @@ export async function httpRequest<T = unknown>(
   };
 
   if (retry === false) return run();
-  return withRetry(run, retry ?? {});
+  const method = (init.method ?? "GET").toUpperCase();
+  const safeToRetry = IDEMPOTENT_METHODS.has(method);
+  if (!safeToRetry && retry === undefined) return run();
+  return withRetry(run, { shouldRetry: isRetryableError, ...retry });
 }
 
 export const http = {
