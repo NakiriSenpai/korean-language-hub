@@ -111,7 +111,7 @@ export const AssessmentLoader = {
         .order("version", { ascending: false })
         .limit(1),
       "exam.loader.latest",
-    ) as SnapshotRow[];
+    ) as readonly SnapshotRow[];
 
     const row = rows[0];
     if (!row) {
@@ -178,7 +178,7 @@ export const AssessmentLoader = {
         .eq("status", "published")
         .order("title", { ascending: true }),
       "exam.loader.list",
-    ) as Array<{
+    ) as ReadonlyArray<{
       id: string;
       title: string;
       slug: string;
@@ -202,7 +202,7 @@ export const AssessmentLoader = {
           rows.map((row) => row.id),
         ),
       "exam.loader.list.counts",
-    ) as Array<{ assessment_id: string; version: number; question_count: number }>;
+    ) as ReadonlyArray<{ assessment_id: string; version: number; question_count: number }>;
 
     const latest = new Map<string, { version: number; questionCount: number }>();
     counts.forEach((row) => {
