@@ -48,12 +48,15 @@ function useSplash(): boolean {
 export function AppShell() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const splashVisible = useSplash();
-  const { pathname, isLoading } = useRouterState({
+  const hydrated = useHydrated();
+  const { pathname, isLoading: routerLoading } = useRouterState({
     select: (state) => ({
       pathname: state.location.pathname,
       isLoading: state.status === "pending",
     }),
   });
+  // Never render the pending state during SSR/hydration: it would mismatch.
+  const isLoading = hydrated && routerLoading;
 
   return (
     <div className="flex min-h-dvh w-full bg-background text-foreground">
