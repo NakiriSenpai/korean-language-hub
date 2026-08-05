@@ -45,6 +45,7 @@ import { Route as ShellLearningBookmarksRouteImport } from './routes/_shell.lear
 import { Route as ShellLearningContinueRouteImport } from './routes/_shell.learning.continue'
 import { Route as ShellPlatformIndexRouteImport } from './routes/_shell.platform.index'
 import { Route as ShellPlatformBrandingRouteImport } from './routes/_shell.platform.branding'
+import { Route as ShellPlatformSettingsRouteImport } from './routes/_shell.platform.settings'
 import { Route as ShellPlatformTenantsRouteImport } from './routes/_shell.platform.tenants'
 import { Route as ShellPlatformUsersRouteImport } from './routes/_shell.platform.users'
 import { Route as ShellAssessmentAssessmentsIndexRouteImport } from './routes/_shell.assessment.assessments.index'
@@ -241,6 +242,11 @@ const ShellPlatformBrandingRoute = ShellPlatformBrandingRouteImport.update({
   path: '/branding',
   getParentRoute: () => ShellPlatformRoute,
 } as any)
+const ShellPlatformSettingsRoute = ShellPlatformSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => ShellPlatformRoute,
+} as any)
 const ShellPlatformTenantsRoute = ShellPlatformTenantsRouteImport.update({
   id: '/tenants',
   path: '/tenants',
@@ -352,6 +358,7 @@ export interface FileRoutesByFullPath {
   '/learning/bookmarks': typeof ShellLearningBookmarksRoute
   '/learning/continue': typeof ShellLearningContinueRoute
   '/platform/branding': typeof ShellPlatformBrandingRoute
+  '/platform/settings': typeof ShellPlatformSettingsRoute
   '/platform/tenants': typeof ShellPlatformTenantsRoute
   '/platform/users': typeof ShellPlatformUsersRoute
   '/academic/': typeof ShellAcademicIndexRoute
@@ -396,6 +403,7 @@ export interface FileRoutesByTo {
   '/learning/bookmarks': typeof ShellLearningBookmarksRoute
   '/learning/continue': typeof ShellLearningContinueRoute
   '/platform/branding': typeof ShellPlatformBrandingRoute
+  '/platform/settings': typeof ShellPlatformSettingsRoute
   '/platform/tenants': typeof ShellPlatformTenantsRoute
   '/platform/users': typeof ShellPlatformUsersRoute
   '/academic': typeof ShellAcademicIndexRoute
@@ -449,6 +457,7 @@ export interface FileRoutesById {
   '/_shell/learning/bookmarks': typeof ShellLearningBookmarksRoute
   '/_shell/learning/continue': typeof ShellLearningContinueRoute
   '/_shell/platform/branding': typeof ShellPlatformBrandingRoute
+  '/_shell/platform/settings': typeof ShellPlatformSettingsRoute
   '/_shell/platform/tenants': typeof ShellPlatformTenantsRoute
   '/_shell/platform/users': typeof ShellPlatformUsersRoute
   '/_shell/academic/': typeof ShellAcademicIndexRoute
@@ -502,6 +511,7 @@ export interface FileRouteTypes {
     | '/learning/bookmarks'
     | '/learning/continue'
     | '/platform/branding'
+    | '/platform/settings'
     | '/platform/tenants'
     | '/platform/users'
     | '/academic/'
@@ -546,6 +556,7 @@ export interface FileRouteTypes {
     | '/learning/bookmarks'
     | '/learning/continue'
     | '/platform/branding'
+    | '/platform/settings'
     | '/platform/tenants'
     | '/platform/users'
     | '/academic'
@@ -598,6 +609,7 @@ export interface FileRouteTypes {
     | '/_shell/learning/bookmarks'
     | '/_shell/learning/continue'
     | '/_shell/platform/branding'
+    | '/_shell/platform/settings'
     | '/_shell/platform/tenants'
     | '/_shell/platform/users'
     | '/_shell/academic/'
@@ -883,6 +895,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellPlatformBrandingRouteImport
       parentRoute: typeof ShellPlatformRoute
     }
+    '/_shell/platform/settings': {
+      id: '/_shell/platform/settings'
+      path: '/settings'
+      fullPath: '/platform/settings'
+      preLoaderRoute: typeof ShellPlatformSettingsRouteImport
+      parentRoute: typeof ShellPlatformRoute
+    }
     '/_shell/platform/tenants': {
       id: '/_shell/platform/tenants'
       path: '/tenants'
@@ -1117,6 +1136,7 @@ const ShellLearningRouteWithChildren = ShellLearningRoute._addFileChildren(
 
 interface ShellPlatformRouteChildren {
   ShellPlatformBrandingRoute: typeof ShellPlatformBrandingRoute
+  ShellPlatformSettingsRoute: typeof ShellPlatformSettingsRoute
   ShellPlatformTenantsRoute: typeof ShellPlatformTenantsRoute
   ShellPlatformUsersRoute: typeof ShellPlatformUsersRoute
   ShellPlatformIndexRoute: typeof ShellPlatformIndexRoute
@@ -1124,6 +1144,7 @@ interface ShellPlatformRouteChildren {
 
 const ShellPlatformRouteChildren: ShellPlatformRouteChildren = {
   ShellPlatformBrandingRoute: ShellPlatformBrandingRoute,
+  ShellPlatformSettingsRoute: ShellPlatformSettingsRoute,
   ShellPlatformTenantsRoute: ShellPlatformTenantsRoute,
   ShellPlatformUsersRoute: ShellPlatformUsersRoute,
   ShellPlatformIndexRoute: ShellPlatformIndexRoute,

@@ -111,7 +111,7 @@ function SettingSectionCard({
                 );
               }
               return (
-                <Field key={field.key} label={field.label} htmlFor={id} hint={field.hint}>
+                <Field key={field.key} label={field.label} htmlFor={id} {...(field.hint ? { hint: field.hint } : {})}>
                   {field.type === "select" ? (
                     <SelectInput
                       id={id}
