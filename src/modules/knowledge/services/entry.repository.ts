@@ -160,7 +160,7 @@ export async function listEntries(
 
   const { data, error } = await applyFilters(base, filters).order("title", { ascending: true });
   if (error) throw toKnowledgeError(error, scope);
-  return ((data ?? []) as Row[]).map((row) => toEntry(definition, row));
+  return ((data ?? []) as unknown as Row[]).map((row) => toEntry(definition, row));
 }
 
 export async function getEntryBySlug(
@@ -180,7 +180,7 @@ export async function getEntryBySlug(
     .maybeSingle();
 
   if (error) throw toKnowledgeError(error, scope);
-  return data ? toEntry(definition, data as Row) : null;
+  return data ? toEntry(definition, data as unknown as Row) : null;
 }
 
 export async function getEntriesByIds(
@@ -200,7 +200,7 @@ export async function getEntriesByIds(
     .in("id", [...ids]);
 
   if (error) throw toKnowledgeError(error, scope);
-  return ((data ?? []) as Row[]).map((row) => toEntry(definition, row));
+  return ((data ?? []) as unknown as Row[]).map((row) => toEntry(definition, row));
 }
 
 export async function createEntry(
@@ -218,7 +218,7 @@ export async function createEntry(
     .select(columnsFor(definition))
     .single();
 
-  return toEntry(definition, unwrap(result, scope) as Row);
+  return toEntry(definition, unwrap(result, scope) as unknown as Row);
 }
 
 export async function updateEntry(
@@ -239,7 +239,7 @@ export async function updateEntry(
     .select(columnsFor(definition))
     .single();
 
-  return toEntry(definition, unwrap(result, scope) as Row);
+  return toEntry(definition, unwrap(result, scope) as unknown as Row);
 }
 
 export async function updateEntryStatus(
@@ -299,7 +299,7 @@ export async function listCategories(
 
   if (error) throw toKnowledgeError(error, scope);
   const unique = new Set(
-    ((data ?? []) as { category: string | null }[])
+    ((data ?? []) as unknown as { category: string | null }[])
       .map((row) => row.category)
       .filter((value): value is string => Boolean(value)),
   );
