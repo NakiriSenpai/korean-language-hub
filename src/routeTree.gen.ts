@@ -16,13 +16,13 @@ import { Route as OfflineRouteImport } from './routes/offline'
 import { Route as UnauthorizedRouteImport } from './routes/unauthorized'
 import { Route as ShellIndexRouteImport } from './routes/_shell.index'
 import { Route as ShellAcademicRouteImport } from './routes/_shell.academic'
-import { Route as ShellAdminRouteImport } from './routes/_shell.admin'
 import { Route as ShellAnalyticsRouteImport } from './routes/_shell.analytics'
 import { Route as ShellAssessmentRouteImport } from './routes/_shell.assessment'
 import { Route as ShellDesignSystemRouteImport } from './routes/_shell.design-system'
 import { Route as ShellExamRouteImport } from './routes/_shell.exam'
 import { Route as ShellKnowledgeRouteImport } from './routes/_shell.knowledge'
 import { Route as ShellLearningRouteImport } from './routes/_shell.learning'
+import { Route as ShellPlatformRouteImport } from './routes/_shell.platform'
 import { Route as ShellSettingsRouteImport } from './routes/_shell.settings'
 import { Route as ShellAcademicIndexRouteImport } from './routes/_shell.academic.index'
 import { Route as ShellAcademicEnrollmentsRouteImport } from './routes/_shell.academic.enrollments'
@@ -42,6 +42,15 @@ import { Route as ShellKnowledgeSearchRouteImport } from './routes/_shell.knowle
 import { Route as ShellLearningIndexRouteImport } from './routes/_shell.learning.index'
 import { Route as ShellLearningBookmarksRouteImport } from './routes/_shell.learning.bookmarks'
 import { Route as ShellLearningContinueRouteImport } from './routes/_shell.learning.continue'
+import { Route as ShellPlatformIndexRouteImport } from './routes/_shell.platform.index'
+import { Route as ShellPlatformAnnouncementsRouteImport } from './routes/_shell.platform.announcements'
+import { Route as ShellPlatformAuditRouteImport } from './routes/_shell.platform.audit'
+import { Route as ShellPlatformBrandingRouteImport } from './routes/_shell.platform.branding'
+import { Route as ShellPlatformCmsRouteImport } from './routes/_shell.platform.cms'
+import { Route as ShellPlatformMediaRouteImport } from './routes/_shell.platform.media'
+import { Route as ShellPlatformSettingsRouteImport } from './routes/_shell.platform.settings'
+import { Route as ShellPlatformTenantsRouteImport } from './routes/_shell.platform.tenants'
+import { Route as ShellPlatformUsersRouteImport } from './routes/_shell.platform.users'
 import { Route as ShellAssessmentAssessmentsIndexRouteImport } from './routes/_shell.assessment.assessments.index'
 import { Route as ShellAssessmentAssessmentsAssessmentIdRouteImport } from './routes/_shell.assessment.assessments.$assessmentId'
 import { Route as ShellAssessmentQuestionsQuestionIdRouteImport } from './routes/_shell.assessment.questions.$questionId'
@@ -89,11 +98,6 @@ const ShellAcademicRoute = ShellAcademicRouteImport.update({
   path: '/academic',
   getParentRoute: () => ShellRoute,
 } as any)
-const ShellAdminRoute = ShellAdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
-  getParentRoute: () => ShellRoute,
-} as any)
 const ShellAnalyticsRoute = ShellAnalyticsRouteImport.update({
   id: '/analytics',
   path: '/analytics',
@@ -122,6 +126,11 @@ const ShellKnowledgeRoute = ShellKnowledgeRouteImport.update({
 const ShellLearningRoute = ShellLearningRouteImport.update({
   id: '/learning',
   path: '/learning',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellPlatformRoute = ShellPlatformRouteImport.update({
+  id: '/platform',
+  path: '/platform',
   getParentRoute: () => ShellRoute,
 } as any)
 const ShellSettingsRoute = ShellSettingsRouteImport.update({
@@ -221,6 +230,52 @@ const ShellLearningContinueRoute = ShellLearningContinueRouteImport.update({
   path: '/continue',
   getParentRoute: () => ShellLearningRoute,
 } as any)
+const ShellPlatformIndexRoute = ShellPlatformIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ShellPlatformRoute,
+} as any)
+const ShellPlatformAnnouncementsRoute =
+  ShellPlatformAnnouncementsRouteImport.update({
+    id: '/announcements',
+    path: '/announcements',
+    getParentRoute: () => ShellPlatformRoute,
+  } as any)
+const ShellPlatformAuditRoute = ShellPlatformAuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
+  getParentRoute: () => ShellPlatformRoute,
+} as any)
+const ShellPlatformBrandingRoute = ShellPlatformBrandingRouteImport.update({
+  id: '/branding',
+  path: '/branding',
+  getParentRoute: () => ShellPlatformRoute,
+} as any)
+const ShellPlatformCmsRoute = ShellPlatformCmsRouteImport.update({
+  id: '/cms',
+  path: '/cms',
+  getParentRoute: () => ShellPlatformRoute,
+} as any)
+const ShellPlatformMediaRoute = ShellPlatformMediaRouteImport.update({
+  id: '/media',
+  path: '/media',
+  getParentRoute: () => ShellPlatformRoute,
+} as any)
+const ShellPlatformSettingsRoute = ShellPlatformSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => ShellPlatformRoute,
+} as any)
+const ShellPlatformTenantsRoute = ShellPlatformTenantsRouteImport.update({
+  id: '/tenants',
+  path: '/tenants',
+  getParentRoute: () => ShellPlatformRoute,
+} as any)
+const ShellPlatformUsersRoute = ShellPlatformUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => ShellPlatformRoute,
+} as any)
 const ShellAssessmentAssessmentsIndexRoute =
   ShellAssessmentAssessmentsIndexRouteImport.update({
     id: '/assessments/',
@@ -300,13 +355,13 @@ export interface FileRoutesByFullPath {
   '/offline': typeof OfflineRoute
   '/unauthorized': typeof UnauthorizedRoute
   '/academic': typeof ShellAcademicRouteWithChildren
-  '/admin': typeof ShellAdminRoute
   '/analytics': typeof ShellAnalyticsRouteWithChildren
   '/assessment': typeof ShellAssessmentRouteWithChildren
   '/design-system': typeof ShellDesignSystemRoute
   '/exam': typeof ShellExamRouteWithChildren
   '/knowledge': typeof ShellKnowledgeRouteWithChildren
   '/learning': typeof ShellLearningRouteWithChildren
+  '/platform': typeof ShellPlatformRouteWithChildren
   '/settings': typeof ShellSettingsRoute
   '/academic/enrollments': typeof ShellAcademicEnrollmentsRoute
   '/academic/groups': typeof ShellAcademicGroupsRoute
@@ -320,12 +375,21 @@ export interface FileRoutesByFullPath {
   '/knowledge/search': typeof ShellKnowledgeSearchRoute
   '/learning/bookmarks': typeof ShellLearningBookmarksRoute
   '/learning/continue': typeof ShellLearningContinueRoute
+  '/platform/announcements': typeof ShellPlatformAnnouncementsRoute
+  '/platform/audit': typeof ShellPlatformAuditRoute
+  '/platform/branding': typeof ShellPlatformBrandingRoute
+  '/platform/cms': typeof ShellPlatformCmsRoute
+  '/platform/media': typeof ShellPlatformMediaRoute
+  '/platform/settings': typeof ShellPlatformSettingsRoute
+  '/platform/tenants': typeof ShellPlatformTenantsRoute
+  '/platform/users': typeof ShellPlatformUsersRoute
   '/academic/': typeof ShellAcademicIndexRoute
   '/analytics/': typeof ShellAnalyticsIndexRoute
   '/assessment/': typeof ShellAssessmentIndexRoute
   '/exam/': typeof ShellExamIndexRoute
   '/knowledge/': typeof ShellKnowledgeIndexRoute
   '/learning/': typeof ShellLearningIndexRoute
+  '/platform/': typeof ShellPlatformIndexRoute
   '/assessment/assessments/$assessmentId': typeof ShellAssessmentAssessmentsAssessmentIdRoute
   '/assessment/questions/$questionId': typeof ShellAssessmentQuestionsQuestionIdRoute
   '/assessment/questions/new': typeof ShellAssessmentQuestionsNewRoute
@@ -344,7 +408,6 @@ export interface FileRoutesByTo {
   '/forbidden': typeof ForbiddenRoute
   '/offline': typeof OfflineRoute
   '/unauthorized': typeof UnauthorizedRoute
-  '/admin': typeof ShellAdminRoute
   '/design-system': typeof ShellDesignSystemRoute
   '/settings': typeof ShellSettingsRoute
   '/': typeof ShellIndexRoute
@@ -360,12 +423,21 @@ export interface FileRoutesByTo {
   '/knowledge/search': typeof ShellKnowledgeSearchRoute
   '/learning/bookmarks': typeof ShellLearningBookmarksRoute
   '/learning/continue': typeof ShellLearningContinueRoute
+  '/platform/announcements': typeof ShellPlatformAnnouncementsRoute
+  '/platform/audit': typeof ShellPlatformAuditRoute
+  '/platform/branding': typeof ShellPlatformBrandingRoute
+  '/platform/cms': typeof ShellPlatformCmsRoute
+  '/platform/media': typeof ShellPlatformMediaRoute
+  '/platform/settings': typeof ShellPlatformSettingsRoute
+  '/platform/tenants': typeof ShellPlatformTenantsRoute
+  '/platform/users': typeof ShellPlatformUsersRoute
   '/academic': typeof ShellAcademicIndexRoute
   '/analytics': typeof ShellAnalyticsIndexRoute
   '/assessment': typeof ShellAssessmentIndexRoute
   '/exam': typeof ShellExamIndexRoute
   '/knowledge': typeof ShellKnowledgeIndexRoute
   '/learning': typeof ShellLearningIndexRoute
+  '/platform': typeof ShellPlatformIndexRoute
   '/assessment/assessments/$assessmentId': typeof ShellAssessmentAssessmentsAssessmentIdRoute
   '/assessment/questions/$questionId': typeof ShellAssessmentQuestionsQuestionIdRoute
   '/assessment/questions/new': typeof ShellAssessmentQuestionsNewRoute
@@ -387,13 +459,13 @@ export interface FileRoutesById {
   '/offline': typeof OfflineRoute
   '/unauthorized': typeof UnauthorizedRoute
   '/_shell/academic': typeof ShellAcademicRouteWithChildren
-  '/_shell/admin': typeof ShellAdminRoute
   '/_shell/analytics': typeof ShellAnalyticsRouteWithChildren
   '/_shell/assessment': typeof ShellAssessmentRouteWithChildren
   '/_shell/design-system': typeof ShellDesignSystemRoute
   '/_shell/exam': typeof ShellExamRouteWithChildren
   '/_shell/knowledge': typeof ShellKnowledgeRouteWithChildren
   '/_shell/learning': typeof ShellLearningRouteWithChildren
+  '/_shell/platform': typeof ShellPlatformRouteWithChildren
   '/_shell/settings': typeof ShellSettingsRoute
   '/_shell/': typeof ShellIndexRoute
   '/_shell/academic/enrollments': typeof ShellAcademicEnrollmentsRoute
@@ -408,12 +480,21 @@ export interface FileRoutesById {
   '/_shell/knowledge/search': typeof ShellKnowledgeSearchRoute
   '/_shell/learning/bookmarks': typeof ShellLearningBookmarksRoute
   '/_shell/learning/continue': typeof ShellLearningContinueRoute
+  '/_shell/platform/announcements': typeof ShellPlatformAnnouncementsRoute
+  '/_shell/platform/audit': typeof ShellPlatformAuditRoute
+  '/_shell/platform/branding': typeof ShellPlatformBrandingRoute
+  '/_shell/platform/cms': typeof ShellPlatformCmsRoute
+  '/_shell/platform/media': typeof ShellPlatformMediaRoute
+  '/_shell/platform/settings': typeof ShellPlatformSettingsRoute
+  '/_shell/platform/tenants': typeof ShellPlatformTenantsRoute
+  '/_shell/platform/users': typeof ShellPlatformUsersRoute
   '/_shell/academic/': typeof ShellAcademicIndexRoute
   '/_shell/analytics/': typeof ShellAnalyticsIndexRoute
   '/_shell/assessment/': typeof ShellAssessmentIndexRoute
   '/_shell/exam/': typeof ShellExamIndexRoute
   '/_shell/knowledge/': typeof ShellKnowledgeIndexRoute
   '/_shell/learning/': typeof ShellLearningIndexRoute
+  '/_shell/platform/': typeof ShellPlatformIndexRoute
   '/_shell/assessment/assessments/$assessmentId': typeof ShellAssessmentAssessmentsAssessmentIdRoute
   '/_shell/assessment/questions/$questionId': typeof ShellAssessmentQuestionsQuestionIdRoute
   '/_shell/assessment/questions/new': typeof ShellAssessmentQuestionsNewRoute
@@ -436,13 +517,13 @@ export interface FileRouteTypes {
     | '/offline'
     | '/unauthorized'
     | '/academic'
-    | '/admin'
     | '/analytics'
     | '/assessment'
     | '/design-system'
     | '/exam'
     | '/knowledge'
     | '/learning'
+    | '/platform'
     | '/settings'
     | '/academic/enrollments'
     | '/academic/groups'
@@ -456,12 +537,21 @@ export interface FileRouteTypes {
     | '/knowledge/search'
     | '/learning/bookmarks'
     | '/learning/continue'
+    | '/platform/announcements'
+    | '/platform/audit'
+    | '/platform/branding'
+    | '/platform/cms'
+    | '/platform/media'
+    | '/platform/settings'
+    | '/platform/tenants'
+    | '/platform/users'
     | '/academic/'
     | '/analytics/'
     | '/assessment/'
     | '/exam/'
     | '/knowledge/'
     | '/learning/'
+    | '/platform/'
     | '/assessment/assessments/$assessmentId'
     | '/assessment/questions/$questionId'
     | '/assessment/questions/new'
@@ -480,7 +570,6 @@ export interface FileRouteTypes {
     | '/forbidden'
     | '/offline'
     | '/unauthorized'
-    | '/admin'
     | '/design-system'
     | '/settings'
     | '/'
@@ -496,12 +585,21 @@ export interface FileRouteTypes {
     | '/knowledge/search'
     | '/learning/bookmarks'
     | '/learning/continue'
+    | '/platform/announcements'
+    | '/platform/audit'
+    | '/platform/branding'
+    | '/platform/cms'
+    | '/platform/media'
+    | '/platform/settings'
+    | '/platform/tenants'
+    | '/platform/users'
     | '/academic'
     | '/analytics'
     | '/assessment'
     | '/exam'
     | '/knowledge'
     | '/learning'
+    | '/platform'
     | '/assessment/assessments/$assessmentId'
     | '/assessment/questions/$questionId'
     | '/assessment/questions/new'
@@ -522,13 +620,13 @@ export interface FileRouteTypes {
     | '/offline'
     | '/unauthorized'
     | '/_shell/academic'
-    | '/_shell/admin'
     | '/_shell/analytics'
     | '/_shell/assessment'
     | '/_shell/design-system'
     | '/_shell/exam'
     | '/_shell/knowledge'
     | '/_shell/learning'
+    | '/_shell/platform'
     | '/_shell/settings'
     | '/_shell/'
     | '/_shell/academic/enrollments'
@@ -543,12 +641,21 @@ export interface FileRouteTypes {
     | '/_shell/knowledge/search'
     | '/_shell/learning/bookmarks'
     | '/_shell/learning/continue'
+    | '/_shell/platform/announcements'
+    | '/_shell/platform/audit'
+    | '/_shell/platform/branding'
+    | '/_shell/platform/cms'
+    | '/_shell/platform/media'
+    | '/_shell/platform/settings'
+    | '/_shell/platform/tenants'
+    | '/_shell/platform/users'
     | '/_shell/academic/'
     | '/_shell/analytics/'
     | '/_shell/assessment/'
     | '/_shell/exam/'
     | '/_shell/knowledge/'
     | '/_shell/learning/'
+    | '/_shell/platform/'
     | '/_shell/assessment/assessments/$assessmentId'
     | '/_shell/assessment/questions/$questionId'
     | '/_shell/assessment/questions/new'
@@ -622,13 +729,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellAcademicRouteImport
       parentRoute: typeof ShellRoute
     }
-    '/_shell/admin': {
-      id: '/_shell/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof ShellAdminRouteImport
-      parentRoute: typeof ShellRoute
-    }
     '/_shell/analytics': {
       id: '/_shell/analytics'
       path: '/analytics'
@@ -669,6 +769,13 @@ declare module '@tanstack/react-router' {
       path: '/learning'
       fullPath: '/learning'
       preLoaderRoute: typeof ShellLearningRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/platform': {
+      id: '/_shell/platform'
+      path: '/platform'
+      fullPath: '/platform'
+      preLoaderRoute: typeof ShellPlatformRouteImport
       parentRoute: typeof ShellRoute
     }
     '/_shell/settings': {
@@ -803,6 +910,69 @@ declare module '@tanstack/react-router' {
       fullPath: '/learning/continue'
       preLoaderRoute: typeof ShellLearningContinueRouteImport
       parentRoute: typeof ShellLearningRoute
+    }
+    '/_shell/platform/': {
+      id: '/_shell/platform/'
+      path: '/'
+      fullPath: '/platform/'
+      preLoaderRoute: typeof ShellPlatformIndexRouteImport
+      parentRoute: typeof ShellPlatformRoute
+    }
+    '/_shell/platform/announcements': {
+      id: '/_shell/platform/announcements'
+      path: '/announcements'
+      fullPath: '/platform/announcements'
+      preLoaderRoute: typeof ShellPlatformAnnouncementsRouteImport
+      parentRoute: typeof ShellPlatformRoute
+    }
+    '/_shell/platform/audit': {
+      id: '/_shell/platform/audit'
+      path: '/audit'
+      fullPath: '/platform/audit'
+      preLoaderRoute: typeof ShellPlatformAuditRouteImport
+      parentRoute: typeof ShellPlatformRoute
+    }
+    '/_shell/platform/branding': {
+      id: '/_shell/platform/branding'
+      path: '/branding'
+      fullPath: '/platform/branding'
+      preLoaderRoute: typeof ShellPlatformBrandingRouteImport
+      parentRoute: typeof ShellPlatformRoute
+    }
+    '/_shell/platform/cms': {
+      id: '/_shell/platform/cms'
+      path: '/cms'
+      fullPath: '/platform/cms'
+      preLoaderRoute: typeof ShellPlatformCmsRouteImport
+      parentRoute: typeof ShellPlatformRoute
+    }
+    '/_shell/platform/media': {
+      id: '/_shell/platform/media'
+      path: '/media'
+      fullPath: '/platform/media'
+      preLoaderRoute: typeof ShellPlatformMediaRouteImport
+      parentRoute: typeof ShellPlatformRoute
+    }
+    '/_shell/platform/settings': {
+      id: '/_shell/platform/settings'
+      path: '/settings'
+      fullPath: '/platform/settings'
+      preLoaderRoute: typeof ShellPlatformSettingsRouteImport
+      parentRoute: typeof ShellPlatformRoute
+    }
+    '/_shell/platform/tenants': {
+      id: '/_shell/platform/tenants'
+      path: '/tenants'
+      fullPath: '/platform/tenants'
+      preLoaderRoute: typeof ShellPlatformTenantsRouteImport
+      parentRoute: typeof ShellPlatformRoute
+    }
+    '/_shell/platform/users': {
+      id: '/_shell/platform/users'
+      path: '/users'
+      fullPath: '/platform/users'
+      preLoaderRoute: typeof ShellPlatformUsersRouteImport
+      parentRoute: typeof ShellPlatformRoute
     }
     '/_shell/assessment/assessments/': {
       id: '/_shell/assessment/assessments/'
@@ -1022,28 +1192,56 @@ const ShellLearningRouteWithChildren = ShellLearningRoute._addFileChildren(
   ShellLearningRouteChildren,
 )
 
+interface ShellPlatformRouteChildren {
+  ShellPlatformAnnouncementsRoute: typeof ShellPlatformAnnouncementsRoute
+  ShellPlatformAuditRoute: typeof ShellPlatformAuditRoute
+  ShellPlatformBrandingRoute: typeof ShellPlatformBrandingRoute
+  ShellPlatformCmsRoute: typeof ShellPlatformCmsRoute
+  ShellPlatformMediaRoute: typeof ShellPlatformMediaRoute
+  ShellPlatformSettingsRoute: typeof ShellPlatformSettingsRoute
+  ShellPlatformTenantsRoute: typeof ShellPlatformTenantsRoute
+  ShellPlatformUsersRoute: typeof ShellPlatformUsersRoute
+  ShellPlatformIndexRoute: typeof ShellPlatformIndexRoute
+}
+
+const ShellPlatformRouteChildren: ShellPlatformRouteChildren = {
+  ShellPlatformAnnouncementsRoute: ShellPlatformAnnouncementsRoute,
+  ShellPlatformAuditRoute: ShellPlatformAuditRoute,
+  ShellPlatformBrandingRoute: ShellPlatformBrandingRoute,
+  ShellPlatformCmsRoute: ShellPlatformCmsRoute,
+  ShellPlatformMediaRoute: ShellPlatformMediaRoute,
+  ShellPlatformSettingsRoute: ShellPlatformSettingsRoute,
+  ShellPlatformTenantsRoute: ShellPlatformTenantsRoute,
+  ShellPlatformUsersRoute: ShellPlatformUsersRoute,
+  ShellPlatformIndexRoute: ShellPlatformIndexRoute,
+}
+
+const ShellPlatformRouteWithChildren = ShellPlatformRoute._addFileChildren(
+  ShellPlatformRouteChildren,
+)
+
 interface ShellRouteChildren {
   ShellAcademicRoute: typeof ShellAcademicRouteWithChildren
-  ShellAdminRoute: typeof ShellAdminRoute
   ShellAnalyticsRoute: typeof ShellAnalyticsRouteWithChildren
   ShellAssessmentRoute: typeof ShellAssessmentRouteWithChildren
   ShellDesignSystemRoute: typeof ShellDesignSystemRoute
   ShellExamRoute: typeof ShellExamRouteWithChildren
   ShellKnowledgeRoute: typeof ShellKnowledgeRouteWithChildren
   ShellLearningRoute: typeof ShellLearningRouteWithChildren
+  ShellPlatformRoute: typeof ShellPlatformRouteWithChildren
   ShellSettingsRoute: typeof ShellSettingsRoute
   ShellIndexRoute: typeof ShellIndexRoute
 }
 
 const ShellRouteChildren: ShellRouteChildren = {
   ShellAcademicRoute: ShellAcademicRouteWithChildren,
-  ShellAdminRoute: ShellAdminRoute,
   ShellAnalyticsRoute: ShellAnalyticsRouteWithChildren,
   ShellAssessmentRoute: ShellAssessmentRouteWithChildren,
   ShellDesignSystemRoute: ShellDesignSystemRoute,
   ShellExamRoute: ShellExamRouteWithChildren,
   ShellKnowledgeRoute: ShellKnowledgeRouteWithChildren,
   ShellLearningRoute: ShellLearningRouteWithChildren,
+  ShellPlatformRoute: ShellPlatformRouteWithChildren,
   ShellSettingsRoute: ShellSettingsRoute,
   ShellIndexRoute: ShellIndexRoute,
 }

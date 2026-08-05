@@ -105,9 +105,9 @@ export const NAV_ITEMS: readonly NavItem[] = [
   {
     id: "admin",
     label: "Admin",
-    to: "/admin",
+    to: "/platform",
     icon: ShieldCheck,
-    description: "Area administrasi lembaga dan pengelolaan platform akan berada di sini.",
+    description: "Konsol administrasi lembaga, branding, pengaturan, audit, dan konten.",
     primary: false,
     exact: false,
   },
