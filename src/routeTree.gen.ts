@@ -43,6 +43,7 @@ import { Route as ShellKnowledgeSearchRouteImport } from './routes/_shell.knowle
 import { Route as ShellLearningIndexRouteImport } from './routes/_shell.learning.index'
 import { Route as ShellLearningBookmarksRouteImport } from './routes/_shell.learning.bookmarks'
 import { Route as ShellLearningContinueRouteImport } from './routes/_shell.learning.continue'
+import { Route as ShellPlatformIndexRouteImport } from './routes/_shell.platform.index'
 import { Route as ShellAssessmentAssessmentsIndexRouteImport } from './routes/_shell.assessment.assessments.index'
 import { Route as ShellAssessmentAssessmentsAssessmentIdRouteImport } from './routes/_shell.assessment.assessments.$assessmentId'
 import { Route as ShellAssessmentQuestionsQuestionIdRouteImport } from './routes/_shell.assessment.questions.$questionId'
@@ -227,6 +228,11 @@ const ShellLearningContinueRoute = ShellLearningContinueRouteImport.update({
   path: '/continue',
   getParentRoute: () => ShellLearningRoute,
 } as any)
+const ShellPlatformIndexRoute = ShellPlatformIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ShellPlatformRoute,
+} as any)
 const ShellAssessmentAssessmentsIndexRoute =
   ShellAssessmentAssessmentsIndexRouteImport.update({
     id: '/assessments/',
@@ -313,7 +319,7 @@ export interface FileRoutesByFullPath {
   '/exam': typeof ShellExamRouteWithChildren
   '/knowledge': typeof ShellKnowledgeRouteWithChildren
   '/learning': typeof ShellLearningRouteWithChildren
-  '/platform': typeof ShellPlatformRoute
+  '/platform': typeof ShellPlatformRouteWithChildren
   '/settings': typeof ShellSettingsRoute
   '/academic/enrollments': typeof ShellAcademicEnrollmentsRoute
   '/academic/groups': typeof ShellAcademicGroupsRoute
@@ -333,6 +339,7 @@ export interface FileRoutesByFullPath {
   '/exam/': typeof ShellExamIndexRoute
   '/knowledge/': typeof ShellKnowledgeIndexRoute
   '/learning/': typeof ShellLearningIndexRoute
+  '/platform/': typeof ShellPlatformIndexRoute
   '/assessment/assessments/$assessmentId': typeof ShellAssessmentAssessmentsAssessmentIdRoute
   '/assessment/questions/$questionId': typeof ShellAssessmentQuestionsQuestionIdRoute
   '/assessment/questions/new': typeof ShellAssessmentQuestionsNewRoute
@@ -353,7 +360,6 @@ export interface FileRoutesByTo {
   '/unauthorized': typeof UnauthorizedRoute
   '/admin': typeof ShellAdminRoute
   '/design-system': typeof ShellDesignSystemRoute
-  '/platform': typeof ShellPlatformRoute
   '/settings': typeof ShellSettingsRoute
   '/': typeof ShellIndexRoute
   '/academic/enrollments': typeof ShellAcademicEnrollmentsRoute
@@ -374,6 +380,7 @@ export interface FileRoutesByTo {
   '/exam': typeof ShellExamIndexRoute
   '/knowledge': typeof ShellKnowledgeIndexRoute
   '/learning': typeof ShellLearningIndexRoute
+  '/platform': typeof ShellPlatformIndexRoute
   '/assessment/assessments/$assessmentId': typeof ShellAssessmentAssessmentsAssessmentIdRoute
   '/assessment/questions/$questionId': typeof ShellAssessmentQuestionsQuestionIdRoute
   '/assessment/questions/new': typeof ShellAssessmentQuestionsNewRoute
@@ -402,7 +409,7 @@ export interface FileRoutesById {
   '/_shell/exam': typeof ShellExamRouteWithChildren
   '/_shell/knowledge': typeof ShellKnowledgeRouteWithChildren
   '/_shell/learning': typeof ShellLearningRouteWithChildren
-  '/_shell/platform': typeof ShellPlatformRoute
+  '/_shell/platform': typeof ShellPlatformRouteWithChildren
   '/_shell/settings': typeof ShellSettingsRoute
   '/_shell/': typeof ShellIndexRoute
   '/_shell/academic/enrollments': typeof ShellAcademicEnrollmentsRoute
@@ -423,6 +430,7 @@ export interface FileRoutesById {
   '/_shell/exam/': typeof ShellExamIndexRoute
   '/_shell/knowledge/': typeof ShellKnowledgeIndexRoute
   '/_shell/learning/': typeof ShellLearningIndexRoute
+  '/_shell/platform/': typeof ShellPlatformIndexRoute
   '/_shell/assessment/assessments/$assessmentId': typeof ShellAssessmentAssessmentsAssessmentIdRoute
   '/_shell/assessment/questions/$questionId': typeof ShellAssessmentQuestionsQuestionIdRoute
   '/_shell/assessment/questions/new': typeof ShellAssessmentQuestionsNewRoute
@@ -472,6 +480,7 @@ export interface FileRouteTypes {
     | '/exam/'
     | '/knowledge/'
     | '/learning/'
+    | '/platform/'
     | '/assessment/assessments/$assessmentId'
     | '/assessment/questions/$questionId'
     | '/assessment/questions/new'
@@ -492,7 +501,6 @@ export interface FileRouteTypes {
     | '/unauthorized'
     | '/admin'
     | '/design-system'
-    | '/platform'
     | '/settings'
     | '/'
     | '/academic/enrollments'
@@ -513,6 +521,7 @@ export interface FileRouteTypes {
     | '/exam'
     | '/knowledge'
     | '/learning'
+    | '/platform'
     | '/assessment/assessments/$assessmentId'
     | '/assessment/questions/$questionId'
     | '/assessment/questions/new'
@@ -561,6 +570,7 @@ export interface FileRouteTypes {
     | '/_shell/exam/'
     | '/_shell/knowledge/'
     | '/_shell/learning/'
+    | '/_shell/platform/'
     | '/_shell/assessment/assessments/$assessmentId'
     | '/_shell/assessment/questions/$questionId'
     | '/_shell/assessment/questions/new'
@@ -823,6 +833,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellLearningContinueRouteImport
       parentRoute: typeof ShellLearningRoute
     }
+    '/_shell/platform/': {
+      id: '/_shell/platform/'
+      path: '/'
+      fullPath: '/platform/'
+      preLoaderRoute: typeof ShellPlatformIndexRouteImport
+      parentRoute: typeof ShellPlatformRoute
+    }
     '/_shell/assessment/assessments/': {
       id: '/_shell/assessment/assessments/'
       path: '/assessments'
@@ -1041,6 +1058,18 @@ const ShellLearningRouteWithChildren = ShellLearningRoute._addFileChildren(
   ShellLearningRouteChildren,
 )
 
+interface ShellPlatformRouteChildren {
+  ShellPlatformIndexRoute: typeof ShellPlatformIndexRoute
+}
+
+const ShellPlatformRouteChildren: ShellPlatformRouteChildren = {
+  ShellPlatformIndexRoute: ShellPlatformIndexRoute,
+}
+
+const ShellPlatformRouteWithChildren = ShellPlatformRoute._addFileChildren(
+  ShellPlatformRouteChildren,
+)
+
 interface ShellRouteChildren {
   ShellAcademicRoute: typeof ShellAcademicRouteWithChildren
   ShellAdminRoute: typeof ShellAdminRoute
@@ -1050,7 +1079,7 @@ interface ShellRouteChildren {
   ShellExamRoute: typeof ShellExamRouteWithChildren
   ShellKnowledgeRoute: typeof ShellKnowledgeRouteWithChildren
   ShellLearningRoute: typeof ShellLearningRouteWithChildren
-  ShellPlatformRoute: typeof ShellPlatformRoute
+  ShellPlatformRoute: typeof ShellPlatformRouteWithChildren
   ShellSettingsRoute: typeof ShellSettingsRoute
   ShellIndexRoute: typeof ShellIndexRoute
 }
@@ -1064,7 +1093,7 @@ const ShellRouteChildren: ShellRouteChildren = {
   ShellExamRoute: ShellExamRouteWithChildren,
   ShellKnowledgeRoute: ShellKnowledgeRouteWithChildren,
   ShellLearningRoute: ShellLearningRouteWithChildren,
-  ShellPlatformRoute: ShellPlatformRoute,
+  ShellPlatformRoute: ShellPlatformRouteWithChildren,
   ShellSettingsRoute: ShellSettingsRoute,
   ShellIndexRoute: ShellIndexRoute,
 }

@@ -114,6 +114,7 @@ function PlatformConsolePage() {
             </ul>
           ) : (
             <EmptyState
+              icon={Activity}
               title="Belum ada aktivitas"
               description="Perubahan lembaga, peran, dan penerbitan asesmen akan tercatat di sini."
             />
