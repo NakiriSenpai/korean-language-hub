@@ -16,7 +16,7 @@ import { AppCard, AppSection, Stack } from "@/shared/components/layout";
 import { EmptyState } from "@/shared/components/shell";
 import { toUserMessage } from "@/shared/platform";
 
-export const Route = createFileRoute("/_shell/assessment/assessments")({
+export const Route = createFileRoute("/_shell/assessment/assessments/")({
   head: () => ({
     meta: [
       { title: "Asesmen — Assessment Studio | Hangeul LPK Platform" },
