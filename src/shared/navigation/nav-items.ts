@@ -2,6 +2,7 @@ import {
   BarChart3,
   BookOpen,
   CalendarRange,
+  ClipboardList,
   GraduationCap,
   Library,
   LayoutDashboard,
@@ -64,6 +65,15 @@ export const NAV_ITEMS: readonly NavItem[] = [
     exact: false,
   },
 
+  {
+    id: "assessment",
+    label: "Assessment",
+    to: "/assessment",
+    icon: ClipboardList,
+    description: "Question Studio, bank soal berversi, dan penyusunan exam, quiz, practice, try out.",
+    primary: false,
+    exact: false,
+  },
   {
     id: "exam",
     label: "Exam",
