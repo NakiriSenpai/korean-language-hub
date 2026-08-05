@@ -79,8 +79,8 @@ export function AssessmentForm({
         type: form.type,
         status: form.status,
         difficulty: form.difficulty,
-        durationMinutes: form.durationMinutes,
-        passingScore: form.passingScore,
+        durationMinutes: Number(form.durationMinutes) || 0,
+        passingScore: Number(form.passingScore) || 0,
         randomizeQuestions: form.randomizeQuestions,
         randomizeChoices: form.randomizeChoices,
       });
