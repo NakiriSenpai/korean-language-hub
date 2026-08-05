@@ -1,4 +1,4 @@
-import { Outlet, useRouterState } from "@tanstack/react-router";
+import { Outlet, useHydrated, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/utils";
