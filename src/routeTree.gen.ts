@@ -30,6 +30,7 @@ import { Route as ShellAcademicGroupsRouteImport } from './routes/_shell.academi
 import { Route as ShellAcademicStudentsRouteImport } from './routes/_shell.academic.students'
 import { Route as ShellAcademicTeachersRouteImport } from './routes/_shell.academic.teachers'
 import { Route as ShellAssessmentIndexRouteImport } from './routes/_shell.assessment.index'
+import { Route as ShellExamIndexRouteImport } from './routes/_shell.exam.index'
 import { Route as ShellKnowledgeIndexRouteImport } from './routes/_shell.knowledge.index'
 import { Route as ShellKnowledgeKindRouteImport } from './routes/_shell.knowledge.$kind'
 import { Route as ShellKnowledgeFavoritesRouteImport } from './routes/_shell.knowledge.favorites'
@@ -151,6 +152,11 @@ const ShellAssessmentIndexRoute = ShellAssessmentIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ShellAssessmentRoute,
 } as any)
+const ShellExamIndexRoute = ShellExamIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ShellExamRoute,
+} as any)
 const ShellKnowledgeIndexRoute = ShellKnowledgeIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -245,7 +251,7 @@ export interface FileRoutesByFullPath {
   '/analytics': typeof ShellAnalyticsRoute
   '/assessment': typeof ShellAssessmentRouteWithChildren
   '/design-system': typeof ShellDesignSystemRoute
-  '/exam': typeof ShellExamRoute
+  '/exam': typeof ShellExamRouteWithChildren
   '/knowledge': typeof ShellKnowledgeRouteWithChildren
   '/learning': typeof ShellLearningRouteWithChildren
   '/settings': typeof ShellSettingsRoute
@@ -260,6 +266,7 @@ export interface FileRoutesByFullPath {
   '/learning/continue': typeof ShellLearningContinueRoute
   '/academic/': typeof ShellAcademicIndexRoute
   '/assessment/': typeof ShellAssessmentIndexRoute
+  '/exam/': typeof ShellExamIndexRoute
   '/knowledge/': typeof ShellKnowledgeIndexRoute
   '/learning/': typeof ShellLearningIndexRoute
   '/assessment/assessments/$assessmentId': typeof ShellAssessmentAssessmentsAssessmentIdRoute
@@ -279,7 +286,6 @@ export interface FileRoutesByTo {
   '/admin': typeof ShellAdminRoute
   '/analytics': typeof ShellAnalyticsRoute
   '/design-system': typeof ShellDesignSystemRoute
-  '/exam': typeof ShellExamRoute
   '/settings': typeof ShellSettingsRoute
   '/': typeof ShellIndexRoute
   '/academic/enrollments': typeof ShellAcademicEnrollmentsRoute
@@ -293,6 +299,7 @@ export interface FileRoutesByTo {
   '/learning/continue': typeof ShellLearningContinueRoute
   '/academic': typeof ShellAcademicIndexRoute
   '/assessment': typeof ShellAssessmentIndexRoute
+  '/exam': typeof ShellExamIndexRoute
   '/knowledge': typeof ShellKnowledgeIndexRoute
   '/learning': typeof ShellLearningIndexRoute
   '/assessment/assessments/$assessmentId': typeof ShellAssessmentAssessmentsAssessmentIdRoute
@@ -316,7 +323,7 @@ export interface FileRoutesById {
   '/_shell/analytics': typeof ShellAnalyticsRoute
   '/_shell/assessment': typeof ShellAssessmentRouteWithChildren
   '/_shell/design-system': typeof ShellDesignSystemRoute
-  '/_shell/exam': typeof ShellExamRoute
+  '/_shell/exam': typeof ShellExamRouteWithChildren
   '/_shell/knowledge': typeof ShellKnowledgeRouteWithChildren
   '/_shell/learning': typeof ShellLearningRouteWithChildren
   '/_shell/settings': typeof ShellSettingsRoute
@@ -332,6 +339,7 @@ export interface FileRoutesById {
   '/_shell/learning/continue': typeof ShellLearningContinueRoute
   '/_shell/academic/': typeof ShellAcademicIndexRoute
   '/_shell/assessment/': typeof ShellAssessmentIndexRoute
+  '/_shell/exam/': typeof ShellExamIndexRoute
   '/_shell/knowledge/': typeof ShellKnowledgeIndexRoute
   '/_shell/learning/': typeof ShellLearningIndexRoute
   '/_shell/assessment/assessments/$assessmentId': typeof ShellAssessmentAssessmentsAssessmentIdRoute
@@ -371,6 +379,7 @@ export interface FileRouteTypes {
     | '/learning/continue'
     | '/academic/'
     | '/assessment/'
+    | '/exam/'
     | '/knowledge/'
     | '/learning/'
     | '/assessment/assessments/$assessmentId'
@@ -390,7 +399,6 @@ export interface FileRouteTypes {
     | '/admin'
     | '/analytics'
     | '/design-system'
-    | '/exam'
     | '/settings'
     | '/'
     | '/academic/enrollments'
@@ -404,6 +412,7 @@ export interface FileRouteTypes {
     | '/learning/continue'
     | '/academic'
     | '/assessment'
+    | '/exam'
     | '/knowledge'
     | '/learning'
     | '/assessment/assessments/$assessmentId'
@@ -442,6 +451,7 @@ export interface FileRouteTypes {
     | '/_shell/learning/continue'
     | '/_shell/academic/'
     | '/_shell/assessment/'
+    | '/_shell/exam/'
     | '/_shell/knowledge/'
     | '/_shell/learning/'
     | '/_shell/assessment/assessments/$assessmentId'
@@ -611,6 +621,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellAssessmentIndexRouteImport
       parentRoute: typeof ShellAssessmentRoute
     }
+    '/_shell/exam/': {
+      id: '/_shell/exam/'
+      path: '/'
+      fullPath: '/exam/'
+      preLoaderRoute: typeof ShellExamIndexRouteImport
+      parentRoute: typeof ShellExamRoute
+    }
     '/_shell/knowledge/': {
       id: '/_shell/knowledge/'
       path: '/'
@@ -761,6 +778,18 @@ const ShellAssessmentRouteWithChildren = ShellAssessmentRoute._addFileChildren(
   ShellAssessmentRouteChildren,
 )
 
+interface ShellExamRouteChildren {
+  ShellExamIndexRoute: typeof ShellExamIndexRoute
+}
+
+const ShellExamRouteChildren: ShellExamRouteChildren = {
+  ShellExamIndexRoute: ShellExamIndexRoute,
+}
+
+const ShellExamRouteWithChildren = ShellExamRoute._addFileChildren(
+  ShellExamRouteChildren,
+)
+
 interface ShellKnowledgeKindRouteChildren {
   ShellKnowledgeKindSlugRoute: typeof ShellKnowledgeKindSlugRoute
 }
@@ -818,7 +847,7 @@ interface ShellRouteChildren {
   ShellAnalyticsRoute: typeof ShellAnalyticsRoute
   ShellAssessmentRoute: typeof ShellAssessmentRouteWithChildren
   ShellDesignSystemRoute: typeof ShellDesignSystemRoute
-  ShellExamRoute: typeof ShellExamRoute
+  ShellExamRoute: typeof ShellExamRouteWithChildren
   ShellKnowledgeRoute: typeof ShellKnowledgeRouteWithChildren
   ShellLearningRoute: typeof ShellLearningRouteWithChildren
   ShellSettingsRoute: typeof ShellSettingsRoute
@@ -831,7 +860,7 @@ const ShellRouteChildren: ShellRouteChildren = {
   ShellAnalyticsRoute: ShellAnalyticsRoute,
   ShellAssessmentRoute: ShellAssessmentRouteWithChildren,
   ShellDesignSystemRoute: ShellDesignSystemRoute,
-  ShellExamRoute: ShellExamRoute,
+  ShellExamRoute: ShellExamRouteWithChildren,
   ShellKnowledgeRoute: ShellKnowledgeRouteWithChildren,
   ShellLearningRoute: ShellLearningRouteWithChildren,
   ShellSettingsRoute: ShellSettingsRoute,
