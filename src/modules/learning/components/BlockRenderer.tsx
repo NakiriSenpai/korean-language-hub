@@ -1,5 +1,6 @@
 import type { BlockContent, CalloutTone, LessonBlock } from "@/modules/learning/types";
 import { cn } from "@/lib/utils";
+import { optimizeImageUrl } from "@/shared/platform";
 
 const CALLOUT_TONE: Record<CalloutTone, string> = {
   info: "border-primary/40 bg-primary/5 text-text-primary",
@@ -23,9 +24,10 @@ function renderBlock(type: LessonBlock["type"], content: BlockContent) {
       return content.url ? (
         <figure className="flex flex-col gap-xs">
           <img
-            src={content.url}
+            src={optimizeImageUrl(content.url, 960)}
             alt={content.alt ?? content.caption ?? "Ilustrasi materi"}
             loading="lazy"
+            decoding="async"
             className="w-full rounded-lg border border-border object-cover"
           />
           <Caption text={content.caption} />
