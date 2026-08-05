@@ -15,12 +15,14 @@ import { Route as ForbiddenRouteImport } from './routes/forbidden'
 import { Route as OfflineRouteImport } from './routes/offline'
 import { Route as UnauthorizedRouteImport } from './routes/unauthorized'
 import { Route as ShellIndexRouteImport } from './routes/_shell.index'
+import { Route as ShellAcademicRouteImport } from './routes/_shell.academic'
 import { Route as ShellAdminRouteImport } from './routes/_shell.admin'
 import { Route as ShellAnalyticsRouteImport } from './routes/_shell.analytics'
 import { Route as ShellDesignSystemRouteImport } from './routes/_shell.design-system'
 import { Route as ShellExamRouteImport } from './routes/_shell.exam'
 import { Route as ShellLearningRouteImport } from './routes/_shell.learning'
 import { Route as ShellSettingsRouteImport } from './routes/_shell.settings'
+import { Route as ShellAcademicIndexRouteImport } from './routes/_shell.academic.index'
 
 const ShellRoute = ShellRouteImport.update({
   id: '/_shell',
@@ -49,6 +51,11 @@ const UnauthorizedRoute = UnauthorizedRouteImport.update({
 const ShellIndexRoute = ShellIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellAcademicRoute = ShellAcademicRouteImport.update({
+  id: '/academic',
+  path: '/academic',
   getParentRoute: () => ShellRoute,
 } as any)
 const ShellAdminRoute = ShellAdminRouteImport.update({
@@ -81,6 +88,11 @@ const ShellSettingsRoute = ShellSettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => ShellRoute,
 } as any)
+const ShellAcademicIndexRoute = ShellAcademicIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ShellAcademicRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof ShellIndexRoute
@@ -88,12 +100,14 @@ export interface FileRoutesByFullPath {
   '/forbidden': typeof ForbiddenRoute
   '/offline': typeof OfflineRoute
   '/unauthorized': typeof UnauthorizedRoute
+  '/academic': typeof ShellAcademicRouteWithChildren
   '/admin': typeof ShellAdminRoute
   '/analytics': typeof ShellAnalyticsRoute
   '/design-system': typeof ShellDesignSystemRoute
   '/exam': typeof ShellExamRoute
   '/learning': typeof ShellLearningRoute
   '/settings': typeof ShellSettingsRoute
+  '/academic/': typeof ShellAcademicIndexRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
@@ -107,6 +121,7 @@ export interface FileRoutesByTo {
   '/learning': typeof ShellLearningRoute
   '/settings': typeof ShellSettingsRoute
   '/': typeof ShellIndexRoute
+  '/academic': typeof ShellAcademicIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -115,6 +130,7 @@ export interface FileRoutesById {
   '/forbidden': typeof ForbiddenRoute
   '/offline': typeof OfflineRoute
   '/unauthorized': typeof UnauthorizedRoute
+  '/_shell/academic': typeof ShellAcademicRouteWithChildren
   '/_shell/admin': typeof ShellAdminRoute
   '/_shell/analytics': typeof ShellAnalyticsRoute
   '/_shell/design-system': typeof ShellDesignSystemRoute
@@ -122,6 +138,7 @@ export interface FileRoutesById {
   '/_shell/learning': typeof ShellLearningRoute
   '/_shell/settings': typeof ShellSettingsRoute
   '/_shell/': typeof ShellIndexRoute
+  '/_shell/academic/': typeof ShellAcademicIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -131,12 +148,14 @@ export interface FileRouteTypes {
     | '/forbidden'
     | '/offline'
     | '/unauthorized'
+    | '/academic'
     | '/admin'
     | '/analytics'
     | '/design-system'
     | '/exam'
     | '/learning'
     | '/settings'
+    | '/academic/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/auth'
@@ -150,6 +169,7 @@ export interface FileRouteTypes {
     | '/learning'
     | '/settings'
     | '/'
+    | '/academic'
   id:
     | '__root__'
     | '/_shell'
@@ -157,6 +177,7 @@ export interface FileRouteTypes {
     | '/forbidden'
     | '/offline'
     | '/unauthorized'
+    | '/_shell/academic'
     | '/_shell/admin'
     | '/_shell/analytics'
     | '/_shell/design-system'
@@ -164,6 +185,7 @@ export interface FileRouteTypes {
     | '/_shell/learning'
     | '/_shell/settings'
     | '/_shell/'
+    | '/_shell/academic/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -218,6 +240,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellIndexRouteImport
       parentRoute: typeof ShellRoute
     }
+    '/_shell/academic': {
+      id: '/_shell/academic'
+      path: '/academic'
+      fullPath: '/academic'
+      preLoaderRoute: typeof ShellAcademicRouteImport
+      parentRoute: typeof ShellRoute
+    }
     '/_shell/admin': {
       id: '/_shell/admin'
       path: '/admin'
@@ -260,10 +289,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellSettingsRouteImport
       parentRoute: typeof ShellRoute
     }
+    '/_shell/academic/': {
+      id: '/_shell/academic/'
+      path: '/'
+      fullPath: '/academic/'
+      preLoaderRoute: typeof ShellAcademicIndexRouteImport
+      parentRoute: typeof ShellAcademicRoute
+    }
   }
 }
 
+interface ShellAcademicRouteChildren {
+  ShellAcademicIndexRoute: typeof ShellAcademicIndexRoute
+}
+
+const ShellAcademicRouteChildren: ShellAcademicRouteChildren = {
+  ShellAcademicIndexRoute: ShellAcademicIndexRoute,
+}
+
+const ShellAcademicRouteWithChildren = ShellAcademicRoute._addFileChildren(
+  ShellAcademicRouteChildren,
+)
+
 interface ShellRouteChildren {
+  ShellAcademicRoute: typeof ShellAcademicRouteWithChildren
   ShellAdminRoute: typeof ShellAdminRoute
   ShellAnalyticsRoute: typeof ShellAnalyticsRoute
   ShellDesignSystemRoute: typeof ShellDesignSystemRoute
@@ -274,6 +323,7 @@ interface ShellRouteChildren {
 }
 
 const ShellRouteChildren: ShellRouteChildren = {
+  ShellAcademicRoute: ShellAcademicRouteWithChildren,
   ShellAdminRoute: ShellAdminRoute,
   ShellAnalyticsRoute: ShellAnalyticsRoute,
   ShellDesignSystemRoute: ShellDesignSystemRoute,
