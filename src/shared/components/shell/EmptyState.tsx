@@ -26,7 +26,7 @@ export function EmptyState({ icon: Icon, title, description, action, className }
         <Icon className="size-6" />
       </span>
       <h3 className="text-title text-text-primary">{title}</h3>
-      <p className="max-w-md text-body-sm text-text-secondary">{description}</p>
+      <p className="max-w-[46ch] text-body-sm text-text-secondary">{description}</p>
       {action}
     </div>
   );

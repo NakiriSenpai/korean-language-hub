@@ -11,7 +11,7 @@ const actionClass = cn(
 export function NotFoundPage() {
   return (
     <div className="flex min-h-dvh w-full items-center justify-center bg-background px-md">
-      <div className="flex max-w-md flex-col items-center gap-md text-center">
+      <div className="flex max-w-[46ch] flex-col items-center gap-md text-center">
         <span
           aria-hidden="true"
           className="grid size-14 place-items-center rounded-full bg-muted text-text-secondary"
@@ -39,7 +39,7 @@ export interface ErrorPageProps {
 export function ErrorPage({ message, onRetry }: ErrorPageProps) {
   return (
     <div className="flex min-h-dvh w-full items-center justify-center bg-background px-md">
-      <div className="flex max-w-md flex-col items-center gap-md text-center">
+      <div className="flex max-w-[46ch] flex-col items-center gap-md text-center">
         <span
           aria-hidden="true"
           className="grid size-14 place-items-center rounded-full bg-error/10 text-error"
