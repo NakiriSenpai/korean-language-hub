@@ -25,7 +25,3 @@ export const STORAGE_KEYS = {
   language: "hangeul-lpk.language",
   tenant: "hangeul-lpk.tenant",
 } as const;
-
-export const ROUTES = {
-  home: "/",
-} as const;
