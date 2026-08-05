@@ -29,7 +29,7 @@ import type {
   TenantInput,
   TenantUpdateInput,
 } from "@/modules/platform/validation/schemas";
-import { useNetworkStatus } from "@/shared/platform";
+import { getNetworkState } from "@/shared/platform";
 
 export const platformKeys = {
   all: (tenantId: string) => ["platform", tenantId] as const,
@@ -95,7 +95,7 @@ export function usePlatformStats() {
 
 export function useHealthChecks(lastAuditAt: string | null) {
   const stats = usePlatformStats();
-  const { online } = useNetworkStatus();
+  const { online } = getNetworkState();
   if (!stats.data) return [];
   return ConsoleService.buildHealthChecks(stats.data, online, lastAuditAt);
 }
