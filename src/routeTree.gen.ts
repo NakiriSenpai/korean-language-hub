@@ -30,7 +30,6 @@ import { Route as ShellAcademicGroupsRouteImport } from './routes/_shell.academi
 import { Route as ShellAcademicStudentsRouteImport } from './routes/_shell.academic.students'
 import { Route as ShellAcademicTeachersRouteImport } from './routes/_shell.academic.teachers'
 import { Route as ShellAssessmentIndexRouteImport } from './routes/_shell.assessment.index'
-import { Route as ShellAssessmentAssessmentsRouteImport } from './routes/_shell.assessment.assessments'
 import { Route as ShellKnowledgeIndexRouteImport } from './routes/_shell.knowledge.index'
 import { Route as ShellKnowledgeKindRouteImport } from './routes/_shell.knowledge.$kind'
 import { Route as ShellKnowledgeFavoritesRouteImport } from './routes/_shell.knowledge.favorites'
@@ -38,6 +37,7 @@ import { Route as ShellKnowledgeSearchRouteImport } from './routes/_shell.knowle
 import { Route as ShellLearningIndexRouteImport } from './routes/_shell.learning.index'
 import { Route as ShellLearningBookmarksRouteImport } from './routes/_shell.learning.bookmarks'
 import { Route as ShellLearningContinueRouteImport } from './routes/_shell.learning.continue'
+import { Route as ShellAssessmentAssessmentsIndexRouteImport } from './routes/_shell.assessment.assessments.index'
 import { Route as ShellAssessmentQuestionsQuestionIdRouteImport } from './routes/_shell.assessment.questions.$questionId'
 import { Route as ShellAssessmentQuestionsNewRouteImport } from './routes/_shell.assessment.questions.new'
 import { Route as ShellKnowledgeKindSlugRouteImport } from './routes/_shell.knowledge.$kind.$slug'
@@ -150,12 +150,6 @@ const ShellAssessmentIndexRoute = ShellAssessmentIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ShellAssessmentRoute,
 } as any)
-const ShellAssessmentAssessmentsRoute =
-  ShellAssessmentAssessmentsRouteImport.update({
-    id: '/assessments',
-    path: '/assessments',
-    getParentRoute: () => ShellAssessmentRoute,
-  } as any)
 const ShellKnowledgeIndexRoute = ShellKnowledgeIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -191,6 +185,12 @@ const ShellLearningContinueRoute = ShellLearningContinueRouteImport.update({
   path: '/continue',
   getParentRoute: () => ShellLearningRoute,
 } as any)
+const ShellAssessmentAssessmentsIndexRoute =
+  ShellAssessmentAssessmentsIndexRouteImport.update({
+    id: '/assessments/',
+    path: '/assessments/',
+    getParentRoute: () => ShellAssessmentRoute,
+  } as any)
 const ShellAssessmentQuestionsQuestionIdRoute =
   ShellAssessmentQuestionsQuestionIdRouteImport.update({
     id: '/questions/$questionId',
@@ -246,7 +246,6 @@ export interface FileRoutesByFullPath {
   '/academic/groups': typeof ShellAcademicGroupsRoute
   '/academic/students': typeof ShellAcademicStudentsRoute
   '/academic/teachers': typeof ShellAcademicTeachersRoute
-  '/assessment/assessments': typeof ShellAssessmentAssessmentsRoute
   '/knowledge/$kind': typeof ShellKnowledgeKindRouteWithChildren
   '/knowledge/favorites': typeof ShellKnowledgeFavoritesRoute
   '/knowledge/search': typeof ShellKnowledgeSearchRoute
@@ -262,6 +261,7 @@ export interface FileRoutesByFullPath {
   '/learning/courses/$courseId': typeof ShellLearningCoursesCourseIdRoute
   '/learning/lessons/$lessonId': typeof ShellLearningLessonsLessonIdRoute
   '/learning/modules/$moduleId': typeof ShellLearningModulesModuleIdRoute
+  '/assessment/assessments/': typeof ShellAssessmentAssessmentsIndexRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
@@ -278,7 +278,6 @@ export interface FileRoutesByTo {
   '/academic/groups': typeof ShellAcademicGroupsRoute
   '/academic/students': typeof ShellAcademicStudentsRoute
   '/academic/teachers': typeof ShellAcademicTeachersRoute
-  '/assessment/assessments': typeof ShellAssessmentAssessmentsRoute
   '/knowledge/$kind': typeof ShellKnowledgeKindRouteWithChildren
   '/knowledge/favorites': typeof ShellKnowledgeFavoritesRoute
   '/knowledge/search': typeof ShellKnowledgeSearchRoute
@@ -294,6 +293,7 @@ export interface FileRoutesByTo {
   '/learning/courses/$courseId': typeof ShellLearningCoursesCourseIdRoute
   '/learning/lessons/$lessonId': typeof ShellLearningLessonsLessonIdRoute
   '/learning/modules/$moduleId': typeof ShellLearningModulesModuleIdRoute
+  '/assessment/assessments': typeof ShellAssessmentAssessmentsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -316,7 +316,6 @@ export interface FileRoutesById {
   '/_shell/academic/groups': typeof ShellAcademicGroupsRoute
   '/_shell/academic/students': typeof ShellAcademicStudentsRoute
   '/_shell/academic/teachers': typeof ShellAcademicTeachersRoute
-  '/_shell/assessment/assessments': typeof ShellAssessmentAssessmentsRoute
   '/_shell/knowledge/$kind': typeof ShellKnowledgeKindRouteWithChildren
   '/_shell/knowledge/favorites': typeof ShellKnowledgeFavoritesRoute
   '/_shell/knowledge/search': typeof ShellKnowledgeSearchRoute
@@ -332,6 +331,7 @@ export interface FileRoutesById {
   '/_shell/learning/courses/$courseId': typeof ShellLearningCoursesCourseIdRoute
   '/_shell/learning/lessons/$lessonId': typeof ShellLearningLessonsLessonIdRoute
   '/_shell/learning/modules/$moduleId': typeof ShellLearningModulesModuleIdRoute
+  '/_shell/assessment/assessments/': typeof ShellAssessmentAssessmentsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -354,7 +354,6 @@ export interface FileRouteTypes {
     | '/academic/groups'
     | '/academic/students'
     | '/academic/teachers'
-    | '/assessment/assessments'
     | '/knowledge/$kind'
     | '/knowledge/favorites'
     | '/knowledge/search'
@@ -370,6 +369,7 @@ export interface FileRouteTypes {
     | '/learning/courses/$courseId'
     | '/learning/lessons/$lessonId'
     | '/learning/modules/$moduleId'
+    | '/assessment/assessments/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/auth'
@@ -386,7 +386,6 @@ export interface FileRouteTypes {
     | '/academic/groups'
     | '/academic/students'
     | '/academic/teachers'
-    | '/assessment/assessments'
     | '/knowledge/$kind'
     | '/knowledge/favorites'
     | '/knowledge/search'
@@ -402,6 +401,7 @@ export interface FileRouteTypes {
     | '/learning/courses/$courseId'
     | '/learning/lessons/$lessonId'
     | '/learning/modules/$moduleId'
+    | '/assessment/assessments'
   id:
     | '__root__'
     | '/_shell'
@@ -423,7 +423,6 @@ export interface FileRouteTypes {
     | '/_shell/academic/groups'
     | '/_shell/academic/students'
     | '/_shell/academic/teachers'
-    | '/_shell/assessment/assessments'
     | '/_shell/knowledge/$kind'
     | '/_shell/knowledge/favorites'
     | '/_shell/knowledge/search'
@@ -439,6 +438,7 @@ export interface FileRouteTypes {
     | '/_shell/learning/courses/$courseId'
     | '/_shell/learning/lessons/$lessonId'
     | '/_shell/learning/modules/$moduleId'
+    | '/_shell/assessment/assessments/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -598,13 +598,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellAssessmentIndexRouteImport
       parentRoute: typeof ShellAssessmentRoute
     }
-    '/_shell/assessment/assessments': {
-      id: '/_shell/assessment/assessments'
-      path: '/assessments'
-      fullPath: '/assessment/assessments'
-      preLoaderRoute: typeof ShellAssessmentAssessmentsRouteImport
-      parentRoute: typeof ShellAssessmentRoute
-    }
     '/_shell/knowledge/': {
       id: '/_shell/knowledge/'
       path: '/'
@@ -653,6 +646,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/learning/continue'
       preLoaderRoute: typeof ShellLearningContinueRouteImport
       parentRoute: typeof ShellLearningRoute
+    }
+    '/_shell/assessment/assessments/': {
+      id: '/_shell/assessment/assessments/'
+      path: '/assessments'
+      fullPath: '/assessment/assessments/'
+      preLoaderRoute: typeof ShellAssessmentAssessmentsIndexRouteImport
+      parentRoute: typeof ShellAssessmentRoute
     }
     '/_shell/assessment/questions/$questionId': {
       id: '/_shell/assessment/questions/$questionId'
@@ -720,18 +720,18 @@ const ShellAcademicRouteWithChildren = ShellAcademicRoute._addFileChildren(
 )
 
 interface ShellAssessmentRouteChildren {
-  ShellAssessmentAssessmentsRoute: typeof ShellAssessmentAssessmentsRoute
   ShellAssessmentIndexRoute: typeof ShellAssessmentIndexRoute
   ShellAssessmentQuestionsQuestionIdRoute: typeof ShellAssessmentQuestionsQuestionIdRoute
   ShellAssessmentQuestionsNewRoute: typeof ShellAssessmentQuestionsNewRoute
+  ShellAssessmentAssessmentsIndexRoute: typeof ShellAssessmentAssessmentsIndexRoute
 }
 
 const ShellAssessmentRouteChildren: ShellAssessmentRouteChildren = {
-  ShellAssessmentAssessmentsRoute: ShellAssessmentAssessmentsRoute,
   ShellAssessmentIndexRoute: ShellAssessmentIndexRoute,
   ShellAssessmentQuestionsQuestionIdRoute:
     ShellAssessmentQuestionsQuestionIdRoute,
   ShellAssessmentQuestionsNewRoute: ShellAssessmentQuestionsNewRoute,
+  ShellAssessmentAssessmentsIndexRoute: ShellAssessmentAssessmentsIndexRoute,
 }
 
 const ShellAssessmentRouteWithChildren = ShellAssessmentRoute._addFileChildren(
