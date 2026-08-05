@@ -123,6 +123,60 @@ export type Database = {
           },
         ]
       }
+      assessment_snapshots: {
+        Row: {
+          assessment_id: string
+          created_at: string
+          created_by: string | null
+          id: string
+          payload: Json
+          question_count: number
+          tenant_id: string
+          total_points: number
+          updated_at: string
+          version: number
+        }
+        Insert: {
+          assessment_id: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          payload: Json
+          question_count?: number
+          tenant_id: string
+          total_points?: number
+          updated_at?: string
+          version: number
+        }
+        Update: {
+          assessment_id?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          payload?: Json
+          question_count?: number
+          tenant_id?: string
+          total_points?: number
+          updated_at?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assessment_snapshots_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: false
+            referencedRelation: "assessments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "assessment_snapshots_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       assessments: {
         Row: {
           created_at: string
@@ -184,6 +238,66 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "assessments_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      attempt_answers: {
+        Row: {
+          answered_at: string | null
+          attempt_id: string
+          audio_plays: number
+          created_at: string
+          flagged: boolean
+          id: string
+          question_id: string
+          question_version_id: string
+          selected_choice_ids: Json
+          tenant_id: string
+          text_answer: string | null
+          updated_at: string
+        }
+        Insert: {
+          answered_at?: string | null
+          attempt_id: string
+          audio_plays?: number
+          created_at?: string
+          flagged?: boolean
+          id?: string
+          question_id: string
+          question_version_id: string
+          selected_choice_ids?: Json
+          tenant_id: string
+          text_answer?: string | null
+          updated_at?: string
+        }
+        Update: {
+          answered_at?: string | null
+          attempt_id?: string
+          audio_plays?: number
+          created_at?: string
+          flagged?: boolean
+          id?: string
+          question_id?: string
+          question_version_id?: string
+          selected_choice_ids?: Json
+          tenant_id?: string
+          text_answer?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attempt_answers_attempt_id_fkey"
+            columns: ["attempt_id"]
+            isOneToOne: false
+            referencedRelation: "exam_attempts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "attempt_answers_tenant_id_fkey"
             columns: ["tenant_id"]
             isOneToOne: false
             referencedRelation: "tenants"
@@ -690,6 +804,167 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "eps_references_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      exam_attempts: {
+        Row: {
+          assessment_id: string
+          created_at: string
+          duration_minutes: number
+          expires_at: string | null
+          id: string
+          last_saved_at: string | null
+          question_order: Json
+          snapshot_id: string
+          snapshot_version: number
+          started_at: string | null
+          status: Database["public"]["Enums"]["attempt_status"]
+          submitted_at: string | null
+          tenant_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          assessment_id: string
+          created_at?: string
+          duration_minutes?: number
+          expires_at?: string | null
+          id?: string
+          last_saved_at?: string | null
+          question_order?: Json
+          snapshot_id: string
+          snapshot_version?: number
+          started_at?: string | null
+          status?: Database["public"]["Enums"]["attempt_status"]
+          submitted_at?: string | null
+          tenant_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          assessment_id?: string
+          created_at?: string
+          duration_minutes?: number
+          expires_at?: string | null
+          id?: string
+          last_saved_at?: string | null
+          question_order?: Json
+          snapshot_id?: string
+          snapshot_version?: number
+          started_at?: string | null
+          status?: Database["public"]["Enums"]["attempt_status"]
+          submitted_at?: string | null
+          tenant_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "exam_attempts_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: false
+            referencedRelation: "assessments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "exam_attempts_snapshot_id_fkey"
+            columns: ["snapshot_id"]
+            isOneToOne: false
+            referencedRelation: "assessment_snapshots"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "exam_attempts_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      exam_results: {
+        Row: {
+          assessment_id: string
+          attempt_id: string
+          breakdown: Json
+          correct_count: number
+          created_at: string
+          earned_points: number
+          empty_count: number
+          grade: string
+          id: string
+          passed: boolean
+          percentage: number
+          tenant_id: string
+          time_used_seconds: number
+          total_points: number
+          total_questions: number
+          updated_at: string
+          user_id: string
+          wrong_count: number
+        }
+        Insert: {
+          assessment_id: string
+          attempt_id: string
+          breakdown?: Json
+          correct_count?: number
+          created_at?: string
+          earned_points?: number
+          empty_count?: number
+          grade?: string
+          id?: string
+          passed?: boolean
+          percentage?: number
+          tenant_id: string
+          time_used_seconds?: number
+          total_points?: number
+          total_questions?: number
+          updated_at?: string
+          user_id: string
+          wrong_count?: number
+        }
+        Update: {
+          assessment_id?: string
+          attempt_id?: string
+          breakdown?: Json
+          correct_count?: number
+          created_at?: string
+          earned_points?: number
+          empty_count?: number
+          grade?: string
+          id?: string
+          passed?: boolean
+          percentage?: number
+          tenant_id?: string
+          time_used_seconds?: number
+          total_points?: number
+          total_questions?: number
+          updated_at?: string
+          user_id?: string
+          wrong_count?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "exam_results_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: false
+            referencedRelation: "assessments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "exam_results_attempt_id_fkey"
+            columns: ["attempt_id"]
+            isOneToOne: true
+            referencedRelation: "exam_attempts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "exam_results_tenant_id_fkey"
             columns: ["tenant_id"]
             isOneToOne: false
             referencedRelation: "tenants"
@@ -1585,6 +1860,12 @@ export type Database = {
       academic_period_status: "draft" | "active" | "archived"
       app_role: "owner" | "admin" | "instructor" | "staff" | "student"
       assessment_type: "exam" | "quiz" | "practice" | "tryout"
+      attempt_status:
+        | "draft"
+        | "in_progress"
+        | "submitted"
+        | "expired"
+        | "abandoned"
       block_type:
         | "text"
         | "image"
@@ -1744,6 +2025,13 @@ export const Constants = {
       academic_period_status: ["draft", "active", "archived"],
       app_role: ["owner", "admin", "instructor", "staff", "student"],
       assessment_type: ["exam", "quiz", "practice", "tryout"],
+      attempt_status: [
+        "draft",
+        "in_progress",
+        "submitted",
+        "expired",
+        "abandoned",
+      ],
       block_type: [
         "text",
         "image",
