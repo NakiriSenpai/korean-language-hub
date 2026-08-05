@@ -194,6 +194,74 @@ export type Database = {
           },
         ]
       }
+      conversations: {
+        Row: {
+          audio_url: string | null
+          blocks: Json
+          category: string | null
+          cover_url: string | null
+          created_at: string
+          description: string | null
+          difficulty: Database["public"]["Enums"]["knowledge_difficulty"]
+          id: string
+          published_at: string | null
+          situation: string | null
+          slug: string
+          status: Database["public"]["Enums"]["content_status"]
+          tags: string[]
+          tenant_id: string
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          audio_url?: string | null
+          blocks?: Json
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          id?: string
+          published_at?: string | null
+          situation?: string | null
+          slug: string
+          status?: Database["public"]["Enums"]["content_status"]
+          tags?: string[]
+          tenant_id: string
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          audio_url?: string | null
+          blocks?: Json
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          id?: string
+          published_at?: string | null
+          situation?: string | null
+          slug?: string
+          status?: Database["public"]["Enums"]["content_status"]
+          tags?: string[]
+          tenant_id?: string
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "conversations_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       course_modules: {
         Row: {
           course_id: string
@@ -295,6 +363,71 @@ export type Database = {
           },
         ]
       }
+      culture_notes: {
+        Row: {
+          blocks: Json
+          category: string | null
+          cover_url: string | null
+          created_at: string
+          description: string | null
+          difficulty: Database["public"]["Enums"]["knowledge_difficulty"]
+          id: string
+          published_at: string | null
+          region: string | null
+          slug: string
+          status: Database["public"]["Enums"]["content_status"]
+          tags: string[]
+          tenant_id: string
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          blocks?: Json
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          id?: string
+          published_at?: string | null
+          region?: string | null
+          slug: string
+          status?: Database["public"]["Enums"]["content_status"]
+          tags?: string[]
+          tenant_id: string
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          blocks?: Json
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          id?: string
+          published_at?: string | null
+          region?: string | null
+          slug?: string
+          status?: Database["public"]["Enums"]["content_status"]
+          tags?: string[]
+          tenant_id?: string
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "culture_notes_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       enrollments: {
         Row: {
           completed_on: string | null
@@ -356,6 +489,183 @@ export type Database = {
           },
           {
             foreignKeyName: "enrollments_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      eps_references: {
+        Row: {
+          blocks: Json
+          category: string | null
+          cover_url: string | null
+          created_at: string
+          description: string | null
+          difficulty: Database["public"]["Enums"]["knowledge_difficulty"]
+          id: string
+          published_at: string | null
+          reference_code: string | null
+          slug: string
+          source_year: number | null
+          status: Database["public"]["Enums"]["content_status"]
+          tags: string[]
+          tenant_id: string
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          blocks?: Json
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          id?: string
+          published_at?: string | null
+          reference_code?: string | null
+          slug: string
+          source_year?: number | null
+          status?: Database["public"]["Enums"]["content_status"]
+          tags?: string[]
+          tenant_id: string
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          blocks?: Json
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          id?: string
+          published_at?: string | null
+          reference_code?: string | null
+          slug?: string
+          source_year?: number | null
+          status?: Database["public"]["Enums"]["content_status"]
+          tags?: string[]
+          tenant_id?: string
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "eps_references_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      grammars: {
+        Row: {
+          blocks: Json
+          category: string | null
+          cover_url: string | null
+          created_at: string
+          description: string | null
+          difficulty: Database["public"]["Enums"]["knowledge_difficulty"]
+          id: string
+          meaning: string | null
+          pattern: string | null
+          published_at: string | null
+          slug: string
+          status: Database["public"]["Enums"]["content_status"]
+          tags: string[]
+          tenant_id: string
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          blocks?: Json
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          id?: string
+          meaning?: string | null
+          pattern?: string | null
+          published_at?: string | null
+          slug: string
+          status?: Database["public"]["Enums"]["content_status"]
+          tags?: string[]
+          tenant_id: string
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          blocks?: Json
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          id?: string
+          meaning?: string | null
+          pattern?: string | null
+          published_at?: string | null
+          slug?: string
+          status?: Database["public"]["Enums"]["content_status"]
+          tags?: string[]
+          tenant_id?: string
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "grammars_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      knowledge_favorites: {
+        Row: {
+          created_at: string
+          id: string
+          item_id: string
+          item_type: Database["public"]["Enums"]["knowledge_kind"]
+          note: string | null
+          tenant_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          item_id: string
+          item_type: Database["public"]["Enums"]["knowledge_kind"]
+          note?: string | null
+          tenant_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          item_id?: string
+          item_type?: Database["public"]["Enums"]["knowledge_kind"]
+          note?: string | null
+          tenant_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "knowledge_favorites_tenant_id_fkey"
             columns: ["tenant_id"]
             isOneToOne: false
             referencedRelation: "tenants"
@@ -848,6 +1158,80 @@ export type Database = {
         }
         Relationships: []
       }
+      vocabularies: {
+        Row: {
+          audio_url: string | null
+          blocks: Json
+          category: string | null
+          cover_url: string | null
+          created_at: string
+          description: string | null
+          difficulty: Database["public"]["Enums"]["knowledge_difficulty"]
+          hangeul: string | null
+          id: string
+          meaning: string | null
+          published_at: string | null
+          romanization: string | null
+          slug: string
+          status: Database["public"]["Enums"]["content_status"]
+          tags: string[]
+          tenant_id: string
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          audio_url?: string | null
+          blocks?: Json
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          hangeul?: string | null
+          id?: string
+          meaning?: string | null
+          published_at?: string | null
+          romanization?: string | null
+          slug: string
+          status?: Database["public"]["Enums"]["content_status"]
+          tags?: string[]
+          tenant_id: string
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          audio_url?: string | null
+          blocks?: Json
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          hangeul?: string | null
+          id?: string
+          meaning?: string | null
+          published_at?: string | null
+          romanization?: string | null
+          slug?: string
+          status?: Database["public"]["Enums"]["content_status"]
+          tags?: string[]
+          tenant_id?: string
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "vocabularies_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -883,6 +1267,13 @@ export type Database = {
         | "callout"
       content_status: "draft" | "published" | "archived"
       enrollment_status: "active" | "completed" | "suspended" | "dropped"
+      knowledge_difficulty: "beginner" | "intermediate" | "advanced"
+      knowledge_kind:
+        | "grammar"
+        | "vocabulary"
+        | "conversation"
+        | "culture_note"
+        | "eps_reference"
       learning_target: "lesson" | "unit"
       membership_status: "invited" | "active" | "suspended" | "revoked"
       progress_status: "not_started" | "in_progress" | "completed"
@@ -1029,6 +1420,14 @@ export const Constants = {
       ],
       content_status: ["draft", "published", "archived"],
       enrollment_status: ["active", "completed", "suspended", "dropped"],
+      knowledge_difficulty: ["beginner", "intermediate", "advanced"],
+      knowledge_kind: [
+        "grammar",
+        "vocabulary",
+        "conversation",
+        "culture_note",
+        "eps_reference",
+      ],
       learning_target: ["lesson", "unit"],
       membership_status: ["invited", "active", "suspended", "revoked"],
       progress_status: ["not_started", "in_progress", "completed"],
