@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ErrorBoundary } from "@/shared/components/ErrorBoundary";
+import { ThemeProvider, themeInitScript } from "@/shared/theme";
 
 function NotFoundComponent() {
   return (
@@ -103,9 +104,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
+        {/* Applies the theme before first paint to avoid light/dark flicker. */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body>
         {children}
@@ -120,10 +123,12 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ErrorBoundary>
-        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <Outlet />
-      </ErrorBoundary>
+      <ThemeProvider>
+        <ErrorBoundary>
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <Outlet />
+        </ErrorBoundary>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }
