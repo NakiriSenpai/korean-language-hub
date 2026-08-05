@@ -2,10 +2,15 @@
  * Academic Period service — the calendar backbone of every academic activity.
  */
 
+import type { PostgrestError } from "@supabase/supabase-js";
+
 import { supabase } from "@/integrations/supabase/client";
-import { unwrap } from "@/modules/academic/services/academic-client";
+import { toAcademicError, unwrap } from "@/modules/academic/services/academic-client";
 import type { AcademicPeriod, AcademicPeriodStatus } from "@/modules/academic/types";
-import { academicPeriodInputSchema, type AcademicPeriodInput } from "@/modules/academic/validation/schemas";
+import {
+  academicPeriodInputSchema,
+  type AcademicPeriodInput,
+} from "@/modules/academic/validation/schemas";
 
 const COLUMNS = "id, tenant_id, name, code, starts_on, ends_on, status";
 
@@ -47,7 +52,7 @@ export async function getActiveAcademicPeriod(tenantId: string): Promise<Academi
     .eq("status", "active")
     .maybeSingle();
 
-  if (error) throw unwrapError(error, "academic.period.active");
+  if (error) throw toAcademicError(error, "academic.period.active");
   return data ? toPeriod(data as Row) : null;
 }
 
@@ -88,17 +93,5 @@ export async function updateAcademicPeriodStatus(
 
 export async function deleteAcademicPeriod(periodId: string): Promise<void> {
   const { error } = await supabase.from("academic_periods").delete().eq("id", periodId);
-  if (error) throw unwrapError(error, "academic.period.delete");
-}
-
-// Local helper so the maybeSingle/delete paths share the same normalisation.
-function unwrapError(error: { message: string; code: string }, scope: string) {
-  return unwrapErrorImpl(error, scope);
-}
-
-import { toAcademicError } from "@/modules/academic/services/academic-client";
-import type { PostgrestError } from "@supabase/supabase-js";
-
-function unwrapErrorImpl(error: { message: string; code: string }, scope: string) {
-  return toAcademicError(error as PostgrestError, scope);
+  if (error) throw toAcademicError(error as PostgrestError, "academic.period.delete");
 }
