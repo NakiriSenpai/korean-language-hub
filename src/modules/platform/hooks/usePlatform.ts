@@ -16,7 +16,12 @@ import * as ConsoleService from "@/modules/platform/services/console.service";
 import * as MediaService from "@/modules/platform/services/media.service";
 import * as SettingsService from "@/modules/platform/services/settings.service";
 import * as TenantAdminService from "@/modules/platform/services/tenant-admin.service";
-import type { AnnouncementStatus, MediaKind, SettingCategory } from "@/modules/platform/types";
+import type {
+  AnnouncementStatus,
+  HealthCheck,
+  MediaKind,
+  SettingCategory,
+} from "@/modules/platform/types";
 import type {
   AnnouncementInput,
   BrandingInput,
@@ -25,7 +30,8 @@ import type {
   TenantInput,
   TenantUpdateInput,
 } from "@/modules/platform/validation/schemas";
-import { getNetworkState } from "@/shared/platform";
+import { getNetworkState, runHealthChecks } from "@/shared/platform";
+
 
 export const platformKeys = {
   all: (tenantId: string) => ["platform", tenantId] as const,
