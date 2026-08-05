@@ -69,7 +69,7 @@ function StudyGroupsPage() {
     event.preventDefault();
     setError(null);
     try {
-      await createGroup.mutateAsync(form);
+      await createGroup.mutateAsync({ ...form, capacity: Number(form.capacity) });
       setForm({ ...emptyForm, periodId: form.periodId });
       toast.success("Kelas dibuat.");
     } catch (cause) {

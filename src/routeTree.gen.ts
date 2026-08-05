@@ -23,6 +23,8 @@ import { Route as ShellExamRouteImport } from './routes/_shell.exam'
 import { Route as ShellLearningRouteImport } from './routes/_shell.learning'
 import { Route as ShellSettingsRouteImport } from './routes/_shell.settings'
 import { Route as ShellAcademicIndexRouteImport } from './routes/_shell.academic.index'
+import { Route as ShellAcademicGroupsRouteImport } from './routes/_shell.academic.groups'
+import { Route as ShellAcademicStudentsRouteImport } from './routes/_shell.academic.students'
 
 const ShellRoute = ShellRouteImport.update({
   id: '/_shell',
@@ -93,6 +95,16 @@ const ShellAcademicIndexRoute = ShellAcademicIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ShellAcademicRoute,
 } as any)
+const ShellAcademicGroupsRoute = ShellAcademicGroupsRouteImport.update({
+  id: '/groups',
+  path: '/groups',
+  getParentRoute: () => ShellAcademicRoute,
+} as any)
+const ShellAcademicStudentsRoute = ShellAcademicStudentsRouteImport.update({
+  id: '/students',
+  path: '/students',
+  getParentRoute: () => ShellAcademicRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof ShellIndexRoute
@@ -107,6 +119,8 @@ export interface FileRoutesByFullPath {
   '/exam': typeof ShellExamRoute
   '/learning': typeof ShellLearningRoute
   '/settings': typeof ShellSettingsRoute
+  '/academic/groups': typeof ShellAcademicGroupsRoute
+  '/academic/students': typeof ShellAcademicStudentsRoute
   '/academic/': typeof ShellAcademicIndexRoute
 }
 export interface FileRoutesByTo {
@@ -121,6 +135,8 @@ export interface FileRoutesByTo {
   '/learning': typeof ShellLearningRoute
   '/settings': typeof ShellSettingsRoute
   '/': typeof ShellIndexRoute
+  '/academic/groups': typeof ShellAcademicGroupsRoute
+  '/academic/students': typeof ShellAcademicStudentsRoute
   '/academic': typeof ShellAcademicIndexRoute
 }
 export interface FileRoutesById {
@@ -138,6 +154,8 @@ export interface FileRoutesById {
   '/_shell/learning': typeof ShellLearningRoute
   '/_shell/settings': typeof ShellSettingsRoute
   '/_shell/': typeof ShellIndexRoute
+  '/_shell/academic/groups': typeof ShellAcademicGroupsRoute
+  '/_shell/academic/students': typeof ShellAcademicStudentsRoute
   '/_shell/academic/': typeof ShellAcademicIndexRoute
 }
 export interface FileRouteTypes {
@@ -155,6 +173,8 @@ export interface FileRouteTypes {
     | '/exam'
     | '/learning'
     | '/settings'
+    | '/academic/groups'
+    | '/academic/students'
     | '/academic/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -169,6 +189,8 @@ export interface FileRouteTypes {
     | '/learning'
     | '/settings'
     | '/'
+    | '/academic/groups'
+    | '/academic/students'
     | '/academic'
   id:
     | '__root__'
@@ -185,6 +207,8 @@ export interface FileRouteTypes {
     | '/_shell/learning'
     | '/_shell/settings'
     | '/_shell/'
+    | '/_shell/academic/groups'
+    | '/_shell/academic/students'
     | '/_shell/academic/'
   fileRoutesById: FileRoutesById
 }
@@ -296,14 +320,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellAcademicIndexRouteImport
       parentRoute: typeof ShellAcademicRoute
     }
+    '/_shell/academic/groups': {
+      id: '/_shell/academic/groups'
+      path: '/groups'
+      fullPath: '/academic/groups'
+      preLoaderRoute: typeof ShellAcademicGroupsRouteImport
+      parentRoute: typeof ShellAcademicRoute
+    }
+    '/_shell/academic/students': {
+      id: '/_shell/academic/students'
+      path: '/students'
+      fullPath: '/academic/students'
+      preLoaderRoute: typeof ShellAcademicStudentsRouteImport
+      parentRoute: typeof ShellAcademicRoute
+    }
   }
 }
 
 interface ShellAcademicRouteChildren {
+  ShellAcademicGroupsRoute: typeof ShellAcademicGroupsRoute
+  ShellAcademicStudentsRoute: typeof ShellAcademicStudentsRoute
   ShellAcademicIndexRoute: typeof ShellAcademicIndexRoute
 }
 
 const ShellAcademicRouteChildren: ShellAcademicRouteChildren = {
+  ShellAcademicGroupsRoute: ShellAcademicGroupsRoute,
+  ShellAcademicStudentsRoute: ShellAcademicStudentsRoute,
   ShellAcademicIndexRoute: ShellAcademicIndexRoute,
 }
 
