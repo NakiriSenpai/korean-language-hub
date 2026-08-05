@@ -21,6 +21,9 @@ export default defineConfig({
         // Registration is owned by src/shared/pwa/register.ts (guarded wrapper).
         injectRegister: null,
         filename: "sw.js",
+        // The client build is emitted to dist/client — keep the worker next to it.
+        outDir: "dist/client",
+
         // The manifest is authored by hand in public/manifest.webmanifest.
         manifest: false,
         devOptions: { enabled: false },
