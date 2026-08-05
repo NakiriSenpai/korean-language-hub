@@ -15,6 +15,7 @@ import { themeInitScript } from "@/shared/theme";
 import { PlatformProvider } from "@/shared/platform";
 import { ErrorPage, NotFoundPage } from "@/shared/components/shell";
 import { PwaRegistrar } from "@/shared/pwa";
+import { IdentityProvider } from "@/modules/identity";
 
 function NotFoundComponent() {
   return <NotFoundPage />;
