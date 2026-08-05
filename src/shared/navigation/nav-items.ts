@@ -54,6 +54,16 @@ export const NAV_ITEMS: readonly NavItem[] = [
     exact: false,
   },
   {
+    id: "knowledge",
+    label: "Knowledge",
+    to: "/knowledge",
+    icon: Library,
+    description: "Pusat materi: grammar, kosakata, percakapan, budaya, dan rujukan EPS-TOPIK.",
+    primary: false,
+    exact: false,
+  },
+
+  {
     id: "exam",
     label: "Exam",
     to: "/exam",
