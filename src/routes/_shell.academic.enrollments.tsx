@@ -75,7 +75,10 @@ function EnrollmentsPage() {
   return (
     <Stack gap="xl">
       {canWrite && (
-        <AppSection title="Daftarkan peserta" description="Kelas yang penuh atau diarsipkan akan ditolak.">
+        <AppSection
+          title="Daftarkan peserta"
+          description="Kelas yang penuh atau diarsipkan akan ditolak."
+        >
           <AppCard>
             <form onSubmit={onSubmit} className="flex flex-col gap-md" noValidate>
               <Grid cols={1} smCols={2} lgCols={2} gap="md">

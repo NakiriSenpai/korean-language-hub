@@ -24,7 +24,9 @@ interface Row {
 }
 
 /** Teacher display names come from `profiles`, resolved in a second query. */
-async function resolveTeacherNames(userIds: readonly string[]): Promise<Map<string, string | null>> {
+async function resolveTeacherNames(
+  userIds: readonly string[],
+): Promise<Map<string, string | null>> {
   const unique = [...new Set(userIds)];
   if (unique.length === 0) return new Map();
 

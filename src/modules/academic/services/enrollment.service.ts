@@ -62,13 +62,12 @@ export async function listEnrollments(
   if (filter.status) query = query.eq("status", filter.status);
 
   const result = await query.order("enrolled_on", { ascending: false });
-  return unwrap(result, "academic.enrollment.list").map((row) => toEnrollment(row as unknown as Row));
+  return unwrap(result, "academic.enrollment.list").map((row) =>
+    toEnrollment(row as unknown as Row),
+  );
 }
 
-export async function enrollStudent(
-  tenantId: string,
-  input: EnrollmentInput,
-): Promise<Enrollment> {
+export async function enrollStudent(tenantId: string, input: EnrollmentInput): Promise<Enrollment> {
   const values = enrollmentInputSchema.parse(input);
 
   const groupResult = await supabase

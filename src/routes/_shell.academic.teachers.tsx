@@ -73,7 +73,10 @@ function TeacherAssignmentsPage() {
   return (
     <Stack gap="xl">
       {canWrite && (
-        <AppSection title="Tugaskan pengajar" description="Satu kelas dapat memiliki pengajar utama dan asisten.">
+        <AppSection
+          title="Tugaskan pengajar"
+          description="Satu kelas dapat memiliki pengajar utama dan asisten."
+        >
           <AppCard>
             <form onSubmit={onSubmit} className="flex flex-col gap-md" noValidate>
               <Grid cols={1} smCols={2} lgCols={3} gap="md">
@@ -145,7 +148,10 @@ function TeacherAssignmentsPage() {
         </AppSection>
       )}
 
-      <AppSection title="Daftar penugasan" description="Penugasan aktif pada seluruh kelas lembaga.">
+      <AppSection
+        title="Daftar penugasan"
+        description="Penugasan aktif pada seluruh kelas lembaga."
+      >
         {assignments.isLoading ? (
           <p className="text-body-sm text-text-secondary">Memuat penugasan…</p>
         ) : assignments.data && assignments.data.length > 0 ? (

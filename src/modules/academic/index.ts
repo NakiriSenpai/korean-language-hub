@@ -63,4 +63,9 @@ export {
 export { summarizeEnrollments } from "@/modules/academic/services/enrollment.service";
 export { suggestStudentNumber } from "@/modules/academic/services/student-profile.service";
 
-export { EnrollmentBadge, LifecycleBadge, StatusBadge, statusLabel } from "@/modules/academic/components/StatusBadge";
+export {
+  EnrollmentBadge,
+  LifecycleBadge,
+  StatusBadge,
+  statusLabel,
+} from "@/modules/academic/components/StatusBadge";

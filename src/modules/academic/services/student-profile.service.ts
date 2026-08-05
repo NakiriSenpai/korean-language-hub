@@ -55,7 +55,11 @@ export async function listStudentProfiles(
 }
 
 export async function getStudentProfile(profileId: string): Promise<StudentProfile> {
-  const result = await supabase.from("student_profiles").select(COLUMNS).eq("id", profileId).single();
+  const result = await supabase
+    .from("student_profiles")
+    .select(COLUMNS)
+    .eq("id", profileId)
+    .single();
   return toProfile(unwrap(result, "academic.studentProfile.get") as Row);
 }
 

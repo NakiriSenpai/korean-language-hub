@@ -9,7 +9,12 @@ import {
   useDeleteStudentProfile,
   useStudentProfiles,
 } from "@/modules/academic";
-import { Field, TextInput, buttonClass, ghostButtonClass } from "@/modules/academic/components/Form";
+import {
+  Field,
+  TextInput,
+  buttonClass,
+  ghostButtonClass,
+} from "@/modules/academic/components/Form";
 import { usePermissions } from "@/modules/identity";
 import { AppCard, AppSection, Grid, Stack } from "@/shared/components/layout";
 import { EmptyState } from "@/shared/components/shell";

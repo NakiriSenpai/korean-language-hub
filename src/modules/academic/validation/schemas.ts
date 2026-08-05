@@ -5,7 +5,8 @@
 
 import { z } from "zod";
 
-const trimmed = (max: number) => z.string().trim().min(1, "Wajib diisi").max(max, `Maksimal ${max} karakter`);
+const trimmed = (max: number) =>
+  z.string().trim().min(1, "Wajib diisi").max(max, `Maksimal ${max} karakter`);
 const isoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Format tanggal harus YYYY-MM-DD");
 const optionalText = (max: number) =>
   z
@@ -34,7 +35,11 @@ export const studyGroupInputSchema = z.object({
   code: trimmed(32),
   level: optionalText(64),
   room: optionalText(64),
-  capacity: z.coerce.number().int("Kapasitas harus bilangan bulat").min(1, "Minimal 1").max(500, "Maksimal 500"),
+  capacity: z.coerce
+    .number()
+    .int("Kapasitas harus bilangan bulat")
+    .min(1, "Minimal 1")
+    .max(500, "Maksimal 500"),
   status: z.enum(["draft", "active", "archived"]).default("draft"),
 });
 

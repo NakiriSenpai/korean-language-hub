@@ -80,7 +80,10 @@ function StudyGroupsPage() {
   return (
     <Stack gap="xl">
       {canWrite && (
-        <AppSection title="Buat kelas" description="Kelas selalu terikat pada satu periode akademik.">
+        <AppSection
+          title="Buat kelas"
+          description="Kelas selalu terikat pada satu periode akademik."
+        >
           <AppCard>
             <form onSubmit={onSubmit} className="flex flex-col gap-md" noValidate>
               <Grid cols={1} smCols={2} lgCols={2} gap="md">
@@ -201,7 +204,8 @@ function StudyGroupsPage() {
                     <p className="mt-xs text-body-sm text-text-secondary">
                       {group.code}
                       {group.level ? ` · ${group.level}` : ""}
-                      {group.room ? ` · ${group.room}` : ""} · {group.enrolledCount}/{group.capacity} kursi
+                      {group.room ? ` · ${group.room}` : ""} · {group.enrolledCount}/
+                      {group.capacity} kursi
                     </p>
                   </div>
 

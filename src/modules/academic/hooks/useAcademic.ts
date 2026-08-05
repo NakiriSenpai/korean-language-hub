@@ -64,8 +64,7 @@ export const academicKeys = {
     ["academic", tenantId, "enrollments", filter] as const,
   teacherAssignments: (tenantId: string, studyGroupId?: string) =>
     ["academic", tenantId, "teacher-assignments", studyGroupId ?? "all"] as const,
-  teacherCandidates: (tenantId: string) =>
-    ["academic", tenantId, "teacher-candidates"] as const,
+  teacherCandidates: (tenantId: string) => ["academic", tenantId, "teacher-candidates"] as const,
 };
 
 /** Current tenant id, or an empty string when identity is still resolving. */

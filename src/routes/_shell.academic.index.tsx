@@ -69,7 +69,10 @@ function AcademicPeriodsPage() {
   return (
     <Stack gap="xl">
       {canWrite && (
-        <AppSection title="Buat periode akademik" description="Satu lembaga hanya boleh punya satu periode aktif.">
+        <AppSection
+          title="Buat periode akademik"
+          description="Satu lembaga hanya boleh punya satu periode aktif."
+        >
           <AppCard>
             <form onSubmit={onSubmit} className="flex flex-col gap-md" noValidate>
               <Grid cols={1} smCols={2} lgCols={2} gap="md">

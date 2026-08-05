@@ -12,7 +12,13 @@ const TONE = {
 
 export type BadgeTone = keyof typeof TONE;
 
-export function StatusBadge({ tone = "neutral", children }: { tone?: BadgeTone; children: ReactNode }) {
+export function StatusBadge({
+  tone = "neutral",
+  children,
+}: {
+  tone?: BadgeTone;
+  children: ReactNode;
+}) {
   return (
     <span
       className={cn(
@@ -56,5 +62,7 @@ export function LifecycleBadge({ status }: { status: string }) {
 }
 
 export function EnrollmentBadge({ status }: { status: string }) {
-  return <StatusBadge tone={ENROLLMENT_TONE[status] ?? "neutral"}>{statusLabel(status)}</StatusBadge>;
+  return (
+    <StatusBadge tone={ENROLLMENT_TONE[status] ?? "neutral"}>{statusLabel(status)}</StatusBadge>
+  );
 }
