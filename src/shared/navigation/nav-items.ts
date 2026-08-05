@@ -3,6 +3,7 @@ import {
   BookOpen,
   CalendarRange,
   GraduationCap,
+  Library,
   LayoutDashboard,
   Settings,
   ShieldCheck,
@@ -53,6 +54,16 @@ export const NAV_ITEMS: readonly NavItem[] = [
     primary: true,
     exact: false,
   },
+  {
+    id: "knowledge",
+    label: "Knowledge",
+    to: "/knowledge",
+    icon: Library,
+    description: "Pusat materi: grammar, kosakata, percakapan, budaya, dan rujukan EPS-TOPIK.",
+    primary: false,
+    exact: false,
+  },
+
   {
     id: "exam",
     label: "Exam",
