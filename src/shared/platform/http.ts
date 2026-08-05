@@ -83,7 +83,7 @@ export async function httpRequest<T = unknown>(
   const run = async (): Promise<HttpResponse<T>> => {
     const controller = new AbortController();
     const requestHeaders = new Headers(headers);
-    let payload: BodyInit | undefined;
+    let payload: BodyInit | null = null;
 
     if (body !== undefined) {
       if (typeof body === "string" || body instanceof FormData || body instanceof Blob) {
