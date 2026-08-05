@@ -16,7 +16,12 @@ import * as ConsoleService from "@/modules/platform/services/console.service";
 import * as MediaService from "@/modules/platform/services/media.service";
 import * as SettingsService from "@/modules/platform/services/settings.service";
 import * as TenantAdminService from "@/modules/platform/services/tenant-admin.service";
-import type { AnnouncementStatus, MediaKind, SettingCategory } from "@/modules/platform/types";
+import type {
+  AnnouncementStatus,
+  HealthCheck,
+  MediaKind,
+  SettingCategory,
+} from "@/modules/platform/types";
 import type {
   AnnouncementInput,
   BrandingInput,
@@ -25,7 +30,7 @@ import type {
   TenantInput,
   TenantUpdateInput,
 } from "@/modules/platform/validation/schemas";
-import { getNetworkState } from "@/shared/platform";
+import { getNetworkState, runHealthChecks } from "@/shared/platform";
 
 export const platformKeys = {
   all: (tenantId: string) => ["platform", tenantId] as const,
@@ -89,11 +94,34 @@ export function usePlatformStats() {
   });
 }
 
+/**
+ * Live dependency probes (platform / database / media / storage).
+ * Kept separate from the derived data checks so a slow probe never blocks the
+ * console from painting.
+ */
+export function usePlatformRuntimeHealth() {
+  return useQuery({
+    queryKey: ["platform", "health"],
+    queryFn: () => runHealthChecks(),
+    staleTime: 30_000,
+    refetchInterval: 60_000,
+  });
+}
+
 export function useHealthChecks(lastAuditAt: string | null) {
   const stats = usePlatformStats();
+  const runtime = usePlatformRuntimeHealth();
   const { online } = getNetworkState();
-  if (!stats.data) return [];
-  return ConsoleService.buildHealthChecks(stats.data, online, lastAuditAt);
+  const derived = stats.data
+    ? ConsoleService.buildHealthChecks(stats.data, online, lastAuditAt)
+    : [];
+  const probes: HealthCheck[] = (runtime.data?.probes ?? []).map((probe) => ({
+    id: probe.id,
+    label: probe.label,
+    level: probe.level,
+    detail: probe.detail,
+  }));
+  return [...probes, ...derived];
 }
 
 /* ------------------------------------------------------------------ */
