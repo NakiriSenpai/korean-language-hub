@@ -65,8 +65,7 @@ export const observability = {
   log(level: LogLevel, message: string, context?: LogContext, requestId?: string): void {
     logger[level](message, withTelemetry(context, requestId));
   },
-  debug: (message: string, context?: LogContext) =>
-    logger.debug(message, withTelemetry(context)),
+  debug: (message: string, context?: LogContext) => logger.debug(message, withTelemetry(context)),
   info: (message: string, context?: LogContext) => logger.info(message, withTelemetry(context)),
   warn: (message: string, context?: LogContext) => logger.warn(message, withTelemetry(context)),
   error: (message: string, context?: LogContext) => logger.error(message, withTelemetry(context)),
@@ -77,7 +76,10 @@ export const observability = {
     const startedAt = Date.now();
     try {
       const result = await task(requestId);
-      logger.debug(`${scope} ok`, withTelemetry({ scope, durationMs: Date.now() - startedAt }, requestId));
+      logger.debug(
+        `${scope} ok`,
+        withTelemetry({ scope, durationMs: Date.now() - startedAt }, requestId),
+      );
       return result;
     } catch (error) {
       logger.error(

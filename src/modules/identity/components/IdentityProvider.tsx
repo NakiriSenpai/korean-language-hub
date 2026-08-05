@@ -73,7 +73,6 @@ export function IdentityProvider({ children }: IdentityProviderProps) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const queryClient = useQueryClient();
 
-
   const loadIdentity = useCallback(async (session: Session | null): Promise<void> => {
     if (!session?.user) {
       setState({ ...INITIAL, status: "unauthenticated" });

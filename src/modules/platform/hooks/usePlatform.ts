@@ -32,7 +32,6 @@ import type {
 } from "@/modules/platform/validation/schemas";
 import { getNetworkState, runHealthChecks } from "@/shared/platform";
 
-
 export const platformKeys = {
   all: (tenantId: string) => ["platform", tenantId] as const,
   tenants: (userId: string) => ["platform", "tenants", userId] as const,
@@ -124,7 +123,6 @@ export function useHealthChecks(lastAuditAt: string | null) {
   }));
   return [...probes, ...derived];
 }
-
 
 /* ------------------------------------------------------------------ */
 /* Tenant management                                                   */
