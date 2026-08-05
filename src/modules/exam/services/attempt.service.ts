@@ -262,13 +262,12 @@ export const AttemptService = {
   ): Promise<ExamAttempt> {
     assertTenant(scope.tenantId, "exam.attempt.status");
     assertUser(scope.userId, "exam.attempt.status");
-    const patch: Record<string, unknown> = {
+    const now = new Date().toISOString();
+    const patch = {
       status,
-      last_saved_at: new Date().toISOString(),
+      last_saved_at: now,
+      ...(status === "submitted" || status === "expired" ? { submitted_at: now } : {}),
     };
-    if (status === "submitted" || status === "expired") {
-      patch["submitted_at"] = new Date().toISOString();
-    }
 
     const row = unwrap(
       await supabase
