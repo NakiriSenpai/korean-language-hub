@@ -25,10 +25,7 @@ export interface ThemeProviderProps {
   readonly defaultTheme?: ThemeName;
 }
 
-export function ThemeProvider({
-  children,
-  defaultTheme = APP_DEFAULTS.theme,
-}: ThemeProviderProps) {
+export function ThemeProvider({ children, defaultTheme = APP_DEFAULTS.theme }: ThemeProviderProps) {
   const [theme, setThemeState] = useState<ThemeName>(defaultTheme);
   const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>("light");
 

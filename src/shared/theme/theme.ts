@@ -45,6 +45,4 @@ export const applyTheme = (resolved: ResolvedTheme): void => {
  */
 export const themeInitScript = `(function(){try{var k=${JSON.stringify(
   STORAGE_KEYS.theme,
-)};var t=localStorage.getItem(k);if(t!=="light"&&t!=="dark"&&t!=="system"){t="${
-  "system"
-}";}var d=t==="dark"||(t==="system"&&window.matchMedia("(prefers-color-scheme: dark)").matches);var e=document.documentElement;e.classList.toggle("dark",d);e.style.colorScheme=d?"dark":"light";}catch(_){}})();`;
+)};var t=localStorage.getItem(k);if(t!=="light"&&t!=="dark"&&t!=="system"){t="${"system"}";}var d=t==="dark"||(t==="system"&&window.matchMedia("(prefers-color-scheme: dark)").matches);var e=document.documentElement;e.classList.toggle("dark",d);e.style.colorScheme=d?"dark":"light";}catch(_){}})();`;

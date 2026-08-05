@@ -166,7 +166,8 @@ export function AppCard({
         PADDING[padding],
         RADIUS[radius],
         SHADOW[shadow],
-        interactive && "transition-all motion-normal hover:shadow-md focus-within:ring-2 focus-within:ring-ring",
+        interactive &&
+          "transition-all motion-normal hover:shadow-md focus-within:ring-2 focus-within:ring-ring",
         className,
       )}
     >
@@ -288,7 +289,16 @@ export function Grid({
   as: Tag = "div",
 }: GridProps) {
   return (
-    <Tag className={cn("grid w-full", COLS[cols], SM_COLS[smCols], LG_COLS[lgCols], GAP[gap], className)}>
+    <Tag
+      className={cn(
+        "grid w-full",
+        COLS[cols],
+        SM_COLS[smCols],
+        LG_COLS[lgCols],
+        GAP[gap],
+        className,
+      )}
+    >
       {children}
     </Tag>
   );

@@ -1,12 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import {
-  AppCard,
-  AppPage,
-  AppSection,
-  Grid,
-  Stack,
-} from "@/shared/components/layout";
+import { AppCard, AppPage, AppSection, Grid, Stack } from "@/shared/components/layout";
 import { ThemeToggle } from "@/shared/components/ThemeToggle";
 import { appConfig } from "@/shared/config/app.config";
 import { APP_META } from "@/shared/constants";
@@ -155,7 +149,12 @@ function DesignSystemPage() {
               </div>
             ))}
             {SHADOW_TOKENS.map((token) => (
-              <AppCard key={token} shadow={token} padding="md" className="flex h-20 items-center justify-center">
+              <AppCard
+                key={token}
+                shadow={token}
+                padding="md"
+                className="flex h-20 items-center justify-center"
+              >
                 <span className="text-caption text-text-secondary">shadow {token}</span>
               </AppCard>
             ))}
