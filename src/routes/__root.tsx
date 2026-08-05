@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ErrorBoundary } from "@/shared/components/ErrorBoundary";
+import { ThemeProvider, themeInitScript } from "@/shared/theme";
 
 function NotFoundComponent() {
   return (
