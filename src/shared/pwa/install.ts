@@ -22,8 +22,8 @@ let deferredPrompt: BeforeInstallPromptEvent | null = null;
 let bound = false;
 
 function dismissedRecently(): boolean {
-  const at = localStore.get<number>(DISMISS_KEY);
-  return typeof at === "number" && Date.now() - at < DISMISS_COOLDOWN_MS;
+  const at = localStore.get<number>(DISMISS_KEY, 0);
+  return at > 0 && Date.now() - at < DISMISS_COOLDOWN_MS;
 }
 
 /** True when a prompt is captured, the app is not installed and not muted. */
