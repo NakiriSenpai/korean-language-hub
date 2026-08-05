@@ -47,6 +47,7 @@ import { Route as ShellPlatformIndexRouteImport } from './routes/_shell.platform
 import { Route as ShellPlatformAnnouncementsRouteImport } from './routes/_shell.platform.announcements'
 import { Route as ShellPlatformAuditRouteImport } from './routes/_shell.platform.audit'
 import { Route as ShellPlatformBrandingRouteImport } from './routes/_shell.platform.branding'
+import { Route as ShellPlatformCmsRouteImport } from './routes/_shell.platform.cms'
 import { Route as ShellPlatformMediaRouteImport } from './routes/_shell.platform.media'
 import { Route as ShellPlatformSettingsRouteImport } from './routes/_shell.platform.settings'
 import { Route as ShellPlatformTenantsRouteImport } from './routes/_shell.platform.tenants'
@@ -256,6 +257,11 @@ const ShellPlatformBrandingRoute = ShellPlatformBrandingRouteImport.update({
   path: '/branding',
   getParentRoute: () => ShellPlatformRoute,
 } as any)
+const ShellPlatformCmsRoute = ShellPlatformCmsRouteImport.update({
+  id: '/cms',
+  path: '/cms',
+  getParentRoute: () => ShellPlatformRoute,
+} as any)
 const ShellPlatformMediaRoute = ShellPlatformMediaRouteImport.update({
   id: '/media',
   path: '/media',
@@ -379,6 +385,7 @@ export interface FileRoutesByFullPath {
   '/platform/announcements': typeof ShellPlatformAnnouncementsRoute
   '/platform/audit': typeof ShellPlatformAuditRoute
   '/platform/branding': typeof ShellPlatformBrandingRoute
+  '/platform/cms': typeof ShellPlatformCmsRoute
   '/platform/media': typeof ShellPlatformMediaRoute
   '/platform/settings': typeof ShellPlatformSettingsRoute
   '/platform/tenants': typeof ShellPlatformTenantsRoute
@@ -427,6 +434,7 @@ export interface FileRoutesByTo {
   '/platform/announcements': typeof ShellPlatformAnnouncementsRoute
   '/platform/audit': typeof ShellPlatformAuditRoute
   '/platform/branding': typeof ShellPlatformBrandingRoute
+  '/platform/cms': typeof ShellPlatformCmsRoute
   '/platform/media': typeof ShellPlatformMediaRoute
   '/platform/settings': typeof ShellPlatformSettingsRoute
   '/platform/tenants': typeof ShellPlatformTenantsRoute
@@ -484,6 +492,7 @@ export interface FileRoutesById {
   '/_shell/platform/announcements': typeof ShellPlatformAnnouncementsRoute
   '/_shell/platform/audit': typeof ShellPlatformAuditRoute
   '/_shell/platform/branding': typeof ShellPlatformBrandingRoute
+  '/_shell/platform/cms': typeof ShellPlatformCmsRoute
   '/_shell/platform/media': typeof ShellPlatformMediaRoute
   '/_shell/platform/settings': typeof ShellPlatformSettingsRoute
   '/_shell/platform/tenants': typeof ShellPlatformTenantsRoute
@@ -541,6 +550,7 @@ export interface FileRouteTypes {
     | '/platform/announcements'
     | '/platform/audit'
     | '/platform/branding'
+    | '/platform/cms'
     | '/platform/media'
     | '/platform/settings'
     | '/platform/tenants'
@@ -589,6 +599,7 @@ export interface FileRouteTypes {
     | '/platform/announcements'
     | '/platform/audit'
     | '/platform/branding'
+    | '/platform/cms'
     | '/platform/media'
     | '/platform/settings'
     | '/platform/tenants'
@@ -645,6 +656,7 @@ export interface FileRouteTypes {
     | '/_shell/platform/announcements'
     | '/_shell/platform/audit'
     | '/_shell/platform/branding'
+    | '/_shell/platform/cms'
     | '/_shell/platform/media'
     | '/_shell/platform/settings'
     | '/_shell/platform/tenants'
@@ -946,6 +958,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellPlatformBrandingRouteImport
       parentRoute: typeof ShellPlatformRoute
     }
+    '/_shell/platform/cms': {
+      id: '/_shell/platform/cms'
+      path: '/cms'
+      fullPath: '/platform/cms'
+      preLoaderRoute: typeof ShellPlatformCmsRouteImport
+      parentRoute: typeof ShellPlatformRoute
+    }
     '/_shell/platform/media': {
       id: '/_shell/platform/media'
       path: '/media'
@@ -1196,6 +1215,7 @@ interface ShellPlatformRouteChildren {
   ShellPlatformAnnouncementsRoute: typeof ShellPlatformAnnouncementsRoute
   ShellPlatformAuditRoute: typeof ShellPlatformAuditRoute
   ShellPlatformBrandingRoute: typeof ShellPlatformBrandingRoute
+  ShellPlatformCmsRoute: typeof ShellPlatformCmsRoute
   ShellPlatformMediaRoute: typeof ShellPlatformMediaRoute
   ShellPlatformSettingsRoute: typeof ShellPlatformSettingsRoute
   ShellPlatformTenantsRoute: typeof ShellPlatformTenantsRoute
@@ -1207,6 +1227,7 @@ const ShellPlatformRouteChildren: ShellPlatformRouteChildren = {
   ShellPlatformAnnouncementsRoute: ShellPlatformAnnouncementsRoute,
   ShellPlatformAuditRoute: ShellPlatformAuditRoute,
   ShellPlatformBrandingRoute: ShellPlatformBrandingRoute,
+  ShellPlatformCmsRoute: ShellPlatformCmsRoute,
   ShellPlatformMediaRoute: ShellPlatformMediaRoute,
   ShellPlatformSettingsRoute: ShellPlatformSettingsRoute,
   ShellPlatformTenantsRoute: ShellPlatformTenantsRoute,
