@@ -1,6 +1,7 @@
 import {
   BarChart3,
   BookOpen,
+  CalendarRange,
   GraduationCap,
   LayoutDashboard,
   Settings,

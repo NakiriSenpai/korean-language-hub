@@ -23,8 +23,10 @@ import { Route as ShellExamRouteImport } from './routes/_shell.exam'
 import { Route as ShellLearningRouteImport } from './routes/_shell.learning'
 import { Route as ShellSettingsRouteImport } from './routes/_shell.settings'
 import { Route as ShellAcademicIndexRouteImport } from './routes/_shell.academic.index'
+import { Route as ShellAcademicEnrollmentsRouteImport } from './routes/_shell.academic.enrollments'
 import { Route as ShellAcademicGroupsRouteImport } from './routes/_shell.academic.groups'
 import { Route as ShellAcademicStudentsRouteImport } from './routes/_shell.academic.students'
+import { Route as ShellAcademicTeachersRouteImport } from './routes/_shell.academic.teachers'
 
 const ShellRoute = ShellRouteImport.update({
   id: '/_shell',
@@ -95,6 +97,12 @@ const ShellAcademicIndexRoute = ShellAcademicIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ShellAcademicRoute,
 } as any)
+const ShellAcademicEnrollmentsRoute =
+  ShellAcademicEnrollmentsRouteImport.update({
+    id: '/enrollments',
+    path: '/enrollments',
+    getParentRoute: () => ShellAcademicRoute,
+  } as any)
 const ShellAcademicGroupsRoute = ShellAcademicGroupsRouteImport.update({
   id: '/groups',
   path: '/groups',
@@ -103,6 +111,11 @@ const ShellAcademicGroupsRoute = ShellAcademicGroupsRouteImport.update({
 const ShellAcademicStudentsRoute = ShellAcademicStudentsRouteImport.update({
   id: '/students',
   path: '/students',
+  getParentRoute: () => ShellAcademicRoute,
+} as any)
+const ShellAcademicTeachersRoute = ShellAcademicTeachersRouteImport.update({
+  id: '/teachers',
+  path: '/teachers',
   getParentRoute: () => ShellAcademicRoute,
 } as any)
 
@@ -119,8 +132,10 @@ export interface FileRoutesByFullPath {
   '/exam': typeof ShellExamRoute
   '/learning': typeof ShellLearningRoute
   '/settings': typeof ShellSettingsRoute
+  '/academic/enrollments': typeof ShellAcademicEnrollmentsRoute
   '/academic/groups': typeof ShellAcademicGroupsRoute
   '/academic/students': typeof ShellAcademicStudentsRoute
+  '/academic/teachers': typeof ShellAcademicTeachersRoute
   '/academic/': typeof ShellAcademicIndexRoute
 }
 export interface FileRoutesByTo {
@@ -135,8 +150,10 @@ export interface FileRoutesByTo {
   '/learning': typeof ShellLearningRoute
   '/settings': typeof ShellSettingsRoute
   '/': typeof ShellIndexRoute
+  '/academic/enrollments': typeof ShellAcademicEnrollmentsRoute
   '/academic/groups': typeof ShellAcademicGroupsRoute
   '/academic/students': typeof ShellAcademicStudentsRoute
+  '/academic/teachers': typeof ShellAcademicTeachersRoute
   '/academic': typeof ShellAcademicIndexRoute
 }
 export interface FileRoutesById {
@@ -154,8 +171,10 @@ export interface FileRoutesById {
   '/_shell/learning': typeof ShellLearningRoute
   '/_shell/settings': typeof ShellSettingsRoute
   '/_shell/': typeof ShellIndexRoute
+  '/_shell/academic/enrollments': typeof ShellAcademicEnrollmentsRoute
   '/_shell/academic/groups': typeof ShellAcademicGroupsRoute
   '/_shell/academic/students': typeof ShellAcademicStudentsRoute
+  '/_shell/academic/teachers': typeof ShellAcademicTeachersRoute
   '/_shell/academic/': typeof ShellAcademicIndexRoute
 }
 export interface FileRouteTypes {
@@ -173,8 +192,10 @@ export interface FileRouteTypes {
     | '/exam'
     | '/learning'
     | '/settings'
+    | '/academic/enrollments'
     | '/academic/groups'
     | '/academic/students'
+    | '/academic/teachers'
     | '/academic/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -189,8 +210,10 @@ export interface FileRouteTypes {
     | '/learning'
     | '/settings'
     | '/'
+    | '/academic/enrollments'
     | '/academic/groups'
     | '/academic/students'
+    | '/academic/teachers'
     | '/academic'
   id:
     | '__root__'
@@ -207,8 +230,10 @@ export interface FileRouteTypes {
     | '/_shell/learning'
     | '/_shell/settings'
     | '/_shell/'
+    | '/_shell/academic/enrollments'
     | '/_shell/academic/groups'
     | '/_shell/academic/students'
+    | '/_shell/academic/teachers'
     | '/_shell/academic/'
   fileRoutesById: FileRoutesById
 }
@@ -320,6 +345,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellAcademicIndexRouteImport
       parentRoute: typeof ShellAcademicRoute
     }
+    '/_shell/academic/enrollments': {
+      id: '/_shell/academic/enrollments'
+      path: '/enrollments'
+      fullPath: '/academic/enrollments'
+      preLoaderRoute: typeof ShellAcademicEnrollmentsRouteImport
+      parentRoute: typeof ShellAcademicRoute
+    }
     '/_shell/academic/groups': {
       id: '/_shell/academic/groups'
       path: '/groups'
@@ -334,18 +366,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellAcademicStudentsRouteImport
       parentRoute: typeof ShellAcademicRoute
     }
+    '/_shell/academic/teachers': {
+      id: '/_shell/academic/teachers'
+      path: '/teachers'
+      fullPath: '/academic/teachers'
+      preLoaderRoute: typeof ShellAcademicTeachersRouteImport
+      parentRoute: typeof ShellAcademicRoute
+    }
   }
 }
 
 interface ShellAcademicRouteChildren {
+  ShellAcademicEnrollmentsRoute: typeof ShellAcademicEnrollmentsRoute
   ShellAcademicGroupsRoute: typeof ShellAcademicGroupsRoute
   ShellAcademicStudentsRoute: typeof ShellAcademicStudentsRoute
+  ShellAcademicTeachersRoute: typeof ShellAcademicTeachersRoute
   ShellAcademicIndexRoute: typeof ShellAcademicIndexRoute
 }
 
 const ShellAcademicRouteChildren: ShellAcademicRouteChildren = {
+  ShellAcademicEnrollmentsRoute: ShellAcademicEnrollmentsRoute,
   ShellAcademicGroupsRoute: ShellAcademicGroupsRoute,
   ShellAcademicStudentsRoute: ShellAcademicStudentsRoute,
+  ShellAcademicTeachersRoute: ShellAcademicTeachersRoute,
   ShellAcademicIndexRoute: ShellAcademicIndexRoute,
 }
 
