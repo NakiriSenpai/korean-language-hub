@@ -1,0 +1,10 @@
+REVOKE EXECUTE ON FUNCTION public.default_tenant_id() FROM anon, authenticated, public;
+REVOKE EXECUTE ON FUNCTION public.handle_new_user_membership() FROM anon, authenticated, public;
+REVOKE EXECUTE ON FUNCTION public.handle_new_user() FROM anon, authenticated, public;
+REVOKE EXECUTE ON FUNCTION public.set_updated_at() FROM anon, authenticated, public;
+REVOKE EXECUTE ON FUNCTION public.audit_assessment_publish() FROM anon, authenticated, public;
+REVOKE EXECUTE ON FUNCTION public.audit_membership_change() FROM anon, authenticated, public;
+REVOKE EXECUTE ON FUNCTION public.audit_tenant_change() FROM anon, authenticated, public;
+REVOKE EXECUTE ON FUNCTION public.enforce_study_group_capacity() FROM anon, authenticated, public;
+REVOKE EXECUTE ON FUNCTION public.shares_tenant_with(uuid, uuid) FROM anon, authenticated, public;
+REVOKE EXECUTE ON FUNCTION public.create_tenant(text, text) FROM anon;

@@ -2162,6 +2162,7 @@ export type Database = {
     }
     Functions: {
       create_tenant: { Args: { _name: string; _slug: string }; Returns: string }
+      default_tenant_id: { Args: never; Returns: string }
       has_tenant_role: {
         Args: {
           _roles: Database["public"]["Enums"]["app_role"][]
