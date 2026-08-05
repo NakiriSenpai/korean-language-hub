@@ -6,17 +6,11 @@
 import { supabase } from "@/integrations/supabase/client";
 import { assertTenant, unwrap } from "@/modules/learning/services/learning-client";
 import { listUnits } from "@/modules/learning/services/unit.service";
-import type {
-  ContentStatus,
-  Lesson,
-  LessonContext,
-  OutlineLesson,
-} from "@/modules/learning/types";
+import type { ContentStatus, Lesson, LessonContext, OutlineLesson } from "@/modules/learning/types";
 import { lessonInputSchema, type LessonInput } from "@/modules/learning/validation/schemas";
 import { AppError } from "@/shared/platform";
 
-const COLUMNS =
-  "id, tenant_id, module_id, title, summary, estimated_minutes, status, position";
+const COLUMNS = "id, tenant_id, module_id, title, summary, estimated_minutes, status, position";
 
 interface Row {
   id: string;
@@ -40,10 +34,7 @@ const toLesson = (row: Row): Lesson => ({
   position: row.position,
 });
 
-export async function listLessons(
-  tenantId: string,
-  moduleId: string,
-): Promise<readonly Lesson[]> {
+export async function listLessons(tenantId: string, moduleId: string): Promise<readonly Lesson[]> {
   assertTenant(tenantId, "learning.lesson.list");
   const result = await supabase
     .from("lessons")
@@ -159,10 +150,7 @@ export async function getCourseOutline(
 }
 
 /** Lesson + units + previous/next navigation derived from the course structure. */
-export async function getLessonContext(
-  tenantId: string,
-  lessonId: string,
-): Promise<LessonContext> {
+export async function getLessonContext(tenantId: string, lessonId: string): Promise<LessonContext> {
   assertTenant(tenantId, "learning.lesson.context");
   const result = await supabase
     .from("lessons")

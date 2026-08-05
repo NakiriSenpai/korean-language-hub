@@ -94,10 +94,7 @@ export async function deleteUnit(tenantId: string, unitId: string): Promise<void
   if (error) unwrap({ data: null, error }, "learning.unit.delete");
 }
 
-export async function createBlock(
-  tenantId: string,
-  input: LessonBlockInput,
-): Promise<LessonBlock> {
+export async function createBlock(tenantId: string, input: LessonBlockInput): Promise<LessonBlock> {
   assertTenant(tenantId, "learning.block.create");
   const values = lessonBlockInputSchema.parse(input);
   const result = await supabase

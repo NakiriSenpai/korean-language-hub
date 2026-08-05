@@ -92,7 +92,4 @@ export {
 } from "@/modules/learning/components/LearningBadges";
 export { LessonReader } from "@/modules/learning/components/LessonReader";
 export { ContinueLearningCard } from "@/modules/learning/components/ContinueLearningCard";
-export {
-  LessonNavigation,
-  UnitNavigation,
-} from "@/modules/learning/components/ReaderNavigation";
+export { LessonNavigation, UnitNavigation } from "@/modules/learning/components/ReaderNavigation";

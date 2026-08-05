@@ -13,12 +13,7 @@ export interface UnitNavigationProps {
 }
 
 /** Previous / next unit inside the current lesson. */
-export function UnitNavigation({
-  unitIndex,
-  unitCount,
-  onPrevious,
-  onNext,
-}: UnitNavigationProps) {
+export function UnitNavigation({ unitIndex, unitCount, onPrevious, onNext }: UnitNavigationProps) {
   return (
     <div className="flex items-center justify-between gap-sm">
       <button
@@ -54,7 +49,10 @@ export interface LessonNavigationProps {
 /** Previous / next lesson, derived from the course outline. */
 export function LessonNavigation({ previous, next }: LessonNavigationProps) {
   return (
-    <nav aria-label="Navigasi lesson" className="flex flex-col gap-sm sm:flex-row sm:justify-between">
+    <nav
+      aria-label="Navigasi lesson"
+      className="flex flex-col gap-sm sm:flex-row sm:justify-between"
+    >
       {previous ? (
         <Link
           to="/learning/lessons/$lessonId"

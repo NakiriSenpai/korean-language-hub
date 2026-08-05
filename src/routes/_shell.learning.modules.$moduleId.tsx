@@ -113,9 +113,7 @@ function LessonsPage() {
                     min={1}
                     max={600}
                     value={form.estimatedMinutes}
-                    onChange={(event) =>
-                      setForm({ ...form, estimatedMinutes: event.target.value })
-                    }
+                    onChange={(event) => setForm({ ...form, estimatedMinutes: event.target.value })}
                   />
                 </Field>
                 <Field label="Status" htmlFor="lessonStatus">

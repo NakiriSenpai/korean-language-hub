@@ -101,10 +101,7 @@ export async function recordContinueLearning(
   return toEntry(unwrap(result, "learning.continue.record") as unknown as Row);
 }
 
-export async function clearContinueLearning(
-  scope: ContinueScope,
-  entryId: string,
-): Promise<void> {
+export async function clearContinueLearning(scope: ContinueScope, entryId: string): Promise<void> {
   assertTenant(scope.tenantId, "learning.continue.clear");
   assertUser(scope.userId, "learning.continue.clear");
   const { error } = await supabase

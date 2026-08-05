@@ -144,7 +144,10 @@ function CoursesPage() {
         </AppSection>
       )}
 
-      <AppSection title="Daftar course" description="Pilih course untuk melihat module di dalamnya.">
+      <AppSection
+        title="Daftar course"
+        description="Pilih course untuk melihat module di dalamnya."
+      >
         {courses.isLoading ? (
           <p className="text-body-sm text-text-secondary">Memuat course…</p>
         ) : (courses.data ?? []).length === 0 ? (

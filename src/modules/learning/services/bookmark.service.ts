@@ -65,9 +65,7 @@ export async function listLessonBookmarks(
     .eq("tenant_id", scope.tenantId)
     .eq("user_id", scope.userId)
     .eq("lesson_id", lessonId);
-  return unwrap(result, "learning.bookmark.lesson").map((row) =>
-    toBookmark(row as unknown as Row),
-  );
+  return unwrap(result, "learning.bookmark.lesson").map((row) => toBookmark(row as unknown as Row));
 }
 
 async function findBookmarkId(
@@ -81,9 +79,10 @@ async function findBookmarkId(
     .eq("user_id", scope.userId)
     .eq("target_type", values.targetType)
     .eq("lesson_id", values.lessonId);
-  query = values.targetType === "unit" && values.unitId
-    ? query.eq("unit_id", values.unitId)
-    : query.is("unit_id", null);
+  query =
+    values.targetType === "unit" && values.unitId
+      ? query.eq("unit_id", values.unitId)
+      : query.is("unit_id", null);
 
   const result = await query.maybeSingle();
   if (result.error) unwrap(result, "learning.bookmark.find");

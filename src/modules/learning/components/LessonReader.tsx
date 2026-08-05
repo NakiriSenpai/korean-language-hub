@@ -4,10 +4,7 @@ import { toast } from "sonner";
 
 import { BlockList } from "@/modules/learning/components/BlockRenderer";
 import { ProgressBar } from "@/modules/learning/components/LearningBadges";
-import {
-  LessonNavigation,
-  UnitNavigation,
-} from "@/modules/learning/components/ReaderNavigation";
+import { LessonNavigation, UnitNavigation } from "@/modules/learning/components/ReaderNavigation";
 import {
   useLessonBookmarks,
   useLessonProgress,
