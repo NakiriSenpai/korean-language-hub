@@ -19,12 +19,14 @@ export const Route = createFileRoute("/_shell/platform/audit")({
       { title: "Jejak Audit — Hangeul LPK Platform" },
       {
         name: "description",
-        content: "Catatan aktivitas administratif yang bersifat append-only dan tidak dapat diubah.",
+        content:
+          "Catatan aktivitas administratif yang bersifat append-only dan tidak dapat diubah.",
       },
       { property: "og:title", content: "Jejak Audit — Hangeul LPK Platform" },
       {
         property: "og:description",
-        content: "Login, perubahan peran, penerbitan asesmen, dan perubahan lembaga terekam permanen.",
+        content:
+          "Login, perubahan peran, penerbitan asesmen, dan perubahan lembaga terekam permanen.",
       },
     ],
   }),

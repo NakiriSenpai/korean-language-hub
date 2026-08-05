@@ -16,10 +16,7 @@ export {
 } from "@/modules/platform/services/audit.service";
 export type { AuditContext, AuditFilter } from "@/modules/platform/services/audit.service";
 export { brandingCssVariables } from "@/modules/platform/services/branding.service";
-export {
-  SETTING_SECTIONS,
-  resolveSection,
-} from "@/modules/platform/services/settings.service";
+export { SETTING_SECTIONS, resolveSection } from "@/modules/platform/services/settings.service";
 export type {
   SettingField,
   SettingFieldType,

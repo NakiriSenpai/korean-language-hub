@@ -122,7 +122,12 @@ function AnnouncementsPage() {
                     <SelectInput
                       id="audience"
                       value={form.audience}
-                      onChange={(event) => setForm({ ...form, audience: event.target.value as AnnouncementForm["audience"] })}
+                      onChange={(event) =>
+                        setForm({
+                          ...form,
+                          audience: event.target.value as AnnouncementForm["audience"],
+                        })
+                      }
                     >
                       <option value="tenant">Lembaga</option>
                       <option value="platform">Seluruh platform</option>

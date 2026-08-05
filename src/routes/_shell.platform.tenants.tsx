@@ -33,7 +33,8 @@ export const Route = createFileRoute("/_shell/platform/tenants")({
       { title: "Manajemen Lembaga — Hangeul LPK Platform" },
       {
         name: "description",
-        content: "Buat lembaga baru, ubah identitas, dan atur status aktif, tangguhkan, atau arsip.",
+        content:
+          "Buat lembaga baru, ubah identitas, dan atur status aktif, tangguhkan, atau arsip.",
       },
       { property: "og:title", content: "Manajemen Lembaga — Hangeul LPK Platform" },
       {
@@ -57,7 +58,9 @@ function TenantsPage() {
 
   const [form, setForm] = useState({ name: "", slug: "" });
   const [error, setError] = useState<string | null>(null);
-  const [editing, setEditing] = useState<{ id: string; name: string; logoUrl: string } | null>(null);
+  const [editing, setEditing] = useState<{ id: string; name: string; logoUrl: string } | null>(
+    null,
+  );
 
   const onCreate = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -160,7 +163,10 @@ function TenantsPage() {
           </AppSection>
         )}
 
-        <AppSection title="Daftar lembaga" description="Lembaga tempat Anda memiliki keanggotaan aktif.">
+        <AppSection
+          title="Daftar lembaga"
+          description="Lembaga tempat Anda memiliki keanggotaan aktif."
+        >
           {tenants.data && tenants.data.length > 0 ? (
             <Grid cols={1} lgCols={2} gap="md">
               {tenants.data.map((tenant) => (

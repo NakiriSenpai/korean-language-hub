@@ -73,7 +73,9 @@ const STATUS_TONE: Record<string, PlatformTone> = {
 };
 
 export function StatusPill({ status }: { status: string }) {
-  return <PlatformBadge tone={STATUS_TONE[status] ?? "neutral"}>{platformLabel(status)}</PlatformBadge>;
+  return (
+    <PlatformBadge tone={STATUS_TONE[status] ?? "neutral"}>{platformLabel(status)}</PlatformBadge>
+  );
 }
 
 const HEALTH_TONE: Record<HealthLevel, PlatformTone> = {

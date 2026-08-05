@@ -65,8 +65,18 @@ export const SETTING_SECTIONS: readonly SettingSection[] = [
     description: "Aturan bawaan untuk periode, kelas, dan pendaftaran.",
     fields: [
       { key: "defaultCapacity", label: "Kapasitas kelas bawaan", type: "number", defaultValue: 20 },
-      { key: "autoCloseGroups", label: "Tutup kelas penuh otomatis", type: "boolean", defaultValue: true },
-      { key: "studentNumberPrefix", label: "Awalan nomor peserta", type: "text", defaultValue: "STD" },
+      {
+        key: "autoCloseGroups",
+        label: "Tutup kelas penuh otomatis",
+        type: "boolean",
+        defaultValue: true,
+      },
+      {
+        key: "studentNumberPrefix",
+        label: "Awalan nomor peserta",
+        type: "text",
+        defaultValue: "STD",
+      },
     ],
   },
   {
@@ -75,8 +85,18 @@ export const SETTING_SECTIONS: readonly SettingSection[] = [
     description: "Nilai bawaan saat menyusun asesmen baru.",
     fields: [
       { key: "defaultDuration", label: "Durasi bawaan (menit)", type: "number", defaultValue: 60 },
-      { key: "defaultPassingScore", label: "Nilai lulus bawaan (%)", type: "number", defaultValue: 60 },
-      { key: "randomizeByDefault", label: "Acak soal secara bawaan", type: "boolean", defaultValue: false },
+      {
+        key: "defaultPassingScore",
+        label: "Nilai lulus bawaan (%)",
+        type: "number",
+        defaultValue: 60,
+      },
+      {
+        key: "randomizeByDefault",
+        label: "Acak soal secara bawaan",
+        type: "boolean",
+        defaultValue: false,
+      },
     ],
   },
   {
@@ -84,7 +104,12 @@ export const SETTING_SECTIONS: readonly SettingSection[] = [
     label: "Pembelajaran",
     description: "Perilaku reader dan pencatatan progres.",
     fields: [
-      { key: "autoTrackProgress", label: "Catat progres otomatis", type: "boolean", defaultValue: true },
+      {
+        key: "autoTrackProgress",
+        label: "Catat progres otomatis",
+        type: "boolean",
+        defaultValue: true,
+      },
       { key: "completionThreshold", label: "Ambang selesai (%)", type: "number", defaultValue: 90 },
       { key: "allowBookmarks", label: "Izinkan penanda", type: "boolean", defaultValue: true },
     ],
@@ -94,13 +119,24 @@ export const SETTING_SECTIONS: readonly SettingSection[] = [
     label: "Notifikasi",
     description: "Kanal pemberitahuan internal aplikasi.",
     fields: [
-      { key: "announcementBanner", label: "Tampilkan banner pengumuman", type: "boolean", defaultValue: true },
+      {
+        key: "announcementBanner",
+        label: "Tampilkan banner pengumuman",
+        type: "boolean",
+        defaultValue: true,
+      },
       { key: "examReminder", label: "Pengingat ujian", type: "boolean", defaultValue: true },
-      { key: "digestFrequency", label: "Frekuensi ringkasan", type: "select", defaultValue: "weekly", options: [
-        { value: "daily", label: "Harian" },
-        { value: "weekly", label: "Mingguan" },
-        { value: "off", label: "Nonaktif" },
-      ] },
+      {
+        key: "digestFrequency",
+        label: "Frekuensi ringkasan",
+        type: "select",
+        defaultValue: "weekly",
+        options: [
+          { value: "daily", label: "Harian" },
+          { value: "weekly", label: "Mingguan" },
+          { value: "off", label: "Nonaktif" },
+        ],
+      },
     ],
   },
   {

@@ -232,7 +232,10 @@ function CmsPage() {
           </AppSection>
         )}
 
-        <AppSection title="Blok konten" description="Diurutkan berdasarkan posisi lalu tanggal buat.">
+        <AppSection
+          title="Blok konten"
+          description="Diurutkan berdasarkan posisi lalu tanggal buat."
+        >
           {blocks.data && blocks.data.length > 0 ? (
             <Grid cols={1} lgCols={2} gap="md">
               {blocks.data.map((block) => (
