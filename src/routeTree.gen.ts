@@ -16,7 +16,6 @@ import { Route as OfflineRouteImport } from './routes/offline'
 import { Route as UnauthorizedRouteImport } from './routes/unauthorized'
 import { Route as ShellIndexRouteImport } from './routes/_shell.index'
 import { Route as ShellAcademicRouteImport } from './routes/_shell.academic'
-import { Route as ShellAdminRouteImport } from './routes/_shell.admin'
 import { Route as ShellAnalyticsRouteImport } from './routes/_shell.analytics'
 import { Route as ShellAssessmentRouteImport } from './routes/_shell.assessment'
 import { Route as ShellDesignSystemRouteImport } from './routes/_shell.design-system'
@@ -97,11 +96,6 @@ const ShellIndexRoute = ShellIndexRouteImport.update({
 const ShellAcademicRoute = ShellAcademicRouteImport.update({
   id: '/academic',
   path: '/academic',
-  getParentRoute: () => ShellRoute,
-} as any)
-const ShellAdminRoute = ShellAdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
   getParentRoute: () => ShellRoute,
 } as any)
 const ShellAnalyticsRoute = ShellAnalyticsRouteImport.update({
@@ -361,7 +355,6 @@ export interface FileRoutesByFullPath {
   '/offline': typeof OfflineRoute
   '/unauthorized': typeof UnauthorizedRoute
   '/academic': typeof ShellAcademicRouteWithChildren
-  '/admin': typeof ShellAdminRoute
   '/analytics': typeof ShellAnalyticsRouteWithChildren
   '/assessment': typeof ShellAssessmentRouteWithChildren
   '/design-system': typeof ShellDesignSystemRoute
@@ -415,7 +408,6 @@ export interface FileRoutesByTo {
   '/forbidden': typeof ForbiddenRoute
   '/offline': typeof OfflineRoute
   '/unauthorized': typeof UnauthorizedRoute
-  '/admin': typeof ShellAdminRoute
   '/design-system': typeof ShellDesignSystemRoute
   '/settings': typeof ShellSettingsRoute
   '/': typeof ShellIndexRoute
@@ -467,7 +459,6 @@ export interface FileRoutesById {
   '/offline': typeof OfflineRoute
   '/unauthorized': typeof UnauthorizedRoute
   '/_shell/academic': typeof ShellAcademicRouteWithChildren
-  '/_shell/admin': typeof ShellAdminRoute
   '/_shell/analytics': typeof ShellAnalyticsRouteWithChildren
   '/_shell/assessment': typeof ShellAssessmentRouteWithChildren
   '/_shell/design-system': typeof ShellDesignSystemRoute
@@ -526,7 +517,6 @@ export interface FileRouteTypes {
     | '/offline'
     | '/unauthorized'
     | '/academic'
-    | '/admin'
     | '/analytics'
     | '/assessment'
     | '/design-system'
@@ -580,7 +570,6 @@ export interface FileRouteTypes {
     | '/forbidden'
     | '/offline'
     | '/unauthorized'
-    | '/admin'
     | '/design-system'
     | '/settings'
     | '/'
@@ -631,7 +620,6 @@ export interface FileRouteTypes {
     | '/offline'
     | '/unauthorized'
     | '/_shell/academic'
-    | '/_shell/admin'
     | '/_shell/analytics'
     | '/_shell/assessment'
     | '/_shell/design-system'
@@ -739,13 +727,6 @@ declare module '@tanstack/react-router' {
       path: '/academic'
       fullPath: '/academic'
       preLoaderRoute: typeof ShellAcademicRouteImport
-      parentRoute: typeof ShellRoute
-    }
-    '/_shell/admin': {
-      id: '/_shell/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof ShellAdminRouteImport
       parentRoute: typeof ShellRoute
     }
     '/_shell/analytics': {
@@ -1241,7 +1222,6 @@ const ShellPlatformRouteWithChildren = ShellPlatformRoute._addFileChildren(
 
 interface ShellRouteChildren {
   ShellAcademicRoute: typeof ShellAcademicRouteWithChildren
-  ShellAdminRoute: typeof ShellAdminRoute
   ShellAnalyticsRoute: typeof ShellAnalyticsRouteWithChildren
   ShellAssessmentRoute: typeof ShellAssessmentRouteWithChildren
   ShellDesignSystemRoute: typeof ShellDesignSystemRoute
@@ -1255,7 +1235,6 @@ interface ShellRouteChildren {
 
 const ShellRouteChildren: ShellRouteChildren = {
   ShellAcademicRoute: ShellAcademicRouteWithChildren,
-  ShellAdminRoute: ShellAdminRoute,
   ShellAnalyticsRoute: ShellAnalyticsRouteWithChildren,
   ShellAssessmentRoute: ShellAssessmentRouteWithChildren,
   ShellDesignSystemRoute: ShellDesignSystemRoute,
