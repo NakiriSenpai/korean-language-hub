@@ -45,8 +45,9 @@ export async function fetchMemberships(userId: string): Promise<readonly Members
   }
 
   return ((data ?? []) as MembershipQueryRow[])
-    .filter((row): row is MembershipQueryRow & { tenants: NonNullable<MembershipQueryRow["tenants"]> } =>
-      row.tenants !== null,
+    .filter(
+      (row): row is MembershipQueryRow & { tenants: NonNullable<MembershipQueryRow["tenants"]> } =>
+        row.tenants !== null,
     )
     .map((row) => ({
       id: row.id,
