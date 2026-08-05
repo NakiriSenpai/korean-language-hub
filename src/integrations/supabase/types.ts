@@ -58,6 +58,243 @@ export type Database = {
           },
         ]
       }
+      bookmarks: {
+        Row: {
+          created_at: string
+          id: string
+          lesson_id: string
+          note: string | null
+          target_type: Database["public"]["Enums"]["learning_target"]
+          tenant_id: string
+          unit_id: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          lesson_id: string
+          note?: string | null
+          target_type: Database["public"]["Enums"]["learning_target"]
+          tenant_id: string
+          unit_id?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          lesson_id?: string
+          note?: string | null
+          target_type?: Database["public"]["Enums"]["learning_target"]
+          tenant_id?: string
+          unit_id?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookmarks_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lessons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookmarks_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookmarks_unit_id_fkey"
+            columns: ["unit_id"]
+            isOneToOne: false
+            referencedRelation: "lesson_units"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      continue_learning: {
+        Row: {
+          course_id: string
+          created_at: string
+          id: string
+          last_position: number
+          lesson_id: string
+          module_id: string
+          opened_at: string
+          tenant_id: string
+          unit_id: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          course_id: string
+          created_at?: string
+          id?: string
+          last_position?: number
+          lesson_id: string
+          module_id: string
+          opened_at?: string
+          tenant_id: string
+          unit_id?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          course_id?: string
+          created_at?: string
+          id?: string
+          last_position?: number
+          lesson_id?: string
+          module_id?: string
+          opened_at?: string
+          tenant_id?: string
+          unit_id?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "continue_learning_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "continue_learning_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lessons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "continue_learning_module_id_fkey"
+            columns: ["module_id"]
+            isOneToOne: false
+            referencedRelation: "course_modules"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "continue_learning_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "continue_learning_unit_id_fkey"
+            columns: ["unit_id"]
+            isOneToOne: false
+            referencedRelation: "lesson_units"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      course_modules: {
+        Row: {
+          course_id: string
+          created_at: string
+          id: string
+          position: number
+          status: Database["public"]["Enums"]["content_status"]
+          summary: string | null
+          tenant_id: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          course_id: string
+          created_at?: string
+          id?: string
+          position?: number
+          status?: Database["public"]["Enums"]["content_status"]
+          summary?: string | null
+          tenant_id: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          course_id?: string
+          created_at?: string
+          id?: string
+          position?: number
+          status?: Database["public"]["Enums"]["content_status"]
+          summary?: string | null
+          tenant_id?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "course_modules_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "course_modules_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      courses: {
+        Row: {
+          cover_url: string | null
+          created_at: string
+          id: string
+          level: string | null
+          position: number
+          slug: string
+          status: Database["public"]["Enums"]["content_status"]
+          summary: string | null
+          tenant_id: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          cover_url?: string | null
+          created_at?: string
+          id?: string
+          level?: string | null
+          position?: number
+          slug: string
+          status?: Database["public"]["Enums"]["content_status"]
+          summary?: string | null
+          tenant_id: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          cover_url?: string | null
+          created_at?: string
+          id?: string
+          level?: string | null
+          position?: number
+          slug?: string
+          status?: Database["public"]["Enums"]["content_status"]
+          summary?: string | null
+          tenant_id?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "courses_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       enrollments: {
         Row: {
           completed_on: string | null
@@ -119,6 +356,288 @@ export type Database = {
           },
           {
             foreignKeyName: "enrollments_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      grammars: {
+        Row: {
+          blocks: Json
+          category: string | null
+          cover_url: string | null
+          created_at: string
+          description: string | null
+          difficulty: Database["public"]["Enums"]["knowledge_difficulty"]
+          id: string
+          meaning: string | null
+          pattern: string | null
+          published_at: string | null
+          slug: string
+          status: Database["public"]["Enums"]["content_status"]
+          tags: string[]
+          tenant_id: string
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          blocks?: Json
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          id?: string
+          meaning?: string | null
+          pattern?: string | null
+          published_at?: string | null
+          slug: string
+          status?: Database["public"]["Enums"]["content_status"]
+          tags?: string[]
+          tenant_id: string
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          blocks?: Json
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          id?: string
+          meaning?: string | null
+          pattern?: string | null
+          published_at?: string | null
+          slug?: string
+          status?: Database["public"]["Enums"]["content_status"]
+          tags?: string[]
+          tenant_id?: string
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "grammars_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      learning_progress: {
+        Row: {
+          created_at: string
+          id: string
+          last_position: number
+          last_viewed_at: string
+          lesson_id: string
+          percent: number
+          status: Database["public"]["Enums"]["progress_status"]
+          target_type: Database["public"]["Enums"]["learning_target"]
+          tenant_id: string
+          unit_id: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          last_position?: number
+          last_viewed_at?: string
+          lesson_id: string
+          percent?: number
+          status?: Database["public"]["Enums"]["progress_status"]
+          target_type: Database["public"]["Enums"]["learning_target"]
+          tenant_id: string
+          unit_id?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          last_position?: number
+          last_viewed_at?: string
+          lesson_id?: string
+          percent?: number
+          status?: Database["public"]["Enums"]["progress_status"]
+          target_type?: Database["public"]["Enums"]["learning_target"]
+          tenant_id?: string
+          unit_id?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "learning_progress_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lessons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "learning_progress_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "learning_progress_unit_id_fkey"
+            columns: ["unit_id"]
+            isOneToOne: false
+            referencedRelation: "lesson_units"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lesson_blocks: {
+        Row: {
+          content: Json
+          created_at: string
+          id: string
+          position: number
+          tenant_id: string
+          type: Database["public"]["Enums"]["block_type"]
+          unit_id: string
+          updated_at: string
+        }
+        Insert: {
+          content?: Json
+          created_at?: string
+          id?: string
+          position?: number
+          tenant_id: string
+          type: Database["public"]["Enums"]["block_type"]
+          unit_id: string
+          updated_at?: string
+        }
+        Update: {
+          content?: Json
+          created_at?: string
+          id?: string
+          position?: number
+          tenant_id?: string
+          type?: Database["public"]["Enums"]["block_type"]
+          unit_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_blocks_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lesson_blocks_unit_id_fkey"
+            columns: ["unit_id"]
+            isOneToOne: false
+            referencedRelation: "lesson_units"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lesson_units: {
+        Row: {
+          created_at: string
+          id: string
+          lesson_id: string
+          position: number
+          tenant_id: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          lesson_id: string
+          position?: number
+          tenant_id: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          lesson_id?: string
+          position?: number
+          tenant_id?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_units_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lessons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lesson_units_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lessons: {
+        Row: {
+          created_at: string
+          estimated_minutes: number
+          id: string
+          module_id: string
+          position: number
+          status: Database["public"]["Enums"]["content_status"]
+          summary: string | null
+          tenant_id: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          estimated_minutes?: number
+          id?: string
+          module_id: string
+          position?: number
+          status?: Database["public"]["Enums"]["content_status"]
+          summary?: string | null
+          tenant_id: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          estimated_minutes?: number
+          id?: string
+          module_id?: string
+          position?: number
+          status?: Database["public"]["Enums"]["content_status"]
+          summary?: string | null
+          tenant_id?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lessons_module_id_fkey"
+            columns: ["module_id"]
+            isOneToOne: false
+            referencedRelation: "course_modules"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lessons_tenant_id_fkey"
             columns: ["tenant_id"]
             isOneToOne: false
             referencedRelation: "tenants"
@@ -397,6 +916,80 @@ export type Database = {
         }
         Relationships: []
       }
+      vocabularies: {
+        Row: {
+          audio_url: string | null
+          blocks: Json
+          category: string | null
+          cover_url: string | null
+          created_at: string
+          description: string | null
+          difficulty: Database["public"]["Enums"]["knowledge_difficulty"]
+          hangeul: string | null
+          id: string
+          meaning: string | null
+          published_at: string | null
+          romanization: string | null
+          slug: string
+          status: Database["public"]["Enums"]["content_status"]
+          tags: string[]
+          tenant_id: string
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          audio_url?: string | null
+          blocks?: Json
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          hangeul?: string | null
+          id?: string
+          meaning?: string | null
+          published_at?: string | null
+          romanization?: string | null
+          slug: string
+          status?: Database["public"]["Enums"]["content_status"]
+          tags?: string[]
+          tenant_id: string
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          audio_url?: string | null
+          blocks?: Json
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["knowledge_difficulty"]
+          hangeul?: string | null
+          id?: string
+          meaning?: string | null
+          published_at?: string | null
+          romanization?: string | null
+          slug?: string
+          status?: Database["public"]["Enums"]["content_status"]
+          tags?: string[]
+          tenant_id?: string
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "vocabularies_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -422,8 +1015,26 @@ export type Database = {
     Enums: {
       academic_period_status: "draft" | "active" | "archived"
       app_role: "owner" | "admin" | "instructor" | "staff" | "student"
+      block_type:
+        | "text"
+        | "image"
+        | "audio"
+        | "video"
+        | "quote"
+        | "divider"
+        | "callout"
+      content_status: "draft" | "published" | "archived"
       enrollment_status: "active" | "completed" | "suspended" | "dropped"
+      knowledge_difficulty: "beginner" | "intermediate" | "advanced"
+      knowledge_kind:
+        | "grammar"
+        | "vocabulary"
+        | "conversation"
+        | "culture_note"
+        | "eps_reference"
+      learning_target: "lesson" | "unit"
       membership_status: "invited" | "active" | "suspended" | "revoked"
+      progress_status: "not_started" | "in_progress" | "completed"
       study_group_status: "draft" | "active" | "archived"
       teacher_assignment_role: "lead" | "assistant"
       tenant_status: "active" | "suspended"
@@ -556,8 +1167,28 @@ export const Constants = {
     Enums: {
       academic_period_status: ["draft", "active", "archived"],
       app_role: ["owner", "admin", "instructor", "staff", "student"],
+      block_type: [
+        "text",
+        "image",
+        "audio",
+        "video",
+        "quote",
+        "divider",
+        "callout",
+      ],
+      content_status: ["draft", "published", "archived"],
       enrollment_status: ["active", "completed", "suspended", "dropped"],
+      knowledge_difficulty: ["beginner", "intermediate", "advanced"],
+      knowledge_kind: [
+        "grammar",
+        "vocabulary",
+        "conversation",
+        "culture_note",
+        "eps_reference",
+      ],
+      learning_target: ["lesson", "unit"],
       membership_status: ["invited", "active", "suspended", "revoked"],
+      progress_status: ["not_started", "in_progress", "completed"],
       study_group_status: ["draft", "active", "archived"],
       teacher_assignment_role: ["lead", "assistant"],
       tenant_status: ["active", "suspended"],
