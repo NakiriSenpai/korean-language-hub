@@ -70,7 +70,8 @@ export const NAV_ITEMS: readonly NavItem[] = [
     label: "Assessment",
     to: "/assessment",
     icon: ClipboardList,
-    description: "Question Studio, bank soal berversi, dan penyusunan exam, quiz, practice, try out.",
+    description:
+      "Question Studio, bank soal berversi, dan penyusunan exam, quiz, practice, try out.",
     primary: false,
     exact: false,
   },

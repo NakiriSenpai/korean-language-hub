@@ -9,11 +9,7 @@ import { useAuth, useTenant } from "@/modules/identity";
 import { AssessmentService } from "@/modules/assessment/services/assessment.service";
 import { QuestionService } from "@/modules/assessment/services/question.service";
 import { SnapshotService } from "@/modules/assessment/services/snapshot.service";
-import type {
-  AssessmentType,
-  ContentStatus,
-  QuestionFilters,
-} from "@/modules/assessment/types";
+import type { AssessmentType, ContentStatus, QuestionFilters } from "@/modules/assessment/types";
 import type {
   AssessmentInput,
   AssessmentQuestionInput,
@@ -30,8 +26,10 @@ export const assessmentKeys = {
     ["assessment", tenantId, "question", questionId, "versions"] as const,
   questionCategories: (tenantId: string) =>
     ["assessment", tenantId, "question-categories"] as const,
-  assessments: (tenantId: string, filters: { type?: AssessmentType | ""; status?: ContentStatus | "" }) =>
-    ["assessment", tenantId, "assessments", filters] as const,
+  assessments: (
+    tenantId: string,
+    filters: { type?: AssessmentType | ""; status?: ContentStatus | "" },
+  ) => ["assessment", tenantId, "assessments", filters] as const,
   assessment: (tenantId: string, assessmentId: string) =>
     ["assessment", tenantId, "assessment", assessmentId] as const,
   assessmentQuestions: (tenantId: string, assessmentId: string) =>

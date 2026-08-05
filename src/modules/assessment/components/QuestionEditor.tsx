@@ -2,7 +2,12 @@ import { useMemo, useState, type FormEvent } from "react";
 import { Loader2, Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
-import { getQuestionType, LANGUAGE_OPTIONS, QUESTION_SKILLS, QUESTION_TYPES } from "@/modules/assessment/config/registry";
+import {
+  getQuestionType,
+  LANGUAGE_OPTIONS,
+  QUESTION_SKILLS,
+  QUESTION_TYPES,
+} from "@/modules/assessment/config/registry";
 import type {
   ContentStatus,
   KnowledgeDifficulty,
@@ -183,14 +188,12 @@ export function QuestionEditor({
       choices: definition.hasChoices
         ? form.choices
             .filter((choice) => choice.content.trim().length > 0)
-            .map(
-              (choice, index): QuestionChoiceInput => ({
-                label: choice.label,
-                content: choice.content,
-                isCorrect: choice.isCorrect,
-                position: index,
-              }),
-            )
+            .map((choice, index): QuestionChoiceInput => ({
+              label: choice.label,
+              content: choice.content,
+              isCorrect: choice.isCorrect,
+              position: index,
+            }))
         : [],
     };
 
@@ -208,7 +211,10 @@ export function QuestionEditor({
   return (
     <form onSubmit={handleSubmit} noValidate>
       <Stack gap="lg">
-        <AppSection title="Metadata soal" description="Identitas dan klasifikasi untuk Question Bank.">
+        <AppSection
+          title="Metadata soal"
+          description="Identitas dan klasifikasi untuk Question Bank."
+        >
           <AppCard>
             <Grid cols={1} smCols={2} lgCols={3} gap="md">
               <Field label="Kode soal" htmlFor="question-public-id" hint="Kosongkan untuk otomatis">
@@ -447,7 +453,10 @@ export function QuestionEditor({
                     type="button"
                     className={ghostButtonClass}
                     onClick={() =>
-                      setForm((current) => ({ ...current, choices: [...current.choices, newChoice()] }))
+                      setForm((current) => ({
+                        ...current,
+                        choices: [...current.choices, newChoice()],
+                      }))
                     }
                   >
                     <Plus className="size-4" aria-hidden="true" />
@@ -472,8 +481,8 @@ export function QuestionEditor({
           </button>
           {version ? (
             <p className="text-caption text-text-secondary">
-              Menyimpan membuat versi baru (v{version.version + 1}); versi lama tetap dipakai asesmen
-              yang sudah menautkannya.
+              Menyimpan membuat versi baru (v{version.version + 1}); versi lama tetap dipakai
+              asesmen yang sudah menautkannya.
             </p>
           ) : null}
         </div>

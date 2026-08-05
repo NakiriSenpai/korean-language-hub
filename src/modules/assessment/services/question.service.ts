@@ -33,8 +33,7 @@ const QUESTION_COLUMNS =
 const VERSION_COLUMNS =
   "id, tenant_id, question_id, version, type, skill, difficulty, prompt, passage, audio_url, explanation, answer_key, category, tags, source, language, created_by, created_at";
 
-const CHOICE_COLUMNS =
-  "id, tenant_id, question_version_id, label, content, is_correct, position";
+const CHOICE_COLUMNS = "id, tenant_id, question_version_id, label, content, is_correct, position";
 
 interface QuestionRow {
   id: string;
@@ -251,7 +250,9 @@ export const QuestionService = {
       await supabase.from("questions").select("category").eq("tenant_id", tenantId),
       "question.categories",
     ) as { category: string | null }[];
-    return [...new Set(rows.map((row) => row.category).filter((v): v is string => Boolean(v)))].sort();
+    return [
+      ...new Set(rows.map((row) => row.category).filter((v): v is string => Boolean(v))),
+    ].sort();
   },
 
   /** Question with its current version and choices. */

@@ -9,11 +9,7 @@ import type { ContentStatus, KnowledgeDifficulty } from "@/modules/knowledge";
 
 export type { ContentStatus, KnowledgeDifficulty };
 
-export type QuestionType =
-  | "multiple_choice"
-  | "multiple_response"
-  | "true_false"
-  | "short_answer";
+export type QuestionType = "multiple_choice" | "multiple_response" | "true_false" | "short_answer";
 
 export type QuestionSkill = "reading" | "listening";
 

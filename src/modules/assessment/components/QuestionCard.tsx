@@ -1,6 +1,10 @@
 import { Link } from "@tanstack/react-router";
 
-import { QuestionSkillBadge, QuestionTypeBadge, VersionBadge } from "@/modules/assessment/components/AssessmentBadges";
+import {
+  QuestionSkillBadge,
+  QuestionTypeBadge,
+  VersionBadge,
+} from "@/modules/assessment/components/AssessmentBadges";
 import type { Question } from "@/modules/assessment/types";
 import { DIFFICULTY_LABEL } from "@/modules/knowledge/config/kinds";
 import { AppCard, Stack } from "@/shared/components/layout";

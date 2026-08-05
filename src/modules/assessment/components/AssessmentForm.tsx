@@ -11,13 +11,7 @@ import type {
 } from "@/modules/assessment/types";
 import type { AssessmentInput } from "@/modules/assessment/validation/schemas";
 import { DIFFICULTY_OPTIONS } from "@/modules/knowledge/config/kinds";
-import {
-  Field,
-  SelectInput,
-  TextArea,
-  TextInput,
-  buttonClass,
-} from "@/shared/components/form";
+import { Field, SelectInput, TextArea, TextInput, buttonClass } from "@/shared/components/form";
 import { AppCard, Grid, Stack } from "@/shared/components/layout";
 import { toUserMessage } from "@/shared/platform";
 
@@ -187,9 +181,7 @@ export function AssessmentForm({
                 type="checkbox"
                 className="size-4 accent-[var(--color-primary)]"
                 checked={form.randomizeQuestions}
-                onChange={(event) =>
-                  setForm({ ...form, randomizeQuestions: event.target.checked })
-                }
+                onChange={(event) => setForm({ ...form, randomizeQuestions: event.target.checked })}
               />
               Acak urutan soal
             </label>

@@ -91,7 +91,8 @@ function AssessmentListPage() {
                     <div className="flex flex-wrap items-center gap-xs">
                       <AssessmentTypeBadge type={assessment.type} />
                       <span className="text-caption text-text-secondary">
-                        {STATUS_LABEL[assessment.status]} · {DIFFICULTY_LABEL[assessment.difficulty]}
+                        {STATUS_LABEL[assessment.status]} ·{" "}
+                        {DIFFICULTY_LABEL[assessment.difficulty]}
                       </span>
                     </div>
                     <Link

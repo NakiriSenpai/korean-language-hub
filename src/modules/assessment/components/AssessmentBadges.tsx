@@ -4,11 +4,7 @@ import {
   getQuestionSkill,
   getQuestionType,
 } from "@/modules/assessment/config/registry";
-import type {
-  AssessmentType,
-  QuestionSkill,
-  QuestionType,
-} from "@/modules/assessment/types";
+import type { AssessmentType, QuestionSkill, QuestionType } from "@/modules/assessment/types";
 
 const chip = "inline-flex items-center gap-3xs rounded-full border px-sm py-3xs text-caption";
 

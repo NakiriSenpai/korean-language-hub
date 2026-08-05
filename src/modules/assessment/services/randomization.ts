@@ -36,9 +36,10 @@ export function randomizeQuestionSet(
     ...question,
     position: index,
     choices: options.randomizeChoices
-      ? shuffle(question.choices).map(
-          (choice, choiceIndex): SnapshotChoice => ({ ...choice, position: choiceIndex }),
-        )
+      ? shuffle(question.choices).map((choice, choiceIndex): SnapshotChoice => ({
+          ...choice,
+          position: choiceIndex,
+        }))
       : question.choices,
   }));
 }

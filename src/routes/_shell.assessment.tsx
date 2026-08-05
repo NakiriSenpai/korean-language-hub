@@ -18,7 +18,8 @@ export const Route = createFileRoute("/_shell/assessment")({
       { property: "og:title", content: "Assessment Studio — Hangeul LPK Platform" },
       {
         property: "og:description",
-        content: "Bank soal berversi dan asesmen dengan snapshot yang tidak berubah setelah terbit.",
+        content:
+          "Bank soal berversi dan asesmen dengan snapshot yang tidak berubah setelah terbit.",
       },
     ],
   }),
@@ -47,8 +48,8 @@ function AssessmentLayout() {
           <div className="min-w-0">
             <h2 className="text-h2 text-text-primary">Assessment Studio</h2>
             <p className="mt-xs text-body-sm text-text-secondary">
-              Menulis soal, mengelola bank soal berversi, dan menyusun asesmen yang dibekukan sebagai
-              snapshot saat diterbitkan.
+              Menulis soal, mengelola bank soal berversi, dan menyusun asesmen yang dibekukan
+              sebagai snapshot saat diterbitkan.
             </p>
           </div>
         </header>
@@ -71,11 +72,7 @@ function AssessmentLayout() {
               </Link>
             </li>
             <li>
-              <Link
-                to="/assessment/assessments"
-                className={linkClass}
-                activeProps={activeProps}
-              >
+              <Link to="/assessment/assessments" className={linkClass} activeProps={activeProps}>
                 Asesmen
               </Link>
             </li>
