@@ -27,6 +27,7 @@ import { Route as ShellAcademicEnrollmentsRouteImport } from './routes/_shell.ac
 import { Route as ShellAcademicGroupsRouteImport } from './routes/_shell.academic.groups'
 import { Route as ShellAcademicStudentsRouteImport } from './routes/_shell.academic.students'
 import { Route as ShellAcademicTeachersRouteImport } from './routes/_shell.academic.teachers'
+import { Route as ShellLearningIndexRouteImport } from './routes/_shell.learning.index'
 
 const ShellRoute = ShellRouteImport.update({
   id: '/_shell',
@@ -118,6 +119,11 @@ const ShellAcademicTeachersRoute = ShellAcademicTeachersRouteImport.update({
   path: '/teachers',
   getParentRoute: () => ShellAcademicRoute,
 } as any)
+const ShellLearningIndexRoute = ShellLearningIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ShellLearningRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof ShellIndexRoute
@@ -130,13 +136,14 @@ export interface FileRoutesByFullPath {
   '/analytics': typeof ShellAnalyticsRoute
   '/design-system': typeof ShellDesignSystemRoute
   '/exam': typeof ShellExamRoute
-  '/learning': typeof ShellLearningRoute
+  '/learning': typeof ShellLearningRouteWithChildren
   '/settings': typeof ShellSettingsRoute
   '/academic/enrollments': typeof ShellAcademicEnrollmentsRoute
   '/academic/groups': typeof ShellAcademicGroupsRoute
   '/academic/students': typeof ShellAcademicStudentsRoute
   '/academic/teachers': typeof ShellAcademicTeachersRoute
   '/academic/': typeof ShellAcademicIndexRoute
+  '/learning/': typeof ShellLearningIndexRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
@@ -147,7 +154,6 @@ export interface FileRoutesByTo {
   '/analytics': typeof ShellAnalyticsRoute
   '/design-system': typeof ShellDesignSystemRoute
   '/exam': typeof ShellExamRoute
-  '/learning': typeof ShellLearningRoute
   '/settings': typeof ShellSettingsRoute
   '/': typeof ShellIndexRoute
   '/academic/enrollments': typeof ShellAcademicEnrollmentsRoute
@@ -155,6 +161,7 @@ export interface FileRoutesByTo {
   '/academic/students': typeof ShellAcademicStudentsRoute
   '/academic/teachers': typeof ShellAcademicTeachersRoute
   '/academic': typeof ShellAcademicIndexRoute
+  '/learning': typeof ShellLearningIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -168,7 +175,7 @@ export interface FileRoutesById {
   '/_shell/analytics': typeof ShellAnalyticsRoute
   '/_shell/design-system': typeof ShellDesignSystemRoute
   '/_shell/exam': typeof ShellExamRoute
-  '/_shell/learning': typeof ShellLearningRoute
+  '/_shell/learning': typeof ShellLearningRouteWithChildren
   '/_shell/settings': typeof ShellSettingsRoute
   '/_shell/': typeof ShellIndexRoute
   '/_shell/academic/enrollments': typeof ShellAcademicEnrollmentsRoute
@@ -176,6 +183,7 @@ export interface FileRoutesById {
   '/_shell/academic/students': typeof ShellAcademicStudentsRoute
   '/_shell/academic/teachers': typeof ShellAcademicTeachersRoute
   '/_shell/academic/': typeof ShellAcademicIndexRoute
+  '/_shell/learning/': typeof ShellLearningIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -197,6 +205,7 @@ export interface FileRouteTypes {
     | '/academic/students'
     | '/academic/teachers'
     | '/academic/'
+    | '/learning/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/auth'
@@ -207,7 +216,6 @@ export interface FileRouteTypes {
     | '/analytics'
     | '/design-system'
     | '/exam'
-    | '/learning'
     | '/settings'
     | '/'
     | '/academic/enrollments'
@@ -215,6 +223,7 @@ export interface FileRouteTypes {
     | '/academic/students'
     | '/academic/teachers'
     | '/academic'
+    | '/learning'
   id:
     | '__root__'
     | '/_shell'
@@ -235,6 +244,7 @@ export interface FileRouteTypes {
     | '/_shell/academic/students'
     | '/_shell/academic/teachers'
     | '/_shell/academic/'
+    | '/_shell/learning/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -373,6 +383,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellAcademicTeachersRouteImport
       parentRoute: typeof ShellAcademicRoute
     }
+    '/_shell/learning/': {
+      id: '/_shell/learning/'
+      path: '/'
+      fullPath: '/learning/'
+      preLoaderRoute: typeof ShellLearningIndexRouteImport
+      parentRoute: typeof ShellLearningRoute
+    }
   }
 }
 
@@ -396,13 +413,25 @@ const ShellAcademicRouteWithChildren = ShellAcademicRoute._addFileChildren(
   ShellAcademicRouteChildren,
 )
 
+interface ShellLearningRouteChildren {
+  ShellLearningIndexRoute: typeof ShellLearningIndexRoute
+}
+
+const ShellLearningRouteChildren: ShellLearningRouteChildren = {
+  ShellLearningIndexRoute: ShellLearningIndexRoute,
+}
+
+const ShellLearningRouteWithChildren = ShellLearningRoute._addFileChildren(
+  ShellLearningRouteChildren,
+)
+
 interface ShellRouteChildren {
   ShellAcademicRoute: typeof ShellAcademicRouteWithChildren
   ShellAdminRoute: typeof ShellAdminRoute
   ShellAnalyticsRoute: typeof ShellAnalyticsRoute
   ShellDesignSystemRoute: typeof ShellDesignSystemRoute
   ShellExamRoute: typeof ShellExamRoute
-  ShellLearningRoute: typeof ShellLearningRoute
+  ShellLearningRoute: typeof ShellLearningRouteWithChildren
   ShellSettingsRoute: typeof ShellSettingsRoute
   ShellIndexRoute: typeof ShellIndexRoute
 }
@@ -413,7 +442,7 @@ const ShellRouteChildren: ShellRouteChildren = {
   ShellAnalyticsRoute: ShellAnalyticsRoute,
   ShellDesignSystemRoute: ShellDesignSystemRoute,
   ShellExamRoute: ShellExamRoute,
-  ShellLearningRoute: ShellLearningRoute,
+  ShellLearningRoute: ShellLearningRouteWithChildren,
   ShellSettingsRoute: ShellSettingsRoute,
   ShellIndexRoute: ShellIndexRoute,
 }
