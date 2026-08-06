@@ -6,14 +6,14 @@
 every HTML response (SSR pages, offline shell, error page). Static assets and the
 service worker are intentionally left untouched.
 
-| Header | Purpose |
-| --- | --- |
-| `content-security-policy` | Restricts script/style/connect origins to self + backend + CDN |
-| `x-content-type-options: nosniff` | Blocks MIME sniffing |
-| `x-frame-options: DENY` | Blocks clickjacking |
-| `referrer-policy` | Limits referrer leakage |
-| `permissions-policy` | Disables unused device APIs |
-| `strict-transport-security` | HTTPS only (production responses) |
+| Header                            | Purpose                                                        |
+| --------------------------------- | -------------------------------------------------------------- |
+| `content-security-policy`         | Restricts script/style/connect origins to self + backend + CDN |
+| `x-content-type-options: nosniff` | Blocks MIME sniffing                                           |
+| `x-frame-options: DENY`           | Blocks clickjacking                                            |
+| `referrer-policy`                 | Limits referrer leakage                                        |
+| `permissions-policy`              | Disables unused device APIs                                    |
+| `strict-transport-security`       | HTTPS only (production responses)                              |
 
 ## 2. Database access model
 
@@ -28,12 +28,12 @@ service worker are intentionally left untouched.
 
 Four helpers are deliberately executable by signed-in users:
 
-| Function | Why it must stay callable |
-| --- | --- |
-| `has_tenant_role` | Evaluated inside RLS policies; must bypass RLS to avoid recursion |
-| `is_tenant_member` | Same — membership lookup used by policies |
-| `shares_tenant_with` | Same — cross-user visibility inside one tenant |
-| `create_tenant` | Bootstrap RPC: creates a tenant + owner membership atomically |
+| Function             | Why it must stay callable                                         |
+| -------------------- | ----------------------------------------------------------------- |
+| `has_tenant_role`    | Evaluated inside RLS policies; must bypass RLS to avoid recursion |
+| `is_tenant_member`   | Same — membership lookup used by policies                         |
+| `shares_tenant_with` | Same — cross-user visibility inside one tenant                    |
+| `create_tenant`      | Bootstrap RPC: creates a tenant + owner membership atomically     |
 
 Each takes only scalar arguments, never accepts SQL, and pins `search_path = public`.
 Every other function (triggers, auditing, capacity enforcement) is now callable only by

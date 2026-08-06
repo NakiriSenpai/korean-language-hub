@@ -13,11 +13,11 @@ bun run build      # Vite + Nitro edge worker + PWA precache
 
 Output:
 
-| Path | Contents |
-| --- | --- |
-| `dist/client` | Client bundle, `sw.js` (~158 precache entries, ~1.5 MB), `_headers` |
-| `dist/server` | Worker entry `index.mjs` + code-split chunks |
-| `dist/server/wrangler.json` | Generated deploy config (root `wrangler.jsonc` merged in) |
+| Path                        | Contents                                                            |
+| --------------------------- | ------------------------------------------------------------------- |
+| `dist/client`               | Client bundle, `sw.js` (~158 precache entries, ~1.5 MB), `_headers` |
+| `dist/server`               | Worker entry `index.mjs` + code-split chunks                        |
+| `dist/server/wrangler.json` | Generated deploy config (root `wrangler.jsonc` merged in)           |
 
 Any router-generator warning is a blocker — fix before shipping.
 
@@ -44,25 +44,25 @@ come from one build.
 
 ### Build time (GitHub Actions repo/environment secrets — inlined into the bundle)
 
-| Name | Required | Purpose |
-| --- | --- | --- |
-| `VITE_SUPABASE_URL` | yes | Supabase project URL |
-| `VITE_SUPABASE_PUBLISHABLE_KEY` | yes | Supabase publishable key |
-| `VITE_CLOUDINARY_CLOUD_NAME` | no | Media delivery (degrades if unset) |
-| `VITE_CLOUDINARY_UPLOAD_PRESET` | no | Unsigned upload preset |
+| Name                            | Required | Purpose                            |
+| ------------------------------- | -------- | ---------------------------------- |
+| `VITE_SUPABASE_URL`             | yes      | Supabase project URL               |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | yes      | Supabase publishable key           |
+| `VITE_CLOUDINARY_CLOUD_NAME`    | no       | Media delivery (degrades if unset) |
+| `VITE_CLOUDINARY_UPLOAD_PRESET` | no       | Unsigned upload preset             |
 
 ### Worker runtime (Cloudflare, set via `wrangler secret put` or the dashboard)
 
-| Name | Required | Purpose |
-| --- | --- | --- |
-| `SUPABASE_URL` | yes | Read by `src/server.ts` to build the CSP `connect-src` |
+| Name           | Required | Purpose                                                |
+| -------------- | -------- | ------------------------------------------------------ |
+| `SUPABASE_URL` | yes      | Read by `src/server.ts` to build the CSP `connect-src` |
 
 ### GitHub Actions deploy credentials
 
-| Name | Purpose |
-| --- | --- |
-| `CLOUDFLARE_API_TOKEN` | Token with **Workers Scripts: Edit** (+ Workers R2/KV only if later used) |
-| `CLOUDFLARE_ACCOUNT_ID` | Target Cloudflare account |
+| Name                    | Purpose                                                                   |
+| ----------------------- | ------------------------------------------------------------------------- |
+| `CLOUDFLARE_API_TOKEN`  | Token with **Workers Scripts: Edit** (+ Workers R2/KV only if later used) |
+| `CLOUDFLARE_ACCOUNT_ID` | Target Cloudflare account                                                 |
 
 ## Required Cloudflare settings
 
