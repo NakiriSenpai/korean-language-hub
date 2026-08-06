@@ -24,16 +24,16 @@ Scripts: `dev`, `build`, `lint`, `format`.
 
 ## Features
 
-| Domain | What it does |
-| --- | --- |
-| Identity | Sign-in, session manager, tenants, roles, permission matrix |
-| Academic | Periods, study groups with capacity, enrollments, students, teachers |
-| Learning | Course → module → lesson → unit → block reader, progress, bookmarks |
-| Knowledge | Grammar, vocabulary, conversation, culture, search, favorites |
-| Assessment | Versioned question bank, assessments, randomization, publish snapshots |
-| Exam | Snapshot delivery, resumable attempts, timer, auto-scoring, review |
-| Analytics | Student / assessment / class / platform dashboards, XLSX-PDF-CSV export |
-| Platform | Console, tenants, branding, settings, audit log, announcements, media, CMS |
+| Domain     | What it does                                                               |
+| ---------- | -------------------------------------------------------------------------- |
+| Identity   | Sign-in, session manager, tenants, roles, permission matrix                |
+| Academic   | Periods, study groups with capacity, enrollments, students, teachers       |
+| Learning   | Course → module → lesson → unit → block reader, progress, bookmarks        |
+| Knowledge  | Grammar, vocabulary, conversation, culture, search, favorites              |
+| Assessment | Versioned question bank, assessments, randomization, publish snapshots     |
+| Exam       | Snapshot delivery, resumable attempts, timer, auto-scoring, review         |
+| Analytics  | Student / assessment / class / platform dashboards, XLSX-PDF-CSV export    |
+| Platform   | Console, tenants, branding, settings, audit log, announcements, media, CMS |
 
 ## Documentation
 

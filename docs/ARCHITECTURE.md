@@ -35,16 +35,16 @@ Rules enforced across sprints:
 
 ## Domains
 
-| Domain | Responsibility |
-| --- | --- |
-| `identity` | Auth, session manager, tenant membership, roles, permission matrix |
-| `academic` | Academic periods, study groups, enrollments, student profiles, teacher assignments |
-| `learning` | Course → module → lesson → unit → block content, progress, bookmarks |
-| `knowledge` | Grammar, vocabulary, conversation, culture entries, search, favorites |
-| `assessment` | Question bank with immutable versioning, assessments, publish snapshots |
-| `exam` | Snapshot-only loader, attempt lifecycle, scoring engine, review |
-| `analytics` | Denormalized datasets, aggregation, filters, XLSX/PDF/CSV export |
-| `platform` | Console, tenants, branding, settings, audit log, announcements, media, CMS |
+| Domain       | Responsibility                                                                     |
+| ------------ | ---------------------------------------------------------------------------------- |
+| `identity`   | Auth, session manager, tenant membership, roles, permission matrix                 |
+| `academic`   | Academic periods, study groups, enrollments, student profiles, teacher assignments |
+| `learning`   | Course → module → lesson → unit → block content, progress, bookmarks               |
+| `knowledge`  | Grammar, vocabulary, conversation, culture entries, search, favorites              |
+| `assessment` | Question bank with immutable versioning, assessments, publish snapshots            |
+| `exam`       | Snapshot-only loader, attempt lifecycle, scoring engine, review                    |
+| `analytics`  | Denormalized datasets, aggregation, filters, XLSX/PDF/CSV export                   |
+| `platform`   | Console, tenants, branding, settings, audit log, announcements, media, CMS         |
 
 ## Multi-tenancy & security
 
